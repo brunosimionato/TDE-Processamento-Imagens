@@ -11,13 +11,11 @@ namespace Trabalho
             InitializeComponent();
 
             this.WindowState = FormWindowState.Maximized;
-
         }
 
 
 
-
-        // BOTÃO ABRIR IMAGEM 1
+        // BOTÃO ABRIR IMAGEM 1 ------------------------------------------------------------------------------------------- //
         private void abrirBT1_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -31,12 +29,11 @@ namespace Trabalho
             {
                 try
                 {
-                    // EXIBE A IMAGEM NO PICTURE BOX
+                    // Exibe uma imagem no PictureBox
                     imgA.Image = new System.Drawing.Bitmap(openFileDialog1.FileName);
                 }
                 catch (Exception ex)
                 {
-                    // MENSAGEM DE ERRO CASO A IMAGEM NÃO FOR CARREGADA
                     MessageBox.Show("Erro ao carregar a imagem: " + ex.Message);
                 }
             }
@@ -44,7 +41,7 @@ namespace Trabalho
 
 
 
-        // BOTÃO ABRIR IMAGEM 2
+        // BOTÃO ABRIR IMAGEM 2 ------------------------------------------------------------------------------------------- //
         private void abrir2BT_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog2 = new OpenFileDialog();
@@ -58,12 +55,11 @@ namespace Trabalho
             {
                 try
                 {
-                    // EXIBE A IMAGEM NO PICTURE BOX
+                    // Exibe uma imagem no PictureBox
                     imgB.Image = new System.Drawing.Bitmap(openFileDialog2.FileName);
                 }
                 catch (Exception ex)
                 {
-                    // MENSAGEM DE ERRO CASO A IMAGEM NÃO FOR CARREGADA
                     MessageBox.Show("Erro ao carregar a imagem: " + ex.Message);
                 }
             }
@@ -71,32 +67,32 @@ namespace Trabalho
 
 
 
-        // BOTÃO SALVAR IMAGEM
+        // BOTÃO SALVAR IMAGEM ------------------------------------------------------------------------------------------- //
         private void btSalavar_Click(object sender, EventArgs e)
         {
-            // VERIFICA SE TEM UMA IMAGEM NO PICTURE BOX
+            // Verifica se tem uma imagem no PictureBox
             if (imgResultado.Image == null)
             {
                 MessageBox.Show("Não há imagem para salvar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // ABRE DIALOGO PARA SALVAMENTO
+            // Abre a caixa de dialogo para salvamento
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Title = "Salvar Imagem";
             saveFileDialog.Filter = "Arquivos de Imagem|*.jpg;*.jpeg;*.png;*.gif;*.bmp|Todos os arquivos|*.*";
             saveFileDialog.DefaultExt = "jpg"; // FORMATO PADRÃO
             saveFileDialog.AddExtension = true;
 
-            // AO CLICAR EM SALVAR DENTRO DO DIALOGO, A IMAGEM É SALVA
+            // Ao clicar em salvar dentro do dialogo, a imagem é salva 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    // OBTÉM A IMAGEM DA PICTURE BOX
+                    // Obtém a imagem da PictureBox
                     Bitmap imagem = new Bitmap(imgResultado.Image);
 
-                    // SALVA A IMAGEM NO DISCO
+                    // Salva a imagem no disco
                     imagem.Save(saveFileDialog.FileName);
                 }
                 catch (Exception ex)
@@ -108,148 +104,371 @@ namespace Trabalho
 
 
 
+        // BOTÃO DE ADIÇÃO ------------------------------------------------------------------------------------------- //
+        private void somaBT_Click(object sender, EventArgs e)
+        { 
+            // Verifica a opção selecionada no Radio Button
+            if (!rbA.Checked && !rbB.Checked && !rbDuas.Checked)
+            {
+                MessageBox.Show("Selecione uma opção para processar uma imagem", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                // Carrega as imagens
+                Image image1 = imgA.Image;
+                Image image2 = imgB.Image;
+
+                // Pede para selecionar duas imagens
+                if (image1 == null || image2 == null)
+                {
+                    MessageBox.Show("Selecione uma opção para processar uma imagem", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Verifica tamanho e formato
+                if (image1.Width != image2.Width || image1.Height != image2.Height || image1.PixelFormat != image2.PixelFormat)
+                {
+                    MessageBox.Show("As imagens precisam ter o mesmo tamanho e formato para serem somadas.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Cria um novo bitmap com a largura e altura da primeira imagem
+                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        // Obtém os valores dos pixels das duas imagens
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                        Color color2 = ((Bitmap)image2).GetPixel(x, y);
+
+                        // Soma as componentes RGB dos pixels
+                        int r = color1.R + color2.R;
+                        int g = color1.G + color2.G;
+                        int b = color1.B + color2.B;
+
+                        // Trunca os valores para não ultrapassar 255
+                        r = Math.Min(r, 255);
+                        g = Math.Min(g, 255);
+                        b = Math.Min(b, 255);
+
+                        // Define o novo pixel na imagem resultado
+                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
+                }
+                imgResultado.Image = imagemResultado;
+            }
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
+            if (rbA.Checked)
+            {
+                Image image1 = imgA.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Selecione uma imagem no campo A", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+                // Intera os pixels da imagem
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+
+                        // Soma as componentes RGB do pixel com ele mesmo
+                        int r = color1.R + color1.R;
+                        int g = color1.G + color1.G;
+                        int b = color1.B + color1.B;
+
+                        r = Math.Min(r, 255);
+                        g = Math.Min(g, 255);
+                        b = Math.Min(b, 255);
+
+                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
+                }
+                imgResultado.Image = imagemResultado;
+            }
+
+            // CASO A OPÇÃO "IMAGEM AB" ESTIVER SELECIONADA
+            if (rbB.Checked)
+            {
+                Image image1 = imgB.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Selecione uma imagem no campo B", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+
+                        // Soma as componentes RGB do pixel com ele mesmo
+                        int r = color1.R + color1.R;
+                        int g = color1.G + color1.G;
+                        int b = color1.B + color1.B;
+
+                        r = Math.Min(r, 255);
+                        g = Math.Min(g, 255);
+                        b = Math.Min(b, 255);
+
+                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
+                }
+                imgResultado.Image = imagemResultado;
+            }
+        }
 
 
 
 
+        // BOTÃO SUBTRAIR ------------------------------------------------------------------------------------------- //
+        private void subtracaoBT_Click(object sender, EventArgs e)
+        {
+            // Verifica a opção selecionada no Radio Button
+            if (!rbA.Checked && !rbB.Checked && !rbDuas.Checked)
+            {
+                MessageBox.Show("Selecione uma opção para processar uma imagem", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                // Carrega as imagens
+                Image image1 = imgA.Image;
+                Image image2 = imgB.Image;
+
+                // Pede para selecionar duas imagens
+                if (image1 == null || image2 == null)
+                {
+                    MessageBox.Show("Selecione uma opção para processar uma imagem", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Verifica tamanho e formato
+                if (image1.Width != image2.Width || image1.Height != image2.Height || image1.PixelFormat != image2.PixelFormat)
+                {
+                    MessageBox.Show("As imagens precisam ter o mesmo tamanho e formato para serem somadas.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Cria um novo bitmap com a largura e altura da primeira imagem
+                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        // Obtém os valores dos pixels das duas imagens
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                        Color color2 = ((Bitmap)image2).GetPixel(x, y);
+
+                        // Subtrai as componentes RGB dos pixels
+                        int r = color1.R - color2.R;
+                        int g = color1.G - color2.G;
+                        int b = color1.B - color2.B;
+
+                        // Trunca os valores para não ultrapassar 255
+                        r = Math.Max(r, 0);
+                        g = Math.Max(g, 0);
+                        b = Math.Max(b, 0);
+
+                        // Define o novo pixel na imagem resultado
+                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
+                }
+                imgResultado.Image = imagemResultado;
+            }
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
+            if (rbA.Checked)
+            {
+                Image image1 = imgA.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Selecione uma imagem no campo A", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+                // Intera os pixels da imagem
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+
+                        // Subtrai as componentes RGB do pixel pela metade
+                        int r = color1.R / 2;
+                        int g = color1.G / 2;
+                        int b = color1.B / 2;
+
+                        // Trunca os valores para não ultrapassar 255
+                        r = Math.Max(r, 0);
+                        g = Math.Max(g, 0);
+                        b = Math.Max(b, 0);
+
+                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
+                }
+                imgResultado.Image = imagemResultado;
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
+            if (rbB.Checked)
+            {
+                Image image1 = imgB.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Selecione uma imagem no campo B", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+
+                        // Subtrai as componentes RGB do pixel pela metade
+                        int r = color1.R / 2;
+                        int g = color1.G / 2;
+                        int b = color1.B / 2;
+
+                        // Trunca os valores para não ultrapassar 255
+                        r = Math.Max(r, 0);
+                        g = Math.Max(g, 0);
+                        b = Math.Max(b, 0);
+
+                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
+                }
+                imgResultado.Image = imagemResultado;
+            }
+        }
 
 
+
+
+        // BOTÃO NEGATIVO ------------------------------------------------------------------------------------------- //
         private void negativarBT_Click(object sender, EventArgs e)
         {
-            // Verifica se há uma imagem no PictureBox original
-            if (imgA.Image == null)
+            // Verifica a opção selecionada no Radio Button
+            if (!rbA.Checked && !rbB.Checked)
             {
-                MessageBox.Show("Por favor, carregue uma imagem antes de negativar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor, selecione uma imagem para aplicar o efeito negativo", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Cria uma cópia da imagem original para negativar
-            Bitmap imagemOriginal = new Bitmap(imgA.Image);
-
-            // Itera sobre cada pixel na imagem e inverte suas cores
-            for (int x = 0; x < imagemOriginal.Width; x++)
+            // Verifica se a imagem A está selecionada
+            if (rbA.Checked)
             {
-                for (int y = 0; y < imagemOriginal.Height; y++)
+                Image image = imgA.Image;
+
+                if (image == null)
                 {
-                    Color corOriginal = imagemOriginal.GetPixel(x, y);
-                    Color corNegativa = Color.FromArgb(255 - corOriginal.R, 255 - corOriginal.G, 255 - corOriginal.B);
-                    imagemOriginal.SetPixel(x, y, corNegativa);
+                    MessageBox.Show("Por favor, selecione uma imagem no campo Imagem A", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
-            }
 
-            // Exibe a imagem negativada no PictureBoxResultado
-            imgResultado.SizeMode = PictureBoxSizeMode.Zoom; // Ajuste para exibição
-            imgResultado.Image = imagemOriginal;
-        }
+                // Cria um novo bitmap com as mesmas dimensões da imagem
+                Bitmap imagemResultado = new Bitmap(image.Width, image.Height);
 
-        private void cinzaBT_Click(object sender, EventArgs e)
-        {
-            // Verifica se há uma imagem no PictureBox original
-            if (imgA.Image == null)
-            {
-                MessageBox.Show("Por favor, carregue uma imagem antes de converter para escala de cinza.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // Cria uma cópia da imagem original para converter para escala de cinza
-            Bitmap imagemOriginal = new Bitmap(imgA.Image);
-
-            // Itera sobre cada pixel na imagem e calcula a média dos valores de intensidade RGB
-            for (int x = 0; x < imagemOriginal.Width; x++)
-            {
-                for (int y = 0; y < imagemOriginal.Height; y++)
+                // Itera sobre todos os pixels da imagem
+                for (int x = 0; x < image.Width; x++)
                 {
-                    Color corOriginal = imagemOriginal.GetPixel(x, y);
-                    int media = (corOriginal.R + corOriginal.G + corOriginal.B) / 3; // Calcula a média dos valores RGB
-                    Color corCinza = Color.FromArgb(media, media, media); // Cria uma cor em escala de cinza com a média calculada
-                    imagemOriginal.SetPixel(x, y, corCinza); // Define o pixel na imagem com a nova cor em escala de cinza
+                    for (int y = 0; y < image.Height; y++)
+                    {
+                        // Obtém a cor do pixel
+                        Color color = ((Bitmap)image).GetPixel(x, y);
+
+                        // Calcula o complemento de cor
+                        int r = 255 - color.R;
+                        int g = 255 - color.G;
+                        int b = 255 - color.B;
+
+                        // Define o novo pixel na imagem resultado
+                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
                 }
+
+                // Exibe a imagem negativa no PictureBox
+                imgResultado.Image = imagemResultado;
             }
 
-            // Exibe a imagem em escala de cinza no PictureBoxResultado
-            imgResultado.SizeMode = PictureBoxSizeMode.Zoom; // Ajuste para exibição
-            imgResultado.Image = imagemOriginal;
-        }
-
-
-
-
-        private void somaBT_Click(object sender, EventArgs e)
-        {
-            // Verifica se há imagens nos PictureBoxes
-            if (imgA.Image == null || imgB.Image == null)
+            // Verifica se a imagem B está selecionada
+            if (rbB.Checked)
             {
-                MessageBox.Show("Por favor, carregue duas imagens antes de realizar a soma.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+                Image image = imgB.Image;
 
-            // Normaliza as intensidades das imagens para [0, 1]
-            Bitmap imagemA = NormalizarIntensidades(new Bitmap(imgA.Image));
-            Bitmap imagemB = NormalizarIntensidades(new Bitmap(imgB.Image));
-
-            // Realiza a soma das intensidades normalizadas
-            Bitmap resultado = SomaImagens(imagemA, imagemB);
-
-            // Exibe o resultado da soma no PictureBoxResultado
-            imgResultado.SizeMode = PictureBoxSizeMode.Zoom; // Ajuste para exibição
-            imgResultado.Image = resultado;
-        }
-
-        private Bitmap NormalizarIntensidades(Bitmap imagem)
-        {
-            Bitmap imagemNormalizada = new Bitmap(imagem.Width, imagem.Height);
-
-            for (int x = 0; x < imagem.Width; x++)
-            {
-                for (int y = 0; y < imagem.Height; y++)
+                if (image == null)
                 {
-                    Color pixel = imagem.GetPixel(x, y);
-                    double intensidade = (pixel.R + pixel.G + pixel.B) / 3.0; // Calcula a média das intensidades
-                    double normalizado = intensidade / 255.0; // Normaliza para o intervalo [0, 1]
-                    int valorNormalizado = (int)Math.Round(normalizado * 255); // Ajusta para o intervalo [0, 255]
-                    Color novoPixel = Color.FromArgb(valorNormalizado, valorNormalizado, valorNormalizado);
-                    imagemNormalizada.SetPixel(x, y, novoPixel);
+                    MessageBox.Show("Por favor, selecione uma imagem no campo Imagem B", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
-            }
 
-            return imagemNormalizada;
-        }
+                // Cria um novo bitmap com as mesmas dimensões da imagem
+                Bitmap imagemResultado = new Bitmap(image.Width, image.Height);
 
-        private Bitmap SomaImagens(Bitmap imagemA, Bitmap imagemB)
-        {
-            int largura = Math.Min(imagemA.Width, imagemB.Width);
-            int altura = Math.Min(imagemA.Height, imagemB.Height);
-
-            Bitmap resultado = new Bitmap(largura, altura);
-
-            for (int x = 0; x < largura; x++)
-            {
-                for (int y = 0; y < altura; y++)
+                // Itera sobre todos os pixels da imagem
+                for (int x = 0; x < image.Width; x++)
                 {
-                    Color pixelA = imagemA.GetPixel(x, y);
-                    Color pixelB = imagemB.GetPixel(x, y);
+                    for (int y = 0; y < image.Height; y++)
+                    {
+                        // Obtém a cor do pixel
+                        Color color = ((Bitmap)image).GetPixel(x, y);
 
-                    // Soma as intensidades dos pixels normalizados
-                    double soma = pixelA.R / 255.0 + pixelB.R / 255.0;
+                        // Calcula o complemento de cor
+                        int r = 255 - color.R;
+                        int g = 255 - color.G;
+                        int b = 255 - color.B;
 
-                    // Ajusta para o intervalo [0, 255]
-                    int valorSoma = (int)Math.Round(soma * 255);
-
-                    // Garante que o valor esteja dentro do intervalo válido
-                    valorSoma = Math.Max(0, Math.Min(255, valorSoma));
-
-                    Color novoPixel = Color.FromArgb(valorSoma, valorSoma, valorSoma);
-                    resultado.SetPixel(x, y, novoPixel);
+                        // Define o novo pixel na imagem resultado
+                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
                 }
+
+                // Exibe a imagem negativa no PictureBox
+                imgResultado.Image = imagemResultado;
             }
-
-            return resultado;
         }
 
-        private void gpA_Enter(object sender, EventArgs e)
-        {
 
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     }
