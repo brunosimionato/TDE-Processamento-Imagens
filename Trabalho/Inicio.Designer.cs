@@ -48,7 +48,7 @@
             this.subtracaoBT = new System.Windows.Forms.Button();
             this.FlipBT = new System.Windows.Forms.Button();
             this.FlipUDBT = new System.Windows.Forms.Button();
-            this.espelharBT = new System.Windows.Forms.Button();
+            this.concatenarBT = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imgA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgResultado)).BeginInit();
@@ -123,13 +123,14 @@
             // 
             // cinzaBT
             // 
-            this.cinzaBT.Location = new System.Drawing.Point(692, 368);
+            this.cinzaBT.Location = new System.Drawing.Point(692, 247);
             this.cinzaBT.Margin = new System.Windows.Forms.Padding(2);
             this.cinzaBT.Name = "cinzaBT";
             this.cinzaBT.Size = new System.Drawing.Size(94, 35);
             this.cinzaBT.TabIndex = 6;
             this.cinzaBT.Text = "Escala de Cinza";
             this.cinzaBT.UseVisualStyleBackColor = true;
+            this.cinzaBT.Click += new System.EventHandler(this.cinzaBT_Click);
             // 
             // gpA
             // 
@@ -198,10 +199,10 @@
             this.rbDuas.AutoSize = true;
             this.rbDuas.Location = new System.Drawing.Point(189, 19);
             this.rbDuas.Name = "rbDuas";
-            this.rbDuas.Size = new System.Drawing.Size(99, 17);
+            this.rbDuas.Size = new System.Drawing.Size(113, 17);
             this.rbDuas.TabIndex = 13;
             this.rbDuas.TabStop = true;
-            this.rbDuas.Text = "Ambas imagens";
+            this.rbDuas.Text = "Ambas as imagens";
             this.rbDuas.UseVisualStyleBackColor = true;
             // 
             // rbB
@@ -257,6 +258,7 @@
             this.FlipBT.TabIndex = 17;
             this.FlipBT.Text = "Flip RL";
             this.FlipBT.UseVisualStyleBackColor = true;
+            this.FlipBT.Click += new System.EventHandler(this.FlipBT_Click);
             // 
             // FlipUDBT
             // 
@@ -265,25 +267,27 @@
             this.FlipUDBT.Name = "FlipUDBT";
             this.FlipUDBT.Size = new System.Drawing.Size(94, 35);
             this.FlipUDBT.TabIndex = 18;
-            this.FlipUDBT.Text = "Flip RL";
+            this.FlipUDBT.Text = "Flip UD";
             this.FlipUDBT.UseVisualStyleBackColor = true;
+            this.FlipUDBT.Click += new System.EventHandler(this.FlipUDBT_Click);
             // 
-            // espelharBT
+            // concatenarBT
             // 
-            this.espelharBT.Location = new System.Drawing.Point(814, 198);
-            this.espelharBT.Margin = new System.Windows.Forms.Padding(2);
-            this.espelharBT.Name = "espelharBT";
-            this.espelharBT.Size = new System.Drawing.Size(94, 35);
-            this.espelharBT.TabIndex = 19;
-            this.espelharBT.Text = "Espelhar";
-            this.espelharBT.UseVisualStyleBackColor = true;
+            this.concatenarBT.Location = new System.Drawing.Point(814, 307);
+            this.concatenarBT.Margin = new System.Windows.Forms.Padding(2);
+            this.concatenarBT.Name = "concatenarBT";
+            this.concatenarBT.Size = new System.Drawing.Size(94, 35);
+            this.concatenarBT.TabIndex = 19;
+            this.concatenarBT.Text = "Concatenar";
+            this.concatenarBT.UseVisualStyleBackColor = true;
+            this.concatenarBT.Click += new System.EventHandler(this.concatenarBT_Click);
             // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1371, 839);
-            this.Controls.Add(this.espelharBT);
+            this.Controls.Add(this.concatenarBT);
             this.Controls.Add(this.FlipUDBT);
             this.Controls.Add(this.FlipBT);
             this.Controls.Add(this.subtracaoBT);
@@ -332,7 +336,7 @@
         private System.Windows.Forms.Button subtracaoBT;
         private System.Windows.Forms.Button FlipBT;
         private System.Windows.Forms.Button FlipUDBT;
-        private System.Windows.Forms.Button espelharBT;
+        private System.Windows.Forms.Button concatenarBT;
     }
 }
 
