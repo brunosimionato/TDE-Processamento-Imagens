@@ -492,7 +492,7 @@ namespace Trabalho
 
 
 
-        // BOTÃO FLIPAR HORIZONTAL
+        // BOTÃO FLIPAR HORIZONTAL --------------------------------------------------------------------------------------------------------------
         private void FlipBT_Click(object sender, EventArgs e)
         {
             // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
@@ -574,7 +574,7 @@ namespace Trabalho
 
 
 
-        // BOTÃO FLIPAR VERTICAL
+        // BOTÃO FLIPAR VERTICAL --------------------------------------------------------------------------------------------------------------
         private void FlipUDBT_Click(object sender, EventArgs e)
         {
             // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
@@ -656,7 +656,7 @@ namespace Trabalho
 
 
 
-        // BOTÃO ESCALA DE CINZA
+        // BOTÃO ESCALA DE CINZA --------------------------------------------------------------------------------------------------------------
         private void cinzaBT_Click(object sender, EventArgs e)
         {
             // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
@@ -733,7 +733,7 @@ namespace Trabalho
 
 
 
-        // BOTÃO CONCATENAR
+        // BOTÃO CONCATENAR --------------------------------------------------------------------------------------------------------------
         private void concatenarBT_Click(object sender, EventArgs e)
         {
             // Exibe um aviso caso a opção "Ambas as Imagens" não estiver selecionda
@@ -782,24 +782,20 @@ namespace Trabalho
 
 
 
-
-
-
-
-
+        // BOTÃO RECORTAR --------------------------------------------------------------------------------------------------------------
         private void btnRecortar_Click(object sender, EventArgs e)
         {
-            // Verifica a opção selecionada no Radio Button
-            if (!rbA.Checked && !rbB.Checked && !rbDuas.Checked)
+            // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
+            if (rbDuas.Checked)
             {
-                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' para cortar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
-            if (rbDuas.Checked)
+            // Exibe um aviso caso nenhuma imagens for estiver selecionada
+            if (!rbA.Checked && !rbB.Checked)
             {
-                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -854,7 +850,7 @@ namespace Trabalho
             // Verifica se os valores de iniciais e finais são iguais
             if ((widthInicial == widthFinal) || (heightInicial == heightFinal))
             {
-                MessageBox.Show("As coordenadas de iniciais e finais não podem ser iguais.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("As coordenadas iniciais e finais não podem ser iguais.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -928,9 +924,8 @@ namespace Trabalho
                 }
             }
 
-            return croppedImage; // Retorne a imagem recortada
+            return croppedImage;
         }
-
 
 
         private Bitmap ConvertToBitmap(int[,] matrix)
@@ -950,16 +945,22 @@ namespace Trabalho
             return image;
         }
 
+
+
+
+        // BOTÃO LIMPAR IMAGENS --------------------------------------------------------------------------------------------------------------
         private void limparBT_Click(object sender, EventArgs e)
         {
-            // Limpar as imagens
             imgA.Image = null;
             imgB.Image = null;
             imgResultado.Image = null;
 
-            // Limpar os campos de texto
             widthInicialTB.Text = "";
             widthFinalTB.Text = "";
+
+            rbA.Checked = false;
+            rbB.Checked = false;
+            rbDuas.Checked = false;
         }
     }
 }
