@@ -177,6 +177,12 @@ namespace Trabalho
                     return;
                 }
 
+                if (string.IsNullOrEmpty(adInputTB.Text))
+                {
+                    MessageBox.Show("Adicione um valor no campo de adição.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
 
                 // Intera os pixels da imagem
@@ -186,10 +192,11 @@ namespace Trabalho
                     {
                         Color color1 = ((Bitmap)image1).GetPixel(x, y);
 
-                        // Soma os componentes RGB do pixel com ele mesmo
-                        int r = color1.R + color1.R;
-                        int g = color1.G + color1.G;
-                        int b = color1.B + color1.B;
+                        // Soma os componentes RGB do pixel com o valor digitado
+                        int r = color1.R + Convert.ToInt32(adInputTB.Value);
+                        int g = color1.G + Convert.ToInt32(adInputTB.Value);
+                        int b = color1.B + Convert.ToInt32(adInputTB.Value);
+
 
                         r = Math.Min(r, 255);
                         g = Math.Min(g, 255);
@@ -213,6 +220,12 @@ namespace Trabalho
                     return;
                 }
 
+                if (string.IsNullOrEmpty(adInputTB.Text))
+                {
+                    MessageBox.Show("Adicione um valor no campo de adição.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
 
                 // Intera os pixels da imagem
@@ -222,10 +235,10 @@ namespace Trabalho
                     {
                         Color color1 = ((Bitmap)image1).GetPixel(x, y);
 
-                        // Soma os componentes RGB do pixel com ele mesmo
-                        int r = color1.R + color1.R;
-                        int g = color1.G + color1.G;
-                        int b = color1.B + color1.B;
+                        // Soma os componentes RGB do pixel com o valor digitado
+                        int r = color1.R + Convert.ToInt32(adInputTB.Value);
+                        int g = color1.G + Convert.ToInt32(adInputTB.Value);
+                        int b = color1.B + Convert.ToInt32(adInputTB.Value);
 
                         r = Math.Min(r, 255);
                         g = Math.Min(g, 255);
@@ -312,6 +325,12 @@ namespace Trabalho
                     return;
                 }
 
+                if (string.IsNullOrEmpty(subInputTB.Text))
+                {
+                    MessageBox.Show("Adicione um valor no campo de subtração.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
 
                 // Intera os pixels da imagem
@@ -322,9 +341,9 @@ namespace Trabalho
                         Color color1 = ((Bitmap)image1).GetPixel(x, y);
 
                         // Subtrai as componentes RGB do pixel pela metade
-                        int r = color1.R / 2;
-                        int g = color1.G / 2;
-                        int b = color1.B / 2;
+                        int r = color1.R - Convert.ToInt32(subInputTB.Value);
+                        int g = color1.G - Convert.ToInt32(subInputTB.Value);
+                        int b = color1.B - Convert.ToInt32(subInputTB.Value);
 
                         // Trunca os valores para não ultrapassar 255
                         r = Math.Max(r, 0);
@@ -349,6 +368,12 @@ namespace Trabalho
                     return;
                 }
 
+                if (string.IsNullOrEmpty(subInputTB.Text))
+                {
+                    MessageBox.Show("Adicione um valor no campo de subtração.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
 
                 for (int x = 0; x < image1.Width; x++)
@@ -358,9 +383,9 @@ namespace Trabalho
                         Color color1 = ((Bitmap)image1).GetPixel(x, y);
 
                         // Subtrai as componentes RGB do pixel pela metade
-                        int r = color1.R / 2;
-                        int g = color1.G / 2;
-                        int b = color1.B / 2;
+                        int r = color1.R - Convert.ToInt32(subInputTB.Value);
+                        int g = color1.G - Convert.ToInt32(subInputTB.Value);
+                        int b = color1.B - Convert.ToInt32(subInputTB.Value);
 
                         // Trunca os valores para não ultrapassar 255
                         r = Math.Max(r, 0);
@@ -381,11 +406,10 @@ namespace Trabalho
         // BOTÃO NEGATIVO --------------------------------------------------------------------------------------------------------------
         private void negativarBT_Click(object sender, EventArgs e)
         {
-
-            // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
-            if (rbDuas.Checked)
+            // Exibe um aviso caso nenhuma imagens for escolhida para ser processada
+            if (!rbA.Checked && !rbB.Checked)
             {
-                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -800,23 +824,37 @@ namespace Trabalho
             }
 
             // Verifica se os valores de corte foram inseridos
-            if (string.IsNullOrEmpty(widthTB.Text) || string.IsNullOrEmpty(heightTB.Text))
+            if (string.IsNullOrEmpty(widthInicialTB.Text) || string.IsNullOrEmpty(widthFinalTB.Text) || string.IsNullOrEmpty(heightInicialTB.Text) || string.IsNullOrEmpty(heightFinalTB.Text))
             {
-                MessageBox.Show("Insira os valores de largura e altura para o recorte.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Insira as coordenadas de linha e\n coluna para o recorte.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             // Converte os valores de largura e altura para inteiros
-            if (!int.TryParse(widthTB.Text, out int width) || !int.TryParse(heightTB.Text, out int height))
+            if (!int.TryParse(widthInicialTB.Text, out int widthInicial) || !int.TryParse(widthFinalTB.Text, out int widthFinal) || !int.TryParse(heightInicialTB.Text, out int heightInicial) || !int.TryParse(heightFinalTB.Text, out int heightFinal))
             {
-                MessageBox.Show("Valores de largura e altura devem ser números inteiros.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("As coordenadas de linha e coluna\n devem ser números inteiros.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             // Verifica se os valores de largura e altura são maiores que zero
-            if (width <= 0 || height <= 0)
+            if (widthInicial <= 0 || widthFinal <= 0 || heightInicial <= 0 || heightFinal <= 0)
             {
-                MessageBox.Show("Valores de largura e altura devem ser maiores que zero.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("As coordenadas de linha e coluna\n devem ser maiores que zero.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Verifica se os valores de largura e altura são maiores que zero
+            if ((widthInicial > widthFinal) || (heightInicial > heightFinal))
+            { 
+                MessageBox.Show("As coordenadas iniciais não podem ser maiores que as finais.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Verifica se os valores de iniciais e finais são iguais
+            if ((widthInicial == widthFinal) || (heightInicial == heightFinal))
+            {
+                MessageBox.Show("As coordenadas de iniciais e finais não podem ser iguais.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -828,7 +866,7 @@ namespace Trabalho
             int[,] imageMatrix = ConvertToMatrix(originalImage);
 
             // Realiza o recorte na matriz
-            int[,] croppedImageMatrix = CropImage(imageMatrix, width, height);
+            int[,] croppedImageMatrix = CropImage(imageMatrix, widthInicial, widthFinal, heightInicial, heightFinal);
 
             // Se a matriz recortada for nula, significa que ocorreu um erro durante o recorte
             if (croppedImageMatrix == null)
@@ -861,22 +899,22 @@ namespace Trabalho
             return matrix;
         }
 
-        private int[,] CropImage(int[,] imageMatrix, int width, int height)
+        private int[,] CropImage(int[,] imageMatrix, int widthInicial, int widthFinal, int heightInicial, int heightFinal)
         {
             // Obtenha as dimensões da imagem original
             int originalWidth = imageMatrix.GetLength(1);
             int originalHeight = imageMatrix.GetLength(0);
 
             // Verifique se as dimensões de corte estão dentro dos limites da imagem original
-            if (width > originalWidth || height > originalHeight)
+            if (widthFinal > originalWidth || heightFinal > originalHeight)
             {
                 MessageBox.Show("As dimensões de corte excedem as dimensões da imagem original.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null; // Retorna null para indicar um erro
             }
 
-            // Calcule as coordenadas do canto superior esquerdo do retângulo de corte
-            int startX = (originalWidth - width) / 2;
-            int startY = (originalHeight - height) / 2;
+            // Calcule as dimensões do retângulo de corte
+            int width = widthFinal - widthInicial;
+            int height = heightFinal - heightInicial;
 
             // Crie uma nova matriz para armazenar a imagem recortada
             int[,] croppedImage = new int[height, width];
@@ -886,12 +924,14 @@ namespace Trabalho
             {
                 for (int x = 0; x < width; x++)
                 {
-                    croppedImage[y, x] = imageMatrix[startY + y, startX + x];
+                    croppedImage[y, x] = imageMatrix[heightInicial + y, widthInicial + x];
                 }
             }
 
             return croppedImage; // Retorne a imagem recortada
         }
+
+
 
         private Bitmap ConvertToBitmap(int[,] matrix)
         {
@@ -918,10 +958,9 @@ namespace Trabalho
             imgResultado.Image = null;
 
             // Limpar os campos de texto
-            widthTB.Text = "";
-            heightTB.Text = "";
+            widthInicialTB.Text = "";
+            widthFinalTB.Text = "";
         }
-
     }
 }
 
