@@ -50,6 +50,7 @@
             this.FlipUDBT = new System.Windows.Forms.Button();
             this.concatenarBT = new System.Windows.Forms.Button();
             this.btnRecortar = new System.Windows.Forms.Button();
+
             this.widthInicialTB = new System.Windows.Forms.NumericUpDown();
             this.widthFinalTB = new System.Windows.Forms.NumericUpDown();
             this.limparBT = new System.Windows.Forms.Button();
@@ -62,6 +63,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.adInputTB = new System.Windows.Forms.NumericUpDown();
             this.subInputTB = new System.Windows.Forms.NumericUpDown();
+
             ((System.ComponentModel.ISupportInitialize)(this.imgA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgResultado)).BeginInit();
@@ -69,6 +71,7 @@
             this.gpB.SuspendLayout();
             this.gpResultado.SuspendLayout();
             this.groupBox8.SuspendLayout();
+
             ((System.ComponentModel.ISupportInitialize)(this.widthInicialTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.widthFinalTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.heightInicialTB)).BeginInit();
@@ -76,6 +79,7 @@
             this.gbCortar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.adInputTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subInputTB)).BeginInit();
+
             this.SuspendLayout();
             // 
             // imgA
@@ -212,7 +216,7 @@
             this.groupBox8.Size = new System.Drawing.Size(314, 52);
             this.groupBox8.TabIndex = 15;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Escolha de imagens";
+            this.groupBox8.Text = "Escolha de Imagens";
             // 
             // rbDuas
             // 
@@ -304,7 +308,9 @@
             // 
             // btnRecortar
             // 
+
             this.btnRecortar.Location = new System.Drawing.Point(17, 135);
+
             this.btnRecortar.Margin = new System.Windows.Forms.Padding(2);
             this.btnRecortar.Name = "btnRecortar";
             this.btnRecortar.Size = new System.Drawing.Size(94, 35);
