@@ -49,6 +49,10 @@
             this.FlipBT = new System.Windows.Forms.Button();
             this.FlipUDBT = new System.Windows.Forms.Button();
             this.concatenarBT = new System.Windows.Forms.Button();
+            this.btnRecortar = new System.Windows.Forms.Button();
+            this.widthTB = new System.Windows.Forms.NumericUpDown();
+            this.heightTB = new System.Windows.Forms.NumericUpDown();
+            this.limparBT = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imgA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgResultado)).BeginInit();
@@ -56,6 +60,8 @@
             this.gpB.SuspendLayout();
             this.gpResultado.SuspendLayout();
             this.groupBox8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.widthTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heightTB)).BeginInit();
             this.SuspendLayout();
             // 
             // imgA
@@ -192,7 +198,7 @@
             this.groupBox8.Size = new System.Drawing.Size(314, 52);
             this.groupBox8.TabIndex = 15;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Escolha de imagens";
+            this.groupBox8.Text = "Escolha de Imagens";
             // 
             // rbDuas
             // 
@@ -273,7 +279,7 @@
             // 
             // concatenarBT
             // 
-            this.concatenarBT.Location = new System.Drawing.Point(814, 307);
+            this.concatenarBT.Location = new System.Drawing.Point(814, 247);
             this.concatenarBT.Margin = new System.Windows.Forms.Padding(2);
             this.concatenarBT.Name = "concatenarBT";
             this.concatenarBT.Size = new System.Drawing.Size(94, 35);
@@ -282,11 +288,61 @@
             this.concatenarBT.UseVisualStyleBackColor = true;
             this.concatenarBT.Click += new System.EventHandler(this.concatenarBT_Click);
             // 
+            // btnRecortar
+            // 
+            this.btnRecortar.Location = new System.Drawing.Point(21, 441);
+            this.btnRecortar.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRecortar.Name = "btnRecortar";
+            this.btnRecortar.Size = new System.Drawing.Size(94, 35);
+            this.btnRecortar.TabIndex = 20;
+            this.btnRecortar.Text = "Cortar";
+            this.btnRecortar.UseVisualStyleBackColor = true;
+            this.btnRecortar.Click += new System.EventHandler(this.btnRecortar_Click);
+            // 
+            // widthTB
+            // 
+            this.widthTB.Location = new System.Drawing.Point(21, 481);
+            this.widthTB.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.widthTB.Name = "widthTB";
+            this.widthTB.Size = new System.Drawing.Size(94, 20);
+            this.widthTB.TabIndex = 21;
+            // 
+            // heightTB
+            // 
+            this.heightTB.Location = new System.Drawing.Point(21, 507);
+            this.heightTB.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.heightTB.Name = "heightTB";
+            this.heightTB.Size = new System.Drawing.Size(94, 20);
+            this.heightTB.TabIndex = 22;
+            // 
+            // limparBT
+            // 
+            this.limparBT.Location = new System.Drawing.Point(683, 368);
+            this.limparBT.Margin = new System.Windows.Forms.Padding(2);
+            this.limparBT.Name = "limparBT";
+            this.limparBT.Size = new System.Drawing.Size(94, 35);
+            this.limparBT.TabIndex = 23;
+            this.limparBT.Text = "Limpar Imagens";
+            this.limparBT.UseVisualStyleBackColor = true;
+            this.limparBT.Click += new System.EventHandler(this.limparBT_Click);
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1371, 839);
+            this.Controls.Add(this.limparBT);
+            this.Controls.Add(this.heightTB);
+            this.Controls.Add(this.widthTB);
+            this.Controls.Add(this.btnRecortar);
             this.Controls.Add(this.concatenarBT);
             this.Controls.Add(this.FlipUDBT);
             this.Controls.Add(this.FlipBT);
@@ -311,6 +367,8 @@
             this.gpResultado.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.widthTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.heightTB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -337,6 +395,10 @@
         private System.Windows.Forms.Button FlipBT;
         private System.Windows.Forms.Button FlipUDBT;
         private System.Windows.Forms.Button concatenarBT;
+        private System.Windows.Forms.Button btnRecortar;
+        private System.Windows.Forms.NumericUpDown widthTB;
+        private System.Windows.Forms.NumericUpDown heightTB;
+        private System.Windows.Forms.Button limparBT;
     }
 }
 

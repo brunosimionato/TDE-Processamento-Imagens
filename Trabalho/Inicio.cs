@@ -15,6 +15,7 @@ namespace Trabalho
 
 
 
+
         // BOTÃO ABRIR IMAGEM A --------------------------------------------------------------------------------------------------------------
         private void abrirBT1_Click(object sender, EventArgs e)
         {
@@ -109,10 +110,10 @@ namespace Trabalho
         // BOTÃO DE ADIÇÃO --------------------------------------------------------------------------------------------------------------
         private void somaBT_Click(object sender, EventArgs e)
         { 
-            // Exibe um aviso caso nenhuma imagens for escolhida para ser processada
+            // Exibe um aviso caso nenhuma opção no campo "Escolha de Imagens" for marcada
             if (!rbA.Checked && !rbB.Checked && !rbDuas.Checked)
             {
-                MessageBox.Show("Selecione 'Imagem A', 'Imagem B' ou 'Ambas as imagens' para processar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Selecione uma opção no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -126,14 +127,14 @@ namespace Trabalho
                 // Pede para selecionar duas imagens
                 if (image1 == null || image2 == null)
                 {
-                    MessageBox.Show("Abra uma imagem no Campo A e outra no campo B.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Abra duas Imagens.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 // Verifica tamanho e formato
                 if (image1.Width != image2.Width || image1.Height != image2.Height || image1.PixelFormat != image2.PixelFormat)
                 {
-                    MessageBox.Show("As imagens precisam ter o mesmo tamanho e formato para serem somadas.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("As imagens precisam ter o mesmo tamanho e formato.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -172,7 +173,7 @@ namespace Trabalho
 
                 if (image1 == null)
                 {
-                    MessageBox.Show("Abra uma imagem no Campo A.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -208,7 +209,7 @@ namespace Trabalho
 
                 if (image1 == null)
                 {
-                    MessageBox.Show("Abra uma imagem no Campo B.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -247,7 +248,7 @@ namespace Trabalho
             // Exibe um aviso caso nenhuma imagens for escolhida para ser processada
             if (!rbA.Checked && !rbB.Checked && !rbDuas.Checked)
             {
-                MessageBox.Show("Selecione 'Imagem A', 'Imagem B' ou 'Ambas as imagens' para processar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Selecione uma opção no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -261,14 +262,14 @@ namespace Trabalho
                 // Pede para selecionar duas imagens
                 if (image1 == null || image2 == null)
                 {
-                    MessageBox.Show("Abra uma imagem no Campo A e outra no Campo B.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Abra duas Imagens.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 // Verifica tamanho e formato
                 if (image1.Width != image2.Width || image1.Height != image2.Height || image1.PixelFormat != image2.PixelFormat)
                 {
-                    MessageBox.Show("As imagens precisam ter o mesmo tamanho e formato para serem subtraidas.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("As imagens precisam ter o mesmo tamanho e formato.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -307,7 +308,7 @@ namespace Trabalho
 
                 if (image1 == null)
                 {
-                    MessageBox.Show("Abra uma imagem no campo A.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -344,7 +345,7 @@ namespace Trabalho
 
                 if (image1 == null)
                 {
-                    MessageBox.Show("Abra uma imagem no campo B.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -380,17 +381,18 @@ namespace Trabalho
         // BOTÃO NEGATIVO --------------------------------------------------------------------------------------------------------------
         private void negativarBT_Click(object sender, EventArgs e)
         {
-            // Exibe um aviso caso nenhuma imagens for escolhida para ser processada
-            if (!rbA.Checked && !rbB.Checked && !rbDuas.Checked)
+
+            // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
+            if (rbDuas.Checked)
             {
-                MessageBox.Show("Selecione 'Imagem A', 'Imagem B' ou 'Ambas as imagens' para processar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
-            if (rbDuas.Checked)
+            // Exibe um aviso caso nenhuma imagens for estiver selecionada
+            if (!rbA.Checked && !rbB.Checked)
             {
-                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -401,7 +403,7 @@ namespace Trabalho
 
                 if (image == null)
                 {
-                    MessageBox.Show("Abra uma imagem no Campo Imagem A.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -435,7 +437,7 @@ namespace Trabalho
 
                 if (image == null)
                 {
-                    MessageBox.Show("Abra uma imagem no Campo Imagem B.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -465,20 +467,21 @@ namespace Trabalho
 
 
 
+
         // BOTÃO FLIPAR HORIZONTAL
         private void FlipBT_Click(object sender, EventArgs e)
         {
-            // Exibe um aviso caso nenhuma imagens for escolhida para ser processada
-            if (!rbA.Checked && !rbB.Checked && !rbDuas.Checked)
+            // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
+            if (rbDuas.Checked)
             {
-                MessageBox.Show("Selecione 'Imagem A', 'Imagem B' ou 'Ambas as imagens' para processar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
-            if (rbDuas.Checked)
+            // Exibe um aviso caso nenhuma imagens for estiver selecionada
+            if (!rbA.Checked && !rbB.Checked)
             {
-                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -489,7 +492,7 @@ namespace Trabalho
 
                 if (image == null)
                 {
-                    MessageBox.Show("Abra uma imagem no Campo Imagem A.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -519,7 +522,7 @@ namespace Trabalho
 
                 if (image == null)
                 {
-                    MessageBox.Show("Abra uma imagem no Campo Imagem B.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -544,20 +547,23 @@ namespace Trabalho
         }
 
 
+
+
+
         // BOTÃO FLIPAR VERTICAL
         private void FlipUDBT_Click(object sender, EventArgs e)
         {
-            // Exibe um aviso caso nenhuma imagens for escolhida para ser processada
-            if (!rbA.Checked && !rbB.Checked && !rbDuas.Checked)
+            // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
+            if (rbDuas.Checked)
             {
-                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' para processar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
-            if (rbDuas.Checked)
+            // Exibe um aviso caso nenhuma imagens for estiver selecionada
+            if (!rbA.Checked && !rbB.Checked)
             {
-                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -568,7 +574,7 @@ namespace Trabalho
 
                 if (image == null)
                 {
-                    MessageBox.Show("Abra uma imagem no Campo Imagem A.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -599,7 +605,7 @@ namespace Trabalho
 
                 if (image == null)
                 {
-                    MessageBox.Show("Abra uma imagem no Campo Imagem B.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -629,17 +635,17 @@ namespace Trabalho
         // BOTÃO ESCALA DE CINZA
         private void cinzaBT_Click(object sender, EventArgs e)
         {
-            // Verifica a opção selecionada no Radio Button
-            if (!rbA.Checked && !rbB.Checked && !rbDuas.Checked)
+            // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
+            if (rbDuas.Checked)
             {
-                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' para processar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
-            if (rbDuas.Checked)
+            // Exibe um aviso caso nenhuma imagens for estiver selecionada
+            if (!rbA.Checked && !rbB.Checked)
             {
-                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -650,7 +656,7 @@ namespace Trabalho
 
                 if (image == null)
                 {
-                    MessageBox.Show("Abra uma imagem no Campo Imagem A.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -667,7 +673,7 @@ namespace Trabalho
 
                 if (image == null)
                 {
-                    MessageBox.Show("Abra uma imagem no Campo Imagem B.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -706,17 +712,17 @@ namespace Trabalho
         // BOTÃO CONCATENAR
         private void concatenarBT_Click(object sender, EventArgs e)
         {
-            // CASO A OPÇÃO "AMBAS AS IMAGENS" NÃO ESTIVER SELECIONADA
+            // Exibe um aviso caso a opção "Ambas as Imagens" não estiver selecionda
             if (!rbDuas.Checked)
             {
-                MessageBox.Show("Escolha 'Ambas Imagens' para concatenar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Escolha 'Ambas as Imagens' para concatenar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Verifica se ambas as imagens A e B estão carregadas
+            // Exibe um aviso caso a "Imagem A" ou "Imagem B" não estiverem carregadas
             if (imgA.Image == null || imgB.Image == null)
             {
-                MessageBox.Show("Carregue duas imagens para concatenar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Abra duas Imagens.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -726,7 +732,7 @@ namespace Trabalho
             // Verifica as dimensões das imagens
             if (imagemA.Width != imagemB.Width || imagemA.Height != imagemB.Height)
             {
-                MessageBox.Show("As imagens precisam ter as mesmas dimensões para serem concatenadas.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("As imagens precisam ter o mesmo tamanho e formato.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -755,5 +761,167 @@ namespace Trabalho
 
 
 
+
+
+        private void btnRecortar_Click(object sender, EventArgs e)
+        {
+            // Verifica a opção selecionada no Radio Button
+            if (!rbA.Checked && !rbB.Checked && !rbDuas.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' para cortar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
+            if (rbA.Checked)
+            {
+                if (imgA.Image == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
+            if (rbB.Checked)
+            {
+                if (imgB.Image == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // Verifica se os valores de corte foram inseridos
+            if (string.IsNullOrEmpty(widthTB.Text) || string.IsNullOrEmpty(heightTB.Text))
+            {
+                MessageBox.Show("Insira os valores de largura e altura para o recorte.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Converte os valores de largura e altura para inteiros
+            if (!int.TryParse(widthTB.Text, out int width) || !int.TryParse(heightTB.Text, out int height))
+            {
+                MessageBox.Show("Valores de largura e altura devem ser números inteiros.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Verifica se os valores de largura e altura são maiores que zero
+            if (width <= 0 || height <= 0)
+            {
+                MessageBox.Show("Valores de largura e altura devem ser maiores que zero.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Verifica qual imagem está selecionada
+            PictureBox pictureBox = rbA.Checked ? imgA : imgB;
+
+            // Converte a imagem selecionada em uma matriz
+            Bitmap originalImage = new Bitmap(pictureBox.Image);
+            int[,] imageMatrix = ConvertToMatrix(originalImage);
+
+            // Realiza o recorte na matriz
+            int[,] croppedImageMatrix = CropImage(imageMatrix, width, height);
+
+            // Se a matriz recortada for nula, significa que ocorreu um erro durante o recorte
+            if (croppedImageMatrix == null)
+            {
+                MessageBox.Show("Ocorreu um erro ao recortar a imagem.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Converte a matriz recortada de volta para uma imagem
+            Bitmap croppedImage = ConvertToBitmap(croppedImageMatrix);
+
+            // Exibe o resultado na imagem de destino
+            imgResultado.Image = croppedImage;
+        }
+
+        private int[,] ConvertToMatrix(Bitmap image)
+        {
+            int width = image.Width;
+            int height = image.Height;
+            int[,] matrix = new int[height, width];
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    matrix[y, x] = image.GetPixel(x, y).ToArgb();
+                }
+            }
+
+            return matrix;
+        }
+
+        private int[,] CropImage(int[,] imageMatrix, int width, int height)
+        {
+            // Obtenha as dimensões da imagem original
+            int originalWidth = imageMatrix.GetLength(1);
+            int originalHeight = imageMatrix.GetLength(0);
+
+            // Verifique se as dimensões de corte estão dentro dos limites da imagem original
+            if (width > originalWidth || height > originalHeight)
+            {
+                MessageBox.Show("As dimensões de corte excedem as dimensões da imagem original.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null; // Retorna null para indicar um erro
+            }
+
+            // Calcule as coordenadas do canto superior esquerdo do retângulo de corte
+            int startX = (originalWidth - width) / 2;
+            int startY = (originalHeight - height) / 2;
+
+            // Crie uma nova matriz para armazenar a imagem recortada
+            int[,] croppedImage = new int[height, width];
+
+            // Copie os pixels da região recortada da imagem original para a nova matriz
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    croppedImage[y, x] = imageMatrix[startY + y, startX + x];
+                }
+            }
+
+            return croppedImage; // Retorne a imagem recortada
+        }
+
+        private Bitmap ConvertToBitmap(int[,] matrix)
+        {
+            int height = matrix.GetLength(0);
+            int width = matrix.GetLength(1);
+            Bitmap image = new Bitmap(width, height);
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    image.SetPixel(x, y, Color.FromArgb(matrix[y, x]));
+                }
+            }
+
+            return image;
+        }
+
+        private void limparBT_Click(object sender, EventArgs e)
+        {
+            // Limpar as imagens
+            imgA.Image = null;
+            imgB.Image = null;
+            imgResultado.Image = null;
+
+            // Limpar os campos de texto
+            widthTB.Text = "";
+            heightTB.Text = "";
+        }
+
     }
 }
+
