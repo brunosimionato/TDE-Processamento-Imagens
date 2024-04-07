@@ -50,20 +50,20 @@
             this.FlipUDBT = new System.Windows.Forms.Button();
             this.concatenarBT = new System.Windows.Forms.Button();
             this.btnRecortar = new System.Windows.Forms.Button();
-
             this.widthInicialTB = new System.Windows.Forms.NumericUpDown();
             this.widthFinalTB = new System.Windows.Forms.NumericUpDown();
             this.limparBT = new System.Windows.Forms.Button();
             this.heightInicialTB = new System.Windows.Forms.NumericUpDown();
             this.heightFinalTB = new System.Windows.Forms.NumericUpDown();
             this.gbCortar = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.adInputTB = new System.Windows.Forms.NumericUpDown();
             this.subInputTB = new System.Windows.Forms.NumericUpDown();
-
+            this.RGBbinBT = new System.Windows.Forms.Button();
+            this.RGBbinTB = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.imgA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgResultado)).BeginInit();
@@ -71,7 +71,6 @@
             this.gpB.SuspendLayout();
             this.gpResultado.SuspendLayout();
             this.groupBox8.SuspendLayout();
-
             ((System.ComponentModel.ISupportInitialize)(this.widthInicialTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.widthFinalTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.heightInicialTB)).BeginInit();
@@ -79,7 +78,7 @@
             this.gbCortar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.adInputTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subInputTB)).BeginInit();
-
+            ((System.ComponentModel.ISupportInitialize)(this.RGBbinTB)).BeginInit();
             this.SuspendLayout();
             // 
             // imgA
@@ -136,10 +135,10 @@
             // 
             // negativoBT
             // 
-            this.negativoBT.Location = new System.Drawing.Point(692, 198);
+            this.negativoBT.Location = new System.Drawing.Point(692, 268);
             this.negativoBT.Margin = new System.Windows.Forms.Padding(2);
             this.negativoBT.Name = "negativoBT";
-            this.negativoBT.Size = new System.Drawing.Size(94, 35);
+            this.negativoBT.Size = new System.Drawing.Size(101, 35);
             this.negativoBT.TabIndex = 5;
             this.negativoBT.Text = "Negativo";
             this.negativoBT.UseVisualStyleBackColor = true;
@@ -147,10 +146,10 @@
             // 
             // cinzaBT
             // 
-            this.cinzaBT.Location = new System.Drawing.Point(692, 247);
+            this.cinzaBT.Location = new System.Drawing.Point(692, 307);
             this.cinzaBT.Margin = new System.Windows.Forms.Padding(2);
             this.cinzaBT.Name = "cinzaBT";
-            this.cinzaBT.Size = new System.Drawing.Size(94, 35);
+            this.cinzaBT.Size = new System.Drawing.Size(101, 35);
             this.cinzaBT.TabIndex = 6;
             this.cinzaBT.Text = "Escala de Cinza";
             this.cinzaBT.UseVisualStyleBackColor = true;
@@ -256,7 +255,7 @@
             this.somaBT.Location = new System.Drawing.Point(692, 106);
             this.somaBT.Margin = new System.Windows.Forms.Padding(2);
             this.somaBT.Name = "somaBT";
-            this.somaBT.Size = new System.Drawing.Size(94, 35);
+            this.somaBT.Size = new System.Drawing.Size(101, 35);
             this.somaBT.TabIndex = 7;
             this.somaBT.Text = "Adição";
             this.somaBT.UseVisualStyleBackColor = true;
@@ -264,10 +263,10 @@
             // 
             // subtracaoBT
             // 
-            this.subtracaoBT.Location = new System.Drawing.Point(692, 150);
+            this.subtracaoBT.Location = new System.Drawing.Point(692, 179);
             this.subtracaoBT.Margin = new System.Windows.Forms.Padding(2);
             this.subtracaoBT.Name = "subtracaoBT";
-            this.subtracaoBT.Size = new System.Drawing.Size(94, 35);
+            this.subtracaoBT.Size = new System.Drawing.Size(101, 35);
             this.subtracaoBT.TabIndex = 16;
             this.subtracaoBT.Text = "Subtração";
             this.subtracaoBT.UseVisualStyleBackColor = true;
@@ -275,10 +274,10 @@
             // 
             // FlipBT
             // 
-            this.FlipBT.Location = new System.Drawing.Point(865, 106);
+            this.FlipBT.Location = new System.Drawing.Point(851, 268);
             this.FlipBT.Margin = new System.Windows.Forms.Padding(2);
             this.FlipBT.Name = "FlipBT";
-            this.FlipBT.Size = new System.Drawing.Size(94, 35);
+            this.FlipBT.Size = new System.Drawing.Size(101, 35);
             this.FlipBT.TabIndex = 17;
             this.FlipBT.Text = "Flip RL";
             this.FlipBT.UseVisualStyleBackColor = true;
@@ -286,10 +285,10 @@
             // 
             // FlipUDBT
             // 
-            this.FlipUDBT.Location = new System.Drawing.Point(865, 150);
+            this.FlipUDBT.Location = new System.Drawing.Point(851, 307);
             this.FlipUDBT.Margin = new System.Windows.Forms.Padding(2);
             this.FlipUDBT.Name = "FlipUDBT";
-            this.FlipUDBT.Size = new System.Drawing.Size(94, 35);
+            this.FlipUDBT.Size = new System.Drawing.Size(101, 35);
             this.FlipUDBT.TabIndex = 18;
             this.FlipUDBT.Text = "Flip UD";
             this.FlipUDBT.UseVisualStyleBackColor = true;
@@ -297,10 +296,10 @@
             // 
             // concatenarBT
             // 
-            this.concatenarBT.Location = new System.Drawing.Point(865, 247);
+            this.concatenarBT.Location = new System.Drawing.Point(851, 228);
             this.concatenarBT.Margin = new System.Windows.Forms.Padding(2);
             this.concatenarBT.Name = "concatenarBT";
-            this.concatenarBT.Size = new System.Drawing.Size(94, 35);
+            this.concatenarBT.Size = new System.Drawing.Size(101, 35);
             this.concatenarBT.TabIndex = 19;
             this.concatenarBT.Text = "Concatenar";
             this.concatenarBT.UseVisualStyleBackColor = true;
@@ -308,12 +307,10 @@
             // 
             // btnRecortar
             // 
-
-            this.btnRecortar.Location = new System.Drawing.Point(17, 135);
-
+            this.btnRecortar.Location = new System.Drawing.Point(17, 127);
             this.btnRecortar.Margin = new System.Windows.Forms.Padding(2);
             this.btnRecortar.Name = "btnRecortar";
-            this.btnRecortar.Size = new System.Drawing.Size(94, 35);
+            this.btnRecortar.Size = new System.Drawing.Size(154, 35);
             this.btnRecortar.TabIndex = 20;
             this.btnRecortar.Text = "Cortar";
             this.btnRecortar.UseVisualStyleBackColor = true;
@@ -321,34 +318,34 @@
             // 
             // widthInicialTB
             // 
-            this.widthInicialTB.Location = new System.Drawing.Point(17, 23);
+            this.widthInicialTB.Location = new System.Drawing.Point(17, 38);
             this.widthInicialTB.Maximum = new decimal(new int[] {
             2000,
             0,
             0,
             0});
             this.widthInicialTB.Name = "widthInicialTB";
-            this.widthInicialTB.Size = new System.Drawing.Size(64, 20);
+            this.widthInicialTB.Size = new System.Drawing.Size(67, 20);
             this.widthInicialTB.TabIndex = 21;
             // 
             // widthFinalTB
             // 
-            this.widthFinalTB.Location = new System.Drawing.Point(17, 49);
+            this.widthFinalTB.Location = new System.Drawing.Point(104, 88);
             this.widthFinalTB.Maximum = new decimal(new int[] {
             2000,
             0,
             0,
             0});
             this.widthFinalTB.Name = "widthFinalTB";
-            this.widthFinalTB.Size = new System.Drawing.Size(64, 20);
+            this.widthFinalTB.Size = new System.Drawing.Size(67, 20);
             this.widthFinalTB.TabIndex = 22;
             // 
             // limparBT
             // 
-            this.limparBT.Location = new System.Drawing.Point(683, 368);
+            this.limparBT.Location = new System.Drawing.Point(692, 368);
             this.limparBT.Margin = new System.Windows.Forms.Padding(2);
             this.limparBT.Name = "limparBT";
-            this.limparBT.Size = new System.Drawing.Size(94, 35);
+            this.limparBT.Size = new System.Drawing.Size(101, 35);
             this.limparBT.TabIndex = 23;
             this.limparBT.Text = "Limpar Imagens";
             this.limparBT.UseVisualStyleBackColor = true;
@@ -356,26 +353,26 @@
             // 
             // heightInicialTB
             // 
-            this.heightInicialTB.Location = new System.Drawing.Point(17, 75);
+            this.heightInicialTB.Location = new System.Drawing.Point(104, 38);
             this.heightInicialTB.Maximum = new decimal(new int[] {
             2000,
             0,
             0,
             0});
             this.heightInicialTB.Name = "heightInicialTB";
-            this.heightInicialTB.Size = new System.Drawing.Size(64, 20);
+            this.heightInicialTB.Size = new System.Drawing.Size(67, 20);
             this.heightInicialTB.TabIndex = 24;
             // 
             // heightFinalTB
             // 
-            this.heightFinalTB.Location = new System.Drawing.Point(17, 101);
+            this.heightFinalTB.Location = new System.Drawing.Point(17, 88);
             this.heightFinalTB.Maximum = new decimal(new int[] {
             2000,
             0,
             0,
             0});
             this.heightFinalTB.Name = "heightFinalTB";
-            this.heightFinalTB.Size = new System.Drawing.Size(64, 20);
+            this.heightFinalTB.Size = new System.Drawing.Size(67, 20);
             this.heightFinalTB.TabIndex = 25;
             // 
             // gbCortar
@@ -391,76 +388,101 @@
             this.gbCortar.Controls.Add(this.widthFinalTB);
             this.gbCortar.Location = new System.Drawing.Point(32, 434);
             this.gbCortar.Name = "gbCortar";
-            this.gbCortar.Size = new System.Drawing.Size(184, 186);
+            this.gbCortar.Size = new System.Drawing.Size(195, 180);
             this.gbCortar.TabIndex = 26;
             this.gbCortar.TabStop = false;
-            this.gbCortar.Text = "Recortes";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(89, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 13);
-            this.label1.TabIndex = 26;
-            this.label1.Text = "Coluna Inicial";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(89, 51);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 13);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "Coluna Final";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(89, 77);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 13);
-            this.label3.TabIndex = 28;
-            this.label3.Text = "Linha Inicial";
+            this.gbCortar.Text = "Cortar";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(89, 103);
+            this.label4.Location = new System.Drawing.Point(14, 72);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 29;
             this.label4.Text = "Linha Final";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(101, 22);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 13);
+            this.label3.TabIndex = 28;
+            this.label3.Text = "Linha Inicial";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(101, 72);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 13);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "Coluna Final";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(70, 13);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "Coluna Inicial";
+            // 
             // adInputTB
             // 
-            this.adInputTB.Location = new System.Drawing.Point(791, 115);
+            this.adInputTB.Location = new System.Drawing.Point(692, 143);
             this.adInputTB.Maximum = new decimal(new int[] {
             2000,
             0,
             0,
             0});
             this.adInputTB.Name = "adInputTB";
-            this.adInputTB.Size = new System.Drawing.Size(64, 20);
+            this.adInputTB.Size = new System.Drawing.Size(101, 20);
             this.adInputTB.TabIndex = 30;
             // 
             // subInputTB
             // 
-            this.subInputTB.Location = new System.Drawing.Point(791, 159);
+            this.subInputTB.Location = new System.Drawing.Point(692, 217);
             this.subInputTB.Maximum = new decimal(new int[] {
             2000,
             0,
             0,
             0});
             this.subInputTB.Name = "subInputTB";
-            this.subInputTB.Size = new System.Drawing.Size(64, 20);
+            this.subInputTB.Size = new System.Drawing.Size(101, 20);
             this.subInputTB.TabIndex = 31;
+            // 
+            // RGBbinBT
+            // 
+            this.RGBbinBT.Location = new System.Drawing.Point(851, 106);
+            this.RGBbinBT.Margin = new System.Windows.Forms.Padding(2);
+            this.RGBbinBT.Name = "RGBbinBT";
+            this.RGBbinBT.Size = new System.Drawing.Size(101, 35);
+            this.RGBbinBT.TabIndex = 32;
+            this.RGBbinBT.Text = "RGB para Binário";
+            this.RGBbinBT.UseVisualStyleBackColor = true;
+            this.RGBbinBT.Click += new System.EventHandler(this.RGBbinBT_Click);
+            // 
+            // RGBbinTB
+            // 
+            this.RGBbinTB.Location = new System.Drawing.Point(851, 143);
+            this.RGBbinTB.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.RGBbinTB.Name = "RGBbinTB";
+            this.RGBbinTB.Size = new System.Drawing.Size(101, 20);
+            this.RGBbinTB.TabIndex = 33;
             // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1371, 839);
+            this.Controls.Add(this.RGBbinTB);
+            this.Controls.Add(this.RGBbinBT);
             this.Controls.Add(this.subInputTB);
             this.Controls.Add(this.adInputTB);
             this.Controls.Add(this.gbCortar);
@@ -497,6 +519,7 @@
             this.gbCortar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.adInputTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.subInputTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RGBbinTB)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -536,6 +559,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown adInputTB;
         private System.Windows.Forms.NumericUpDown subInputTB;
+        private System.Windows.Forms.Button RGBbinBT;
+        private System.Windows.Forms.NumericUpDown RGBbinTB;
     }
 }
 
