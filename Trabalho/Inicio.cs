@@ -962,6 +962,114 @@ namespace Trabalho
             rbB.Checked = false;
             rbDuas.Checked = false;
         }
+
+
+
+
+        // RGB PARA BINÁRIO --------------------------------------------------------------------------------------------------------------
+        private void RGBbinBT_Click(object sender, EventArgs e)
+        {
+            // Verifica se a opção "AMBAS AS IMAGENS" está selecionada
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Image imagemSelecionada = null;
+
+            // Verifica se a opção "IMAGEM A" está selecionada
+            if (rbA.Checked)
+            {
+                imagemSelecionada = imgA.Image;
+
+                if (imagemSelecionada == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // Verifica se a opção "IMAGEM B" está selecionada
+            if (rbB.Checked)
+            {
+                imagemSelecionada = imgB.Image;
+
+                if (imagemSelecionada == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // Verifica se o usuário digitou um valor na caixa de texto
+            if (string.IsNullOrEmpty(RGBbinTB.Text))
+            {
+                MessageBox.Show("Digite um valor na caixa de texto.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Converte o valor digitado para um número inteiro
+            if (!int.TryParse(RGBbinTB.Text, out int mediaRGB))
+            {
+                MessageBox.Show("Digite um valor numérico válido.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Verifica se o valor digitado é maior que 255
+            if (mediaRGB > 255)
+            {
+                MessageBox.Show("O valor deve ser menor ou igual a 255.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Obtendo a largura e altura da imagem selecionada
+            int width = imagemSelecionada.Width;
+            int height = imagemSelecionada.Height;
+
+            // Criando uma nova imagem binária
+            Bitmap imagemBinaria = new Bitmap(width, height);
+
+            // Percorrendo a imagem original pixel a pixel
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    // Obtendo o valor RGB do pixel atual
+                    Color pixelColor = ((Bitmap)imagemSelecionada).GetPixel(x, y);
+                    int red = pixelColor.R;
+                    int green = pixelColor.G;
+                    int blue = pixelColor.B;
+
+                    // Calculando a média dos componentes RGB
+                    int mediaPixel = (red + green + blue) / 3;
+
+                    // Definindo o valor binário do pixel na nova imagem
+                    if (mediaPixel > mediaRGB)
+                    {
+                        imagemBinaria.SetPixel(x, y, Color.White); // Valor RGB médio maior que a média, define como branco (1)
+                    }
+                    else
+                    {
+                        imagemBinaria.SetPixel(x, y, Color.Black); // Valor RGB médio menor ou igual à média, define como preto (0)
+                    }
+                }
+            }
+
+            // Exibindo a imagem binária na PictureBox de destino
+            imgResultado.Image = imagemBinaria;
+
+
+
+        }
+
     }
 }
 
