@@ -955,8 +955,10 @@ namespace Trabalho
             imgB.Image = null;
             imgResultado.Image = null;
 
-            widthInicialTB.Text = "";
-            widthFinalTB.Text = "";
+            widthInicialTB.Text = "0";
+            widthFinalTB.Text = "0";
+            heightInicialTB.Text = "0";
+            heightFinalTB.Text = "0";
 
             rbA.Checked = false;
             rbB.Checked = false;
