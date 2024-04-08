@@ -330,7 +330,7 @@
             // 
             // widthFinalTB
             // 
-            this.widthFinalTB.Location = new System.Drawing.Point(104, 88);
+            this.widthFinalTB.Location = new System.Drawing.Point(17, 88);
             this.widthFinalTB.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -365,7 +365,7 @@
             // 
             // heightFinalTB
             // 
-            this.heightFinalTB.Location = new System.Drawing.Point(17, 88);
+            this.heightFinalTB.Location = new System.Drawing.Point(104, 88);
             this.heightFinalTB.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -388,7 +388,7 @@
             this.gbCortar.Controls.Add(this.widthFinalTB);
             this.gbCortar.Location = new System.Drawing.Point(32, 434);
             this.gbCortar.Name = "gbCortar";
-            this.gbCortar.Size = new System.Drawing.Size(195, 180);
+            this.gbCortar.Size = new System.Drawing.Size(203, 179);
             this.gbCortar.TabIndex = 26;
             this.gbCortar.TabStop = false;
             this.gbCortar.Text = "Cortar";
@@ -396,7 +396,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 72);
+            this.label4.Location = new System.Drawing.Point(101, 72);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 29;
@@ -414,7 +414,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(101, 72);
+            this.label2.Location = new System.Drawing.Point(14, 72);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 27;
@@ -460,7 +460,7 @@
             this.RGBbinBT.Name = "RGBbinBT";
             this.RGBbinBT.Size = new System.Drawing.Size(101, 35);
             this.RGBbinBT.TabIndex = 32;
-            this.RGBbinBT.Text = "RGB para Binário";
+            this.RGBbinBT.Text = "Converter pra Binário";
             this.RGBbinBT.UseVisualStyleBackColor = true;
             this.RGBbinBT.Click += new System.EventHandler(this.RGBbinBT_Click);
             // 
