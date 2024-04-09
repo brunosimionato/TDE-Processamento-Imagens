@@ -28,6 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
             this.imgA = new System.Windows.Forms.PictureBox();
             this.imgB = new System.Windows.Forms.PictureBox();
@@ -64,6 +70,10 @@
             this.subInputTB = new System.Windows.Forms.NumericUpDown();
             this.RGBbinBT = new System.Windows.Forms.Button();
             this.RGBbinTB = new System.Windows.Forms.NumericUpDown();
+            this.equalizarBT = new System.Windows.Forms.Button();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgResultado)).BeginInit();
@@ -79,6 +89,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.adInputTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.subInputTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RGBbinTB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // imgA
@@ -433,25 +446,28 @@
             // 
             this.adInputTB.Location = new System.Drawing.Point(692, 143);
             this.adInputTB.Maximum = new decimal(new int[] {
-            2000,
+            255,
             0,
             0,
             0});
             this.adInputTB.Name = "adInputTB";
+            this.adInputTB.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.adInputTB.Size = new System.Drawing.Size(101, 20);
             this.adInputTB.TabIndex = 30;
+            this.adInputTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.adInputTB_KeyPress);
             // 
             // subInputTB
             // 
             this.subInputTB.Location = new System.Drawing.Point(692, 217);
             this.subInputTB.Maximum = new decimal(new int[] {
-            2000,
+            255,
             0,
             0,
             0});
             this.subInputTB.Name = "subInputTB";
             this.subInputTB.Size = new System.Drawing.Size(101, 20);
-            this.subInputTB.TabIndex = 31;
+            this.subInputTB.TabIndex = 30;
+            this.subInputTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.subInputTB_KeyPress);
             // 
             // RGBbinBT
             // 
@@ -476,11 +492,70 @@
             this.RGBbinTB.Size = new System.Drawing.Size(101, 20);
             this.RGBbinTB.TabIndex = 33;
             // 
+            // equalizarBT
+            // 
+            this.equalizarBT.Location = new System.Drawing.Point(851, 368);
+            this.equalizarBT.Margin = new System.Windows.Forms.Padding(2);
+            this.equalizarBT.Name = "equalizarBT";
+            this.equalizarBT.Size = new System.Drawing.Size(101, 35);
+            this.equalizarBT.TabIndex = 34;
+            this.equalizarBT.Text = "Equalizar Histograma";
+            this.equalizarBT.UseVisualStyleBackColor = true;
+            this.equalizarBT.Click += new System.EventHandler(this.equalizarBT_Click);
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(12, 21);
+            this.chart1.Name = "chart1";
+            this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Antes";
+            series1.YValuesPerPoint = 4;
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(314, 284);
+            this.chart1.TabIndex = 35;
+            this.chart1.Text = "chart1";
+            // 
+            // chart2
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
+            this.chart2.Location = new System.Drawing.Point(342, 21);
+            this.chart2.Name = "chart2";
+            this.chart2.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Depois";
+            this.chart2.Series.Add(series2);
+            this.chart2.Size = new System.Drawing.Size(314, 284);
+            this.chart2.TabIndex = 36;
+            this.chart2.Text = "chart2";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.chart2);
+            this.groupBox1.Controls.Add(this.chart1);
+            this.groupBox1.Location = new System.Drawing.Point(680, 456);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(668, 320);
+            this.groupBox1.TabIndex = 37;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Gráficos de Histogramas";
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1371, 839);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.equalizarBT);
             this.Controls.Add(this.RGBbinTB);
             this.Controls.Add(this.RGBbinBT);
             this.Controls.Add(this.subInputTB);
@@ -520,6 +595,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.adInputTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.subInputTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RGBbinTB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -561,6 +639,10 @@
         private System.Windows.Forms.NumericUpDown subInputTB;
         private System.Windows.Forms.Button RGBbinBT;
         private System.Windows.Forms.NumericUpDown RGBbinTB;
+        private System.Windows.Forms.Button equalizarBT;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }
 
