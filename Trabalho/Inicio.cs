@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Linq;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Trabalho
 {
@@ -11,6 +14,51 @@ namespace Trabalho
             InitializeComponent();
 
             this.WindowState = FormWindowState.Maximized;
+            LimparGraficos();
+        }
+
+
+
+
+        // Permite apenas números até 255 na adInputTB
+        private void adInputTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permite apenas números e a tecla Backspace
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            else if (!char.IsControl(e.KeyChar))
+            {
+                
+                int newValue = Convert.ToInt32(adInputTB.Text + e.KeyChar);
+                if (newValue > 255)
+                {
+                    adInputTB.Text = "255";
+                    e.Handled = true;
+                }
+            }
+        }
+
+
+        // Permite apenas números até 255 na subInputTB
+        private void subInputTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permite apenas números e a tecla Backspace (código ASCII 8)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignora o caractere digitado
+            }
+            else if (!char.IsControl(e.KeyChar))
+            {
+                // Se o usuário digitar um número e o valor exceder 255, define o valor como 255
+                int newValue = Convert.ToInt32(subInputTB.Text + e.KeyChar);
+                if (newValue > 255)
+                {
+                    subInputTB.Text = "255";
+                    e.Handled = true; // Indica que o evento foi manipulado
+                }
+            }
         }
 
 
@@ -109,8 +157,8 @@ namespace Trabalho
 
         // BOTÃO DE ADIÇÃO --------------------------------------------------------------------------------------------------------------
         private void somaBT_Click(object sender, EventArgs e)
-        { 
-            // Exibe um aviso caso nenhuma opção no campo "Escolha de Imagens" for marcada
+        {
+            // Exibe um aviso caso nenhuma imagens for escolhida para ser processada
             if (!rbA.Checked && !rbB.Checked && !rbDuas.Checked)
             {
                 MessageBox.Show("Selecione uma opção no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -131,39 +179,14 @@ namespace Trabalho
                     return;
                 }
 
-                // Verifica tamanho e formato
-                if (image1.Width != image2.Width || image1.Height != image2.Height || image1.PixelFormat != image2.PixelFormat)
+                // Redimensiona as imagens para o mesmo tamanho, se necessário
+                if (image1.Width != image2.Width || image1.Height != image2.Height)
                 {
-                    MessageBox.Show("As imagens precisam ter o mesmo tamanho e formato.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    // Redimensiona a imagem 2 para o tamanho da imagem 1
+                    image2 = RedimensionarImagem(image2, image1.Width, image1.Height);
                 }
 
-                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
-
-                for (int x = 0; x < image1.Width; x++)
-                {
-                    for (int y = 0; y < image1.Height; y++)
-                    {
-                        // Obtém os valores dos pixels das duas imagens
-                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
-                        Color color2 = ((Bitmap)image2).GetPixel(x, y);
-
-                        // Soma os componentes RGB dos pixels
-                        int r = color1.R + color2.R;
-                        int g = color1.G + color2.G;
-                        int b = color1.B + color2.B;
-
-                        // Trunca os valores para não ultrapassar 255
-                        r = Math.Min(r, 255);
-                        g = Math.Min(g, 255);
-                        b = Math.Min(b, 255);
-
-                        // Define o novo pixel na imagem resultado
-                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
-                    }
-                }
-
-                imgResultado.Image = imagemResultado;
+                AtualizarResultadoSoma(image1, image2);
             }
 
             // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
@@ -177,36 +200,7 @@ namespace Trabalho
                     return;
                 }
 
-                if (string.IsNullOrEmpty(adInputTB.Text))
-                {
-                    MessageBox.Show("Adicione um valor no campo de adição.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
-
-                // Intera os pixels da imagem
-                for (int x = 0; x < image1.Width; x++)
-                {
-                    for (int y = 0; y < image1.Height; y++)
-                    {
-                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
-
-                        // Soma os componentes RGB do pixel com o valor digitado
-                        int r = color1.R + Convert.ToInt32(adInputTB.Value);
-                        int g = color1.G + Convert.ToInt32(adInputTB.Value);
-                        int b = color1.B + Convert.ToInt32(adInputTB.Value);
-
-
-                        r = Math.Min(r, 255);
-                        g = Math.Min(g, 255);
-                        b = Math.Min(b, 255);
-
-                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
-                    }
-                }
-
-                imgResultado.Image = imagemResultado;
+                AtualizarResultadoImagem(image1);
             }
 
             // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
@@ -220,36 +214,82 @@ namespace Trabalho
                     return;
                 }
 
-                if (string.IsNullOrEmpty(adInputTB.Text))
-                {
-                    MessageBox.Show("Adicione um valor no campo de adição.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
-
-                // Intera os pixels da imagem
-                for (int x = 0; x < image1.Width; x++)
-                {
-                    for (int y = 0; y < image1.Height; y++)
-                    {
-                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
-
-                        // Soma os componentes RGB do pixel com o valor digitado
-                        int r = color1.R + Convert.ToInt32(adInputTB.Value);
-                        int g = color1.G + Convert.ToInt32(adInputTB.Value);
-                        int b = color1.B + Convert.ToInt32(adInputTB.Value);
-
-                        r = Math.Min(r, 255);
-                        g = Math.Min(g, 255);
-                        b = Math.Min(b, 255);
-
-                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
-                    }
-                }
-
-                imgResultado.Image = imagemResultado;
+                AtualizarResultadoImagem(image1);
             }
+        }
+
+        // Função para redimensionar uma imagem para um novo tamanho
+        private Image RedimensionarImagem(Image image, int newWidth, int newHeight)
+        {
+            Bitmap novaImagem = new Bitmap(newWidth, newHeight);
+
+            using (Graphics g = Graphics.FromImage(novaImagem))
+            {
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.DrawImage(image, 0, 0, newWidth, newHeight);
+            }
+
+            return novaImagem;
+        }
+
+        // Função para limitar um valor ao intervalo [0, 255]
+        private int LimitarValor(int value)
+        {
+            return Math.Max(0, Math.Min(value, 255));
+        }
+
+
+
+        // Função para atualizar o resultado da soma das imagens
+        private void AtualizarResultadoSoma(Image image1, Image image2)
+        {
+            int valorAdicao = Convert.ToInt32(adInputTB.Value);
+            Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+            for (int x = 0; x < image1.Width; x++)
+            {
+                for (int y = 0; y < image1.Height; y++)
+                {
+                    // Obtém os valores dos pixels das duas imagens
+                    Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                    Color color2 = ((Bitmap)image2).GetPixel(x, y);
+
+                    // Soma os componentes RGB dos pixels
+                    int r = LimitarValor(color1.R + color2.R + valorAdicao);
+                    int g = LimitarValor(color1.G + color2.G + valorAdicao);
+                    int b = LimitarValor(color1.B + color2.B + valorAdicao);
+
+                    // Define o novo pixel na imagem resultado
+                    imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                }
+            }
+
+            imgResultado.Image = imagemResultado;
+        }
+
+        // Função para atualizar o resultado da imagem com o valor de adição
+        private void AtualizarResultadoImagem(Image image)
+        {
+            int valorAdicao = Convert.ToInt32(adInputTB.Value);
+            Bitmap imagemResultado = new Bitmap(image.Width, image.Height);
+
+            // Intera os pixels da imagem
+            for (int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
+                {
+                    Color color1 = ((Bitmap)image).GetPixel(x, y);
+
+                    // Soma os componentes RGB do pixel com o valor digitado
+                    int r = LimitarValor(color1.R + valorAdicao);
+                    int g = LimitarValor(color1.G + valorAdicao);
+                    int b = LimitarValor(color1.B + valorAdicao);
+
+                    imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                }
+            }
+
+            imgResultado.Image = imagemResultado;
         }
 
 
@@ -258,7 +298,7 @@ namespace Trabalho
         // BOTÃO SUBTRAIR --------------------------------------------------------------------------------------------------------------
         private void subtracaoBT_Click(object sender, EventArgs e)
         {
-            // Exibe um aviso caso nenhuma imagens for escolhida para ser processada
+            // Exibe um aviso caso nenhuma imagem seja escolhida para ser processada
             if (!rbA.Checked && !rbB.Checked && !rbDuas.Checked)
             {
                 MessageBox.Show("Selecione uma opção no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -279,39 +319,14 @@ namespace Trabalho
                     return;
                 }
 
-                // Verifica tamanho e formato
-                if (image1.Width != image2.Width || image1.Height != image2.Height || image1.PixelFormat != image2.PixelFormat)
+                // Redimensiona as imagens para o mesmo tamanho, se necessário
+                if (image1.Width != image2.Width || image1.Height != image2.Height)
                 {
-                    MessageBox.Show("As imagens precisam ter o mesmo tamanho e formato.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    // Redimensiona a imagem 2 para o tamanho da imagem 1
+                    image2 = RedimensionarImagem(image2, image1.Width, image1.Height);
                 }
 
-                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
-
-                for (int x = 0; x < image1.Width; x++)
-                {
-                    for (int y = 0; y < image1.Height; y++)
-                    {
-                        // Obtém os valores dos pixels das duas imagens
-                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
-                        Color color2 = ((Bitmap)image2).GetPixel(x, y);
-
-                        // Subtrai as componentes RGB dos pixels
-                        int r = color1.R - color2.R;
-                        int g = color1.G - color2.G;
-                        int b = color1.B - color2.B;
-
-                        // Trunca os valores para não ultrapassar 255
-                        r = Math.Max(r, 0);
-                        g = Math.Max(g, 0);
-                        b = Math.Max(b, 0);
-
-                        // Define o novo pixel na imagem resultado
-                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
-                    }
-                }
-
-                imgResultado.Image = imagemResultado;
+                AtualizarResultadoSubtracao(image1, image2);
             }
 
             // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
@@ -331,30 +346,7 @@ namespace Trabalho
                     return;
                 }
 
-                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
-
-                // Intera os pixels da imagem
-                for (int x = 0; x < image1.Width; x++)
-                {
-                    for (int y = 0; y < image1.Height; y++)
-                    {
-                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
-
-                        // Subtrai as componentes RGB do pixel pela metade
-                        int r = color1.R - Convert.ToInt32(subInputTB.Value);
-                        int g = color1.G - Convert.ToInt32(subInputTB.Value);
-                        int b = color1.B - Convert.ToInt32(subInputTB.Value);
-
-                        // Trunca os valores para não ultrapassar 255
-                        r = Math.Max(r, 0);
-                        g = Math.Max(g, 0);
-                        b = Math.Max(b, 0);
-
-                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
-                    }
-                }
-
-                imgResultado.Image = imagemResultado;
+                AtualizarResultadoImagemSubtracao(image1);
             }
 
             // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
@@ -374,30 +366,60 @@ namespace Trabalho
                     return;
                 }
 
-                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
-
-                for (int x = 0; x < image1.Width; x++)
-                {
-                    for (int y = 0; y < image1.Height; y++)
-                    {
-                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
-
-                        // Subtrai as componentes RGB do pixel pela metade
-                        int r = color1.R - Convert.ToInt32(subInputTB.Value);
-                        int g = color1.G - Convert.ToInt32(subInputTB.Value);
-                        int b = color1.B - Convert.ToInt32(subInputTB.Value);
-
-                        // Trunca os valores para não ultrapassar 255
-                        r = Math.Max(r, 0);
-                        g = Math.Max(g, 0);
-                        b = Math.Max(b, 0);
-
-                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
-                    }
-                }
-
-                imgResultado.Image = imagemResultado;
+                AtualizarResultadoImagemSubtracao(image1);
             }
+        }
+
+        // Função para atualizar o resultado da subtração das imagens
+        private void AtualizarResultadoSubtracao(Image image1, Image image2)
+        {
+            int valorSubtracao = Convert.ToInt32(subInputTB.Value);
+            Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+            for (int x = 0; x < image1.Width; x++)
+            {
+                for (int y = 0; y < image1.Height; y++)
+                {
+                    // Obtém os valores dos pixels das duas imagens
+                    Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                    Color color2 = ((Bitmap)image2).GetPixel(x, y);
+
+                    // Subtrai as componentes RGB dos pixels
+                    int r = LimitarValor(color1.R - color2.R - valorSubtracao);
+                    int g = LimitarValor(color1.G - color2.G - valorSubtracao);
+                    int b = LimitarValor(color1.B - color2.B - valorSubtracao);
+
+                    // Define o novo pixel na imagem resultado
+                    imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                }
+            }
+
+            imgResultado.Image = imagemResultado;
+        }
+
+        // Função para atualizar o resultado da imagem com o valor de subtração
+        private void AtualizarResultadoImagemSubtracao(Image image)
+        {
+            int valorSubtracao = Convert.ToInt32(subInputTB.Value);
+            Bitmap imagemResultado = new Bitmap(image.Width, image.Height);
+
+            // Intera os pixels da imagem
+            for (int x = 0; x < image.Width; x++)
+            {
+                for (int y = 0; y < image.Height; y++)
+                {
+                    Color color1 = ((Bitmap)image).GetPixel(x, y);
+
+                    // Subtrai as componentes RGB do pixel pelo valor digitado
+                    int r = LimitarValor(color1.R - valorSubtracao);
+                    int g = LimitarValor(color1.G - valorSubtracao);
+                    int b = LimitarValor(color1.B - valorSubtracao);
+
+                    imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                }
+            }
+
+            imgResultado.Image = imagemResultado;
         }
 
 
@@ -406,10 +428,10 @@ namespace Trabalho
         // BOTÃO NEGATIVO --------------------------------------------------------------------------------------------------------------
         private void negativarBT_Click(object sender, EventArgs e)
         {
-            // Exibe um aviso caso nenhuma imagens for escolhida para ser processada
-            if (!rbA.Checked && !rbB.Checked)
+            // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
+            if (rbDuas.Checked)
             {
-                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -569,7 +591,6 @@ namespace Trabalho
                 imgResultado.Image = imagemResultado;
             }
         }
-
 
 
 
@@ -963,8 +984,16 @@ namespace Trabalho
             rbA.Checked = false;
             rbB.Checked = false;
             rbDuas.Checked = false;
+          
+            LimparGraficos();
         }
 
+        // Método para limpar os gráficos
+        private void LimparGraficos()
+        {
+            chart1.Series.Clear();
+            chart2.Series.Clear();
+        }
 
 
 
@@ -987,7 +1016,7 @@ namespace Trabalho
 
             Image imagemSelecionada = null;
 
-            // Verifica se a opção "IMAGEM A" está selecionada
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
             if (rbA.Checked)
             {
                 imagemSelecionada = imgA.Image;
@@ -999,7 +1028,7 @@ namespace Trabalho
                 }
             }
 
-            // Verifica se a opção "IMAGEM B" está selecionada
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
             if (rbB.Checked)
             {
                 imagemSelecionada = imgB.Image;
@@ -1065,13 +1094,189 @@ namespace Trabalho
                 }
             }
 
-            // Exibindo a imagem binária na PictureBox de destino
             imgResultado.Image = imagemBinaria;
-
-
-
         }
+
+
+
+
+        // EQUALIZAR HISTOGRAMA --------------------------------------------------------------------------------------------------------------
+        private void equalizarBT_Click(object sender, EventArgs e)
+        {
+            // Verifica se a opção "AMBAS AS IMAGENS" está selecionada
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
+            if (rbA.Checked)
+            {
+                // Carrega a imagem em escala de cinza
+                Image imagemA = imgA.Image;
+
+                if (imagemA == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Converte para escala de cinza
+                Bitmap imagemCinza = ConverteParaEscalaDeCinza(imagemA);
+
+                // Calcula o histograma
+                int[] histograma = CalculaHistograma(imagemCinza);
+
+                // Equaliza o histograma
+                Bitmap imagemEqualizada = EqualizarHistograma(imagemCinza, histograma);
+
+                // Exibe a imagem equalizada no imgResultado
+                imgResultado.Image = imagemEqualizada;
+
+                // Obtém o histograma da imagem equalizada
+                int[] histogramaEqualizado = CalculaHistograma(imagemEqualizada);
+
+                // Atualiza os gráficos
+                AtualizaGraficosHistograma(histograma, histogramaEqualizado);
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
+            if (rbB.Checked)
+            {
+                // Carrega a imagem em escala de cinza
+                Image imagemB = imgB.Image;
+
+                // Verifica se a imagem foi carregada corretamente
+                if (imagemB == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Converte para escala de cinza
+                Bitmap imagemCinza = ConverteParaEscalaDeCinza(imagemB);
+
+                // Calcula o histograma 
+                int[] histograma = CalculaHistograma(imagemCinza);
+
+                // Equaliza o histograma
+                Bitmap imagemEqualizada = EqualizarHistograma(imagemCinza, histograma);
+
+                // Exibe a imagem equalizada no imgResultado
+                imgResultado.Image = imagemEqualizada;
+
+                // Obtém o histograma da imagem equalizada
+                int[] histogramaEqualizado = CalculaHistograma(imagemEqualizada);
+
+                // Atualiza os gráficos
+                AtualizaGraficosHistograma(histograma, histogramaEqualizado);
+            }
+        }
+
+       // Converter para escala de Cinza
+        private Bitmap ConverteParaEscalaDeCinza(Image imagemColorida)
+        {
+            Bitmap imagemCinza = new Bitmap(imagemColorida.Width, imagemColorida.Height);
+
+            for (int x = 0; x < imagemColorida.Width; x++)
+            {
+                for (int y = 0; y < imagemColorida.Height; y++)
+                {
+                    Color corOriginal = ((Bitmap)imagemColorida).GetPixel(x, y);
+                    int mediaRGB = (corOriginal.R + corOriginal.G + corOriginal.B) / 3;
+                    Color corCinza = Color.FromArgb(corOriginal.A, mediaRGB, mediaRGB, mediaRGB);
+                    imagemCinza.SetPixel(x, y, corCinza);
+                }
+            }
+
+            return imagemCinza;
+        }
+
+        // Calcular Histograma
+        private int[] CalculaHistograma(Bitmap imagemCinza)
+        {
+            int[] histograma = new int[256];
+
+            for (int x = 0; x < imagemCinza.Width; x++)
+            {
+                for (int y = 0; y < imagemCinza.Height; y++)
+                {
+                    Color cor = imagemCinza.GetPixel(x, y);
+                    int tomDeCinza = (int)(cor.R * 0.299 + cor.G * 0.587 + cor.B * 0.114); // Converte para escala de cinza
+                    histograma[tomDeCinza]++; // Incrementa o histograma
+                }
+            }
+
+            return histograma;
+        }
+
+        // Equalizar Histograma
+        private Bitmap EqualizarHistograma(Bitmap imagemCinza, int[] histograma)
+        {
+            int[] cdf = new int[256];
+            int sum = 0;
+
+            // Calcula a função de distribuição acumulada (CDF) do histograma
+            for (int i = 0; i < 256; i++)
+            {
+                sum += histograma[i];
+                cdf[i] = sum;
+            }
+
+            // Equaliza o histograma
+            int pixels = imagemCinza.Width * imagemCinza.Height;
+            for (int i = 0; i < 256; i++)
+            {
+                cdf[i] = (int)(255 * ((float)cdf[i] / pixels));
+            }
+
+            // Cria uma nova imagem equalizada
+            Bitmap imagemEqualizada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+            for (int x = 0; x < imagemCinza.Width; x++)
+            {
+                for (int y = 0; y < imagemCinza.Height; y++)
+                {
+                    Color cor = imagemCinza.GetPixel(x, y);
+                    int tomDeCinza = (int)(cor.R * 0.299 + cor.G * 0.587 + cor.B * 0.114);
+                    int novoTomDeCinza = cdf[tomDeCinza];
+                    Color novaCor = Color.FromArgb(novoTomDeCinza, novoTomDeCinza, novoTomDeCinza);
+                    imagemEqualizada.SetPixel(x, y, novaCor);
+                }
+            }
+
+            return imagemEqualizada;
+        }
+
+        // GRÁFICOS
+        private void AtualizaGraficosHistograma(int[] histogramaOriginal, int[] histogramaEqualizado)
+        {
+            chart1.Series.Clear();
+            chart2.Series.Clear();
+
+            // Adiciona o histograma da imagem original ao primeiro gráfico
+            chart1.Series.Add("Antes");
+            chart1.Series["Antes"].ChartType = SeriesChartType.Column;
+            chart1.Series["Antes"].Points.DataBindY(histogramaOriginal);
+            chart1.ChartAreas[0].AxisY.Maximum = histogramaOriginal.Max() + 10;
+
+            // Adiciona o histograma da imagem equalizada ao segundo gráfico
+            chart2.Series.Add("Depois");
+            chart2.Series["Depois"].ChartType = SeriesChartType.Column;
+            chart2.Series["Depois"].Points.DataBindY(histogramaEqualizado);
+            chart2.ChartAreas[0].AxisY.Maximum = histogramaEqualizado.Max() + 10;
+        }
+
+
 
     }
 }
+
 
