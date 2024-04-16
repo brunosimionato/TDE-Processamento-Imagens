@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -1275,6 +1276,176 @@ namespace Trabalho
         }
 
 
+
+
+        // BOTÃO AND --------------------------------------------------------------------------------------------------------------
+        private void andBT_Click(object sender, EventArgs e)
+        {
+            // Exibe um aviso caso a opção "Ambas as Imagens" não estiver selecionada
+            if (!rbDuas.Checked)
+            {
+                MessageBox.Show("Escolha 'Ambas as Imagens' para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Exibe um aviso caso a "Imagem A" ou "Imagem B" não estiverem carregadas
+            if (imgA.Image == null || imgB.Image == null)
+            {
+                MessageBox.Show("Abra duas Imagens.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Image image1 = imgA.Image;
+            Image image2 = imgB.Image;
+
+            // Redimensiona as imagens para o mesmo tamanho, se necessário
+            if (image1.Width != image2.Width || image1.Height != image2.Height)
+            {
+                // Redimensiona a imagem 2 para o tamanho da imagem 1
+                image2 = RedimensionarImagem(image2, image1.Width, image1.Height);
+            }
+
+            Bitmap bitmap1 = new Bitmap(image1);
+            Bitmap bitmap2 = new Bitmap(image2);
+
+            Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+            // Converte as imagens para binário antes de realizar a operação AND
+            for (int x = 0; x < image1.Width; x++)
+            {
+                for (int y = 0; y < image1.Height; y++)
+                {
+                    Color color1 = bitmap1.GetPixel(x, y);
+                    Color color2 = bitmap2.GetPixel(x, y);
+
+                    // Realiza a operação AND bit a bit nos componentes de cor
+                    Color corResultado = Color.FromArgb(color1.R & color2.R, color1.G & color2.G, color1.B & color2.B);
+
+                    // Define a cor resultante no bitmap de resultado
+                    imagemResultado.SetPixel(x, y, corResultado);
+                }
+            }
+
+            imgResultado.Image = imagemResultado;
+        }
+
+
+
+
+        // BOTÃO OR --------------------------------------------------------------------------------------------------------------
+        private void orBT_Click(object sender, EventArgs e)
+        {
+            // Exibe um aviso caso a opção "Ambas as Imagens" não estiver selecionada
+            if (!rbDuas.Checked)
+            {
+                MessageBox.Show("Escolha 'Ambas as Imagens' para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Exibe um aviso caso a "Imagem A" ou "Imagem B" não estiverem carregadas
+            if (imgA.Image == null || imgB.Image == null)
+            {
+                MessageBox.Show("Abra duas Imagens.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Image image1 = imgA.Image;
+            Image image2 = imgB.Image;
+
+            // Redimensiona as imagens para o mesmo tamanho, se necessário
+            if (image1.Width != image2.Width || image1.Height != image2.Height)
+            {
+                // Redimensiona a imagem 2 para o tamanho da imagem 1
+                image2 = RedimensionarImagem(image2, image1.Width, image1.Height);
+            }
+
+            Bitmap bitmap1 = new Bitmap(image1);
+            Bitmap bitmap2 = new Bitmap(image2);
+
+            Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+            // Converte as imagens para binário antes de realizar a operação OR
+            for (int x = 0; x < image1.Width; x++)
+            {
+                for (int y = 0; y < image1.Height; y++)
+                {
+                    Color color1 = bitmap1.GetPixel(x, y);
+                    Color color2 = bitmap2.GetPixel(x, y);
+
+                    // Realiza a operação OR bit a bit nos componentes de cor
+                    Color corResultado = Color.FromArgb(color1.R | color2.R, color1.G | color2.G, color1.B | color2.B);
+
+                    // Define a cor resultante no bitmap de resultado
+                    imagemResultado.SetPixel(x, y, corResultado);
+                }
+            }
+
+            imgResultado.Image = imagemResultado;
+        }
+
+
+
+
+        // BOTÃO XOR --------------------------------------------------------------------------------------------------------------
+        private void xorBT_Click(object sender, EventArgs e)
+        {
+            // Exibe um aviso caso a opção "Ambas as Imagens" não estiver selecionada
+            if (!rbDuas.Checked)
+            {
+                MessageBox.Show("Escolha 'Ambas as Imagens' para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Exibe um aviso caso a "Imagem A" ou "Imagem B" não estiverem carregadas
+            if (imgA.Image == null || imgB.Image == null)
+            {
+                MessageBox.Show("Abra duas Imagens.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Image image1 = imgA.Image;
+            Image image2 = imgB.Image;
+
+            // Redimensiona as imagens para o mesmo tamanho, se necessário
+            if (image1.Width != image2.Width || image1.Height != image2.Height)
+            {
+                // Redimensiona a imagem 2 para o tamanho da imagem 1
+                image2 = RedimensionarImagem(image2, image1.Width, image1.Height);
+            }
+
+            Bitmap bitmap1 = new Bitmap(image1);
+            Bitmap bitmap2 = new Bitmap(image2);
+
+            Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+            // Converte as imagens para binário antes de realizar a operação XOR
+            for (int x = 0; x < image1.Width; x++)
+            {
+                for (int y = 0; y < image1.Height; y++)
+                {
+                    Color color1 = bitmap1.GetPixel(x, y);
+                    Color color2 = bitmap2.GetPixel(x, y);
+
+                    // Realiza a operação XOR bit a bit nos componentes de cor
+                    Color corResultado = Color.FromArgb(color1.R ^ color2.R, color1.G ^ color2.G, color1.B ^ color2.B);
+
+                    // Define a cor resultante no bitmap de resultado
+                    imagemResultado.SetPixel(x, y, corResultado);
+                }
+            }
+
+            imgResultado.Image = imagemResultado;
+        }
+
+
+
+
+        // BOTÃO NOT --------------------------------------------------------------------------------------------------------------
+        private void notBT_Click(object sender, EventArgs e)
+        {
+            // Chamando a função para negativar ao clicar no botão NOT
+            negativarBT_Click(sender, e);
+        }
 
     }
 }

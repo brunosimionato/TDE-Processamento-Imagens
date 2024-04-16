@@ -74,6 +74,11 @@
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.andBT = new System.Windows.Forms.Button();
+            this.orBT = new System.Windows.Forms.Button();
+            this.xorBT = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.notBT = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.imgA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgResultado)).BeginInit();
@@ -92,6 +97,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // imgA
@@ -287,7 +293,7 @@
             // 
             // FlipBT
             // 
-            this.FlipBT.Location = new System.Drawing.Point(851, 268);
+            this.FlipBT.Location = new System.Drawing.Point(881, 268);
             this.FlipBT.Margin = new System.Windows.Forms.Padding(2);
             this.FlipBT.Name = "FlipBT";
             this.FlipBT.Size = new System.Drawing.Size(101, 35);
@@ -298,7 +304,7 @@
             // 
             // FlipUDBT
             // 
-            this.FlipUDBT.Location = new System.Drawing.Point(851, 307);
+            this.FlipUDBT.Location = new System.Drawing.Point(881, 307);
             this.FlipUDBT.Margin = new System.Windows.Forms.Padding(2);
             this.FlipUDBT.Name = "FlipUDBT";
             this.FlipUDBT.Size = new System.Drawing.Size(101, 35);
@@ -309,7 +315,7 @@
             // 
             // concatenarBT
             // 
-            this.concatenarBT.Location = new System.Drawing.Point(851, 228);
+            this.concatenarBT.Location = new System.Drawing.Point(881, 228);
             this.concatenarBT.Margin = new System.Windows.Forms.Padding(2);
             this.concatenarBT.Name = "concatenarBT";
             this.concatenarBT.Size = new System.Drawing.Size(101, 35);
@@ -320,10 +326,10 @@
             // 
             // btnRecortar
             // 
-            this.btnRecortar.Location = new System.Drawing.Point(17, 127);
+            this.btnRecortar.Location = new System.Drawing.Point(13, 166);
             this.btnRecortar.Margin = new System.Windows.Forms.Padding(2);
             this.btnRecortar.Name = "btnRecortar";
-            this.btnRecortar.Size = new System.Drawing.Size(154, 35);
+            this.btnRecortar.Size = new System.Drawing.Size(151, 35);
             this.btnRecortar.TabIndex = 20;
             this.btnRecortar.Text = "Cortar";
             this.btnRecortar.UseVisualStyleBackColor = true;
@@ -331,7 +337,7 @@
             // 
             // widthInicialTB
             // 
-            this.widthInicialTB.Location = new System.Drawing.Point(17, 38);
+            this.widthInicialTB.Location = new System.Drawing.Point(13, 43);
             this.widthInicialTB.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -343,7 +349,7 @@
             // 
             // widthFinalTB
             // 
-            this.widthFinalTB.Location = new System.Drawing.Point(17, 88);
+            this.widthFinalTB.Location = new System.Drawing.Point(13, 93);
             this.widthFinalTB.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -366,7 +372,7 @@
             // 
             // heightInicialTB
             // 
-            this.heightInicialTB.Location = new System.Drawing.Point(104, 38);
+            this.heightInicialTB.Location = new System.Drawing.Point(97, 43);
             this.heightInicialTB.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -378,7 +384,7 @@
             // 
             // heightFinalTB
             // 
-            this.heightFinalTB.Location = new System.Drawing.Point(104, 88);
+            this.heightFinalTB.Location = new System.Drawing.Point(97, 93);
             this.heightFinalTB.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -399,9 +405,9 @@
             this.gbCortar.Controls.Add(this.heightInicialTB);
             this.gbCortar.Controls.Add(this.widthInicialTB);
             this.gbCortar.Controls.Add(this.widthFinalTB);
-            this.gbCortar.Location = new System.Drawing.Point(32, 434);
+            this.gbCortar.Location = new System.Drawing.Point(21, 422);
             this.gbCortar.Name = "gbCortar";
-            this.gbCortar.Size = new System.Drawing.Size(203, 179);
+            this.gbCortar.Size = new System.Drawing.Size(179, 216);
             this.gbCortar.TabIndex = 26;
             this.gbCortar.TabStop = false;
             this.gbCortar.Text = "Cortar";
@@ -409,7 +415,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(101, 72);
+            this.label4.Location = new System.Drawing.Point(94, 77);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 13);
             this.label4.TabIndex = 29;
@@ -418,7 +424,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(101, 22);
+            this.label3.Location = new System.Drawing.Point(94, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 28;
@@ -427,7 +433,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 72);
+            this.label2.Location = new System.Drawing.Point(10, 77);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 13);
             this.label2.TabIndex = 27;
@@ -436,7 +442,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 22);
+            this.label1.Location = new System.Drawing.Point(10, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 26;
@@ -471,7 +477,7 @@
             // 
             // RGBbinBT
             // 
-            this.RGBbinBT.Location = new System.Drawing.Point(851, 106);
+            this.RGBbinBT.Location = new System.Drawing.Point(881, 106);
             this.RGBbinBT.Margin = new System.Windows.Forms.Padding(2);
             this.RGBbinBT.Name = "RGBbinBT";
             this.RGBbinBT.Size = new System.Drawing.Size(101, 35);
@@ -482,7 +488,7 @@
             // 
             // RGBbinTB
             // 
-            this.RGBbinTB.Location = new System.Drawing.Point(851, 143);
+            this.RGBbinTB.Location = new System.Drawing.Point(881, 143);
             this.RGBbinTB.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -494,7 +500,7 @@
             // 
             // equalizarBT
             // 
-            this.equalizarBT.Location = new System.Drawing.Point(851, 368);
+            this.equalizarBT.Location = new System.Drawing.Point(881, 368);
             this.equalizarBT.Margin = new System.Windows.Forms.Padding(2);
             this.equalizarBT.Name = "equalizarBT";
             this.equalizarBT.Size = new System.Drawing.Size(101, 35);
@@ -549,12 +555,72 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Gráficos de Histogramas";
             // 
+            // andBT
+            // 
+            this.andBT.Location = new System.Drawing.Point(12, 73);
+            this.andBT.Margin = new System.Windows.Forms.Padding(2);
+            this.andBT.Name = "andBT";
+            this.andBT.Size = new System.Drawing.Size(139, 35);
+            this.andBT.TabIndex = 38;
+            this.andBT.Text = "AND";
+            this.andBT.UseVisualStyleBackColor = true;
+            this.andBT.Click += new System.EventHandler(this.andBT_Click);
+            // 
+            // orBT
+            // 
+            this.orBT.Location = new System.Drawing.Point(12, 118);
+            this.orBT.Margin = new System.Windows.Forms.Padding(2);
+            this.orBT.Name = "orBT";
+            this.orBT.Size = new System.Drawing.Size(139, 35);
+            this.orBT.TabIndex = 39;
+            this.orBT.Text = "OR";
+            this.orBT.UseVisualStyleBackColor = true;
+            this.orBT.Click += new System.EventHandler(this.orBT_Click);
+            // 
+            // xorBT
+            // 
+            this.xorBT.Location = new System.Drawing.Point(12, 164);
+            this.xorBT.Margin = new System.Windows.Forms.Padding(2);
+            this.xorBT.Name = "xorBT";
+            this.xorBT.Size = new System.Drawing.Size(139, 35);
+            this.xorBT.TabIndex = 40;
+            this.xorBT.Text = "XOR";
+            this.xorBT.UseVisualStyleBackColor = true;
+            this.xorBT.Click += new System.EventHandler(this.xorBT_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.notBT);
+            this.groupBox2.Controls.Add(this.xorBT);
+            this.groupBox2.Controls.Add(this.andBT);
+            this.groupBox2.Controls.Add(this.orBT);
+            this.groupBox2.Location = new System.Drawing.Point(227, 422);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(161, 216);
+            this.groupBox2.TabIndex = 41;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Operações Lógicas";
+            // 
+            // notBT
+            // 
+            this.notBT.Location = new System.Drawing.Point(12, 30);
+            this.notBT.Margin = new System.Windows.Forms.Padding(2);
+            this.notBT.Name = "notBT";
+            this.notBT.Size = new System.Drawing.Size(139, 35);
+            this.notBT.TabIndex = 41;
+            this.notBT.Text = "NOT";
+            this.notBT.UseVisualStyleBackColor = true;
+            this.notBT.Click += new System.EventHandler(this.notBT_Click);
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1371, 839);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.negativoBT);
             this.Controls.Add(this.equalizarBT);
             this.Controls.Add(this.RGBbinTB);
             this.Controls.Add(this.RGBbinBT);
@@ -572,7 +638,6 @@
             this.Controls.Add(this.gpA);
             this.Controls.Add(this.somaBT);
             this.Controls.Add(this.cinzaBT);
-            this.Controls.Add(this.negativoBT);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Inicio";
@@ -598,6 +663,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -643,6 +709,11 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button andBT;
+        private System.Windows.Forms.Button orBT;
+        private System.Windows.Forms.Button xorBT;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button notBT;
     }
 }
 
