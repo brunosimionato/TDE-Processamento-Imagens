@@ -79,6 +79,14 @@
             this.xorBT = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.notBT = new System.Windows.Forms.Button();
+            this.blendingBT = new System.Windows.Forms.Button();
+            this.blendingInputTB = new System.Windows.Forms.NumericUpDown();
+            this.minBT = new System.Windows.Forms.Button();
+            this.maxBT = new System.Windows.Forms.Button();
+            this.medBT = new System.Windows.Forms.Button();
+            this.rb7 = new System.Windows.Forms.RadioButton();
+            this.rb5 = new System.Windows.Forms.RadioButton();
+            this.rb3 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.imgA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgResultado)).BeginInit();
@@ -98,6 +106,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.blendingInputTB)).BeginInit();
             this.SuspendLayout();
             // 
             // imgA
@@ -612,12 +621,103 @@
             this.notBT.UseVisualStyleBackColor = true;
             this.notBT.Click += new System.EventHandler(this.notBT_Click);
             // 
+            // blendingBT
+            // 
+            this.blendingBT.Location = new System.Drawing.Point(412, 427);
+            this.blendingBT.Margin = new System.Windows.Forms.Padding(2);
+            this.blendingBT.Name = "blendingBT";
+            this.blendingBT.Size = new System.Drawing.Size(101, 35);
+            this.blendingBT.TabIndex = 42;
+            this.blendingBT.Text = "Blending";
+            this.blendingBT.UseVisualStyleBackColor = true;
+            this.blendingBT.Click += new System.EventHandler(this.blendingBT_Click);
+            // 
+            // blendingInputTB
+            // 
+            this.blendingInputTB.DecimalPlaces = 2;
+            this.blendingInputTB.Location = new System.Drawing.Point(412, 477);
+            this.blendingInputTB.Name = "blendingInputTB";
+            this.blendingInputTB.Size = new System.Drawing.Size(101, 20);
+            this.blendingInputTB.TabIndex = 43;
+            // 
+            // minBT
+            // 
+            this.minBT.Location = new System.Drawing.Point(239, 704);
+            this.minBT.Margin = new System.Windows.Forms.Padding(2);
+            this.minBT.Name = "minBT";
+            this.minBT.Size = new System.Drawing.Size(139, 35);
+            this.minBT.TabIndex = 44;
+            this.minBT.Text = "MÍNIMO";
+            this.minBT.UseVisualStyleBackColor = true;
+            this.minBT.Click += new System.EventHandler(this.minBT_Click);
+            // 
+            // maxBT
+            // 
+            this.maxBT.Location = new System.Drawing.Point(239, 743);
+            this.maxBT.Margin = new System.Windows.Forms.Padding(2);
+            this.maxBT.Name = "maxBT";
+            this.maxBT.Size = new System.Drawing.Size(139, 35);
+            this.maxBT.TabIndex = 45;
+            this.maxBT.Text = "MÁXIMO";
+            this.maxBT.UseVisualStyleBackColor = true;
+            // 
+            // medBT
+            // 
+            this.medBT.Location = new System.Drawing.Point(239, 782);
+            this.medBT.Margin = new System.Windows.Forms.Padding(2);
+            this.medBT.Name = "medBT";
+            this.medBT.Size = new System.Drawing.Size(139, 35);
+            this.medBT.TabIndex = 46;
+            this.medBT.Text = "MÉDIA";
+            this.medBT.UseVisualStyleBackColor = true;
+            // 
+            // rb7
+            // 
+            this.rb7.AutoSize = true;
+            this.rb7.Location = new System.Drawing.Point(350, 671);
+            this.rb7.Name = "rb7";
+            this.rb7.Size = new System.Drawing.Size(50, 17);
+            this.rb7.TabIndex = 49;
+            this.rb7.TabStop = true;
+            this.rb7.Text = "7 X 7";
+            this.rb7.UseVisualStyleBackColor = true;
+            // 
+            // rb5
+            // 
+            this.rb5.AutoSize = true;
+            this.rb5.Location = new System.Drawing.Point(284, 671);
+            this.rb5.Name = "rb5";
+            this.rb5.Size = new System.Drawing.Size(50, 17);
+            this.rb5.TabIndex = 48;
+            this.rb5.TabStop = true;
+            this.rb5.Text = "5 X 5";
+            this.rb5.UseVisualStyleBackColor = true;
+            // 
+            // rb3
+            // 
+            this.rb3.AutoSize = true;
+            this.rb3.Location = new System.Drawing.Point(216, 671);
+            this.rb3.Name = "rb3";
+            this.rb3.Size = new System.Drawing.Size(50, 17);
+            this.rb3.TabIndex = 47;
+            this.rb3.TabStop = true;
+            this.rb3.Text = "3 X 3";
+            this.rb3.UseVisualStyleBackColor = true;
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1371, 839);
+            this.Controls.Add(this.rb7);
+            this.Controls.Add(this.rb5);
+            this.Controls.Add(this.rb3);
+            this.Controls.Add(this.medBT);
+            this.Controls.Add(this.maxBT);
+            this.Controls.Add(this.minBT);
+            this.Controls.Add(this.blendingInputTB);
+            this.Controls.Add(this.blendingBT);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.negativoBT);
@@ -664,7 +764,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.blendingInputTB)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -714,6 +816,14 @@
         private System.Windows.Forms.Button xorBT;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button notBT;
+        private System.Windows.Forms.Button blendingBT;
+        private System.Windows.Forms.NumericUpDown blendingInputTB;
+        private System.Windows.Forms.Button minBT;
+        private System.Windows.Forms.Button maxBT;
+        private System.Windows.Forms.Button medBT;
+        private System.Windows.Forms.RadioButton rb7;
+        private System.Windows.Forms.RadioButton rb5;
+        private System.Windows.Forms.RadioButton rb3;
     }
 }
 
