@@ -429,7 +429,7 @@ namespace Trabalho
         // BOTÃO NEGATIVO --------------------------------------------------------------------------------------------------------------
         private void negativarBT_Click(object sender, EventArgs e)
         {
-            // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
+            // CASO A OPÇÃO "AMBAS AS IMAGENS A" ESTIVER SELECIONADA
             if (rbDuas.Checked)
             {
                 MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -518,7 +518,7 @@ namespace Trabalho
         // BOTÃO FLIPAR HORIZONTAL --------------------------------------------------------------------------------------------------------------
         private void FlipBT_Click(object sender, EventArgs e)
         {
-            // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
             if (rbDuas.Checked)
             {
                 MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -599,7 +599,7 @@ namespace Trabalho
         // BOTÃO FLIPAR VERTICAL --------------------------------------------------------------------------------------------------------------
         private void FlipUDBT_Click(object sender, EventArgs e)
         {
-            // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
             if (rbDuas.Checked)
             {
                 MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -681,7 +681,7 @@ namespace Trabalho
         // BOTÃO ESCALA DE CINZA --------------------------------------------------------------------------------------------------------------
         private void cinzaBT_Click(object sender, EventArgs e)
         {
-            // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
             if (rbDuas.Checked)
             {
                 MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -758,7 +758,7 @@ namespace Trabalho
         // BOTÃO CONCATENAR --------------------------------------------------------------------------------------------------------------
         private void concatenarBT_Click(object sender, EventArgs e)
         {
-            // Exibe um aviso caso a opção "Ambas as Imagens" não estiver selecionda
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" NÃO ESTIVER SELECIONADA
             if (!rbDuas.Checked)
             {
                 MessageBox.Show("Escolha 'Ambas as Imagens' para concatenar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -807,7 +807,7 @@ namespace Trabalho
         // BOTÃO RECORTAR --------------------------------------------------------------------------------------------------------------
         private void btnRecortar_Click(object sender, EventArgs e)
         {
-            // Exibe um aviso caso a opção "Ambas as Imagens" estiver selecionda
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
             if (rbDuas.Checked)
             {
                 MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -949,7 +949,7 @@ namespace Trabalho
             return croppedImage;
         }
 
-
+        //Converte uma matriz em Bitmap
         private Bitmap ConvertToBitmap(int[,] matrix)
         {
             int height = matrix.GetLength(0);
@@ -1002,7 +1002,7 @@ namespace Trabalho
         // RGB PARA BINÁRIO --------------------------------------------------------------------------------------------------------------
         private void RGBbinBT_Click(object sender, EventArgs e)
         {
-            // Verifica se a opção "AMBAS AS IMAGENS" está selecionada
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
             if (rbDuas.Checked)
             {
                 MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1105,7 +1105,7 @@ namespace Trabalho
         // EQUALIZAR HISTOGRAMA --------------------------------------------------------------------------------------------------------------
         private void equalizarBT_Click(object sender, EventArgs e)
         {
-            // Verifica se a opção "AMBAS AS IMAGENS" está selecionada
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
             if (rbDuas.Checked)
             {
                 MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1282,7 +1282,7 @@ namespace Trabalho
         // BOTÃO AND --------------------------------------------------------------------------------------------------------------
         private void andBT_Click(object sender, EventArgs e)
         {
-            // Exibe um aviso caso a opção "Ambas as Imagens" não estiver selecionada
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" NÃO ESTIVER SELECIONADA
             if (!rbDuas.Checked)
             {
                 MessageBox.Show("Escolha 'Ambas as Imagens' para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1336,7 +1336,7 @@ namespace Trabalho
         // BOTÃO OR --------------------------------------------------------------------------------------------------------------
         private void orBT_Click(object sender, EventArgs e)
         {
-            // Exibe um aviso caso a opção "Ambas as Imagens" não estiver selecionada
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" NÃO ESTIVER SELECIONADA
             if (!rbDuas.Checked)
             {
                 MessageBox.Show("Escolha 'Ambas as Imagens' para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1390,7 +1390,7 @@ namespace Trabalho
         // BOTÃO XOR --------------------------------------------------------------------------------------------------------------
         private void xorBT_Click(object sender, EventArgs e)
         {
-            // Exibe um aviso caso a opção "Ambas as Imagens" não estiver selecionada
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" NÃO ESTIVER SELECIONADA
             if (!rbDuas.Checked)
             {
                 MessageBox.Show("Escolha 'Ambas as Imagens' para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1441,7 +1441,7 @@ namespace Trabalho
 
 
 
-        // BOTÃO NOT --------------------------------------------------------------------------------------------------------------
+        // BOTÃO NOT -------------------------------------------------------------------------------------------------------------------
         private void notBT_Click(object sender, EventArgs e)
         {
             // Chamando a função para negativar ao clicar no botão NOT
@@ -1479,6 +1479,7 @@ namespace Trabalho
                 return;
             }
 
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
             if (rbDuas.Checked)
             {
                 Image image1 = imgA.Image;
@@ -1517,6 +1518,7 @@ namespace Trabalho
                 imgResultado.Image = imagemResultado;
             }
 
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
             if (rbA.Checked)
             {
                 Image image1 = imgA.Image;
@@ -1545,6 +1547,7 @@ namespace Trabalho
                 imgResultado.Image = imagemResultado;
             }
 
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
             if (rbB.Checked)
             {
                 Image image1 = imgB.Image;
@@ -1578,10 +1581,10 @@ namespace Trabalho
 
 
 
-        // BOTÃO MÍNIMO
+        // BOTÃO MÍNIMO ---------------------------------------------------------------------------------------------------------------------------------------
         private void minBT_Click(object sender, EventArgs e)
         {
-            // Verifica se a opção "AMBAS AS IMAGENS" está selecionada
+            // // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
             if (rbDuas.Checked)
             {
                 MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1595,6 +1598,7 @@ namespace Trabalho
                 return;
             }
 
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
             if (rbA.Checked)
             {
                 Image image1 = imgA.Image;
@@ -1608,6 +1612,8 @@ namespace Trabalho
 
                 Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
 
+
+                // Converte a imagem original para escala de cinza
                 for (int x = 0; x < image1.Width; x++)
                 {
                     for (int y = 0; y < image1.Height; y++)
@@ -1624,6 +1630,7 @@ namespace Trabalho
                     }
                 }
 
+                // Seleciona o tamanho da vizinhança
                 int tamanhoVizinhanca = 0;
                 if (!rb3.Checked && !rb5.Checked && !rb7.Checked)
                 {
@@ -1642,6 +1649,8 @@ namespace Trabalho
                 {
                     tamanhoVizinhanca = 7;
                 }
+
+                // Filtra a imagem
                 Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
 
                 for (int x = 0; x < imagemCinza.Width; x++)
@@ -1653,6 +1662,8 @@ namespace Trabalho
                         {
                             for (int j = 0; j < tamanhoVizinhanca; j++)
                             {
+
+                                // Trata os casos em que xIndex e yIndex estão fora dos limites da imagem
                                 int xIndex = x + i - tamanhoVizinhanca / 2;
                                 int yIndex = y + j - tamanhoVizinhanca / 2;
 
@@ -1677,6 +1688,7 @@ namespace Trabalho
                             }
                         }
 
+                        // Calcula o mínimo da vizinhança
                         int minimo = GetMinimo(vizinhanca);
 
                         imagemFiltrada.SetPixel(x, y, Color.FromArgb(minimo, minimo, minimo));
@@ -1686,6 +1698,7 @@ namespace Trabalho
                 imgResultado.Image = imagemFiltrada;
             }
 
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
             if (rbB.Checked)
             {
                 Image image1 = imgB.Image;
@@ -1699,6 +1712,7 @@ namespace Trabalho
 
                 Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
 
+                // Converte a imagem original para escala de cinza
                 for (int x = 0; x < image1.Width; x++)
                 {
                     for (int y = 0; y < image1.Height; y++)
@@ -1779,7 +1793,7 @@ namespace Trabalho
             }
         }
 
-        // FUNÇÃO PEGAR O MÍNIMO DA MATRIZ
+        // FUNÇÃO PARA CALCULAR O MÍNIMO DE UMA VIZINHANÇA
         private int GetMinimo(int[,] matriz)
         {
             int minimo = int.MaxValue;
@@ -1801,6 +1815,455 @@ namespace Trabalho
 
 
 
+        // BOTÃO MÁXIMO ---------------------------------------------------------------------------------------------------------------------------------------
+        private void maxBT_Click(object sender, EventArgs e)
+        {
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
+            if (rbA.Checked)
+            {
+                Image image1 = imgA.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+                // Converte a imagem original para escala de cinza
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        Color color = ((Bitmap)image1).GetPixel(x, y);
+                        int gray = (color.R + color.G + color.B) / 3;
+
+                        Color novaCor = Color.FromArgb(color.A, gray, gray, gray);
+                        imagemCinza.SetPixel(x, y, novaCor);
+                    }
+                }
+
+                // Seleciona o tamanho da vizinhança
+                int tamanhoVizinhanca = 0;
+                if (!rb3.Checked && !rb5.Checked && !rb7.Checked)
+                {
+                    MessageBox.Show("Selecione o tamanho da vizinhança para filtrar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (rb3.Checked)
+                {
+                    tamanhoVizinhanca = 3;
+                }
+                if (rb5.Checked)
+                {
+                    tamanhoVizinhanca = 5;
+                }
+                if (rb7.Checked)
+                {
+                    tamanhoVizinhanca = 7;
+                }
+
+                // Filtra a imagem
+                Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+                for (int x = 0; x < imagemCinza.Width; x++)
+                {
+                    for (int y = 0; y < imagemCinza.Height; y++)
+                    {
+                        int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+                        for (int i = 0; i < tamanhoVizinhanca; i++)
+                        {
+                            for (int j = 0; j < tamanhoVizinhanca; j++)
+                            {
+                                int xIndex = x + i - tamanhoVizinhanca / 2;
+                                int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                                // Trata os casos em que xIndex e yIndex estão fora dos limites da imagem
+                                if (xIndex < 0)
+                                {
+                                    xIndex = 0;
+                                }
+                                if (xIndex >= imagemCinza.Width)
+                                {
+                                    xIndex = imagemCinza.Width - 1;
+                                }
+                                if (yIndex < 0)
+                                {
+                                    yIndex = 0;
+                                }
+                                if (yIndex >= imagemCinza.Height)
+                                {
+                                    yIndex = imagemCinza.Height - 1;
+                                }
+
+                                vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            }
+                        }
+
+                        // Calcula o máximo da vizinhança
+                        int maximo = GetMaximo(vizinhanca);
+
+                        imagemFiltrada.SetPixel(x, y, Color.FromArgb(maximo, maximo, maximo));
+                    }
+                }
+
+                imgResultado.Image = imagemFiltrada;
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
+            if (rbB.Checked)
+            {
+                Image image1 = imgB.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+                // Converte a imagem original para escala de cinza
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                        int r = color1.R;
+                        int g = color1.G;
+                        int b = color1.B;
+                        int gray = (r + g + b) / 3;
+
+                        Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                        imagemCinza.SetPixel(x, y, novaCor);
+                    }
+                }
+
+                int tamanhoVizinhanca = 0;
+                if (!rb3.Checked && !rb5.Checked && !rb7.Checked)
+                {
+                    MessageBox.Show("Selecione o tamanho da vizinhança para filtrar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (rb3.Checked)
+                {
+                    tamanhoVizinhanca = 3;
+                }
+                if (rb5.Checked)
+                {
+                    tamanhoVizinhanca = 5;
+                }
+                if (rb7.Checked)
+                {
+                    tamanhoVizinhanca = 7;
+                }
+
+                Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+                for (int x = 0; x < imagemCinza.Width; x++)
+                {
+                    for (int y = 0; y < imagemCinza.Height; y++)
+                    {
+                        int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+                        for (int i = 0; i < tamanhoVizinhanca; i++)
+                        {
+                            for (int j = 0; j < tamanhoVizinhanca; j++)
+                            {
+                                int xIndex = x + i - tamanhoVizinhanca / 2;
+                                int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                                if (xIndex < 0)
+                                {
+                                    xIndex = 0;
+                                }
+                                if (xIndex >= imagemCinza.Width)
+                                {
+                                    xIndex = imagemCinza.Width - 1;
+                                }
+                                if (yIndex < 0)
+                                {
+                                    yIndex = 0;
+                                }
+                                if (yIndex >= imagemCinza.Height)
+                                {
+                                    yIndex = imagemCinza.Height - 1;
+                                }
+
+                                vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            }
+                        }
+
+                        int minimo = GetMinimo(vizinhanca);
+
+                        imagemFiltrada.SetPixel(x, y, Color.FromArgb(minimo, minimo, minimo));
+                    }
+                }
+
+                imgResultado.Image = imagemFiltrada;
+            }
+        }
+
+        // FUNÇÃO PARA CALCULAR O MÁXIMO DE UMA VIZINHANÇA
+        private int GetMaximo(int[,] vizinhanca)
+        {
+            int maximo = int.MinValue;
+            for (int i = 0; i < vizinhanca.GetLength(0); i++)
+            {
+                for (int j = 0; j < vizinhanca.GetLength(1); j++)
+                {
+                    if (vizinhanca[i, j] > maximo)
+                    {
+                        maximo = vizinhanca[i, j];
+                    }
+                }
+            }
+            return maximo;
+        }
+
+
+
+
+        // BOTÃO MÉDIA --------------------------------------------------------------------------------------------------------------------------------------------
+        private void medBT_Click(object sender, EventArgs e)
+        {
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
+            if (rbA.Checked)
+            {
+                Image image1 = imgA.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+
+                }
+
+                Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+                // Converte a imagem original para escala de cinza
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                        int r = color1.R;
+                        int g = color1.G;
+                        int b = color1.B;
+                        int gray = (r + g + b) / 3;
+
+                        Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                        imagemCinza.SetPixel(x, y, novaCor);
+
+                    }
+                }
+
+                // Seleciona o tamanho da vizinhança
+                int tamanhoVizinhanca = 0;
+                if (!rb3.Checked && !rb5.Checked && !rb7.Checked)
+                {
+                    MessageBox.Show("Selecione o tamanho da vizinhança para filtrar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (rb3.Checked)
+                {
+                    tamanhoVizinhanca = 3;
+                }
+                if (rb5.Checked)
+                {
+                    tamanhoVizinhanca = 5;
+                }
+                if (rb7.Checked)
+                {
+                    tamanhoVizinhanca = 7;
+                }
+
+                // Filtra a imagem
+                Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+                for (int x = 0; x < imagemCinza.Width; x++)
+                {
+                    for (int y = 0; y < imagemCinza.Height; y++)
+                    {
+                        int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+                        for (int i = 0; i < tamanhoVizinhanca; i++)
+                        {
+                            for (int j = 0; j < tamanhoVizinhanca; j++)
+                            {
+                                int xIndex = x + i - tamanhoVizinhanca / 2;
+                                int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                                // Trata os casos em que xIndex e yIndex estão fora dos limites da imagem
+                                if (xIndex < 0)
+                                {
+                                    xIndex = 0;
+                                }
+                                if (xIndex >= imagemCinza.Width)
+                                {
+                                    xIndex = imagemCinza.Width - 1;
+                                }
+                                if (yIndex < 0)
+                                {
+                                    yIndex = 0;
+                                }
+                                if (yIndex >= imagemCinza.Height)
+                                {
+                                    yIndex = imagemCinza.Height - 1;
+                                }
+
+                                vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            }
+                        }
+
+                        // Calcula a média da vizinhança
+                        int media = GetMedia(vizinhanca);
+
+                        imagemFiltrada.SetPixel(x, y, Color.FromArgb(media, media, media));
+                    }
+                }
+
+                imgResultado.Image = imagemFiltrada;
+            }
+            
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
+            if (rbB.Checked)
+            {
+                Image image1 = imgB.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+
+                }
+
+                Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+                // Converte a imagem original para escala de cinza
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                        int r = color1.R;
+                        int g = color1.G;
+                        int b = color1.B;
+                        int gray = (r + g + b) / 3;
+
+                        Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                        imagemCinza.SetPixel(x, y, novaCor);
+
+                    }
+                }
+
+                int tamanhoVizinhanca = 0;
+                if (!rb3.Checked && !rb5.Checked && !rb7.Checked)
+                {
+                    MessageBox.Show("Selecione o tamanho da vizinhança para filtrar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (rb3.Checked)
+                {
+                    tamanhoVizinhanca = 3;
+                }
+                if (rb5.Checked)
+                {
+                    tamanhoVizinhanca = 5;
+                }
+                if (rb7.Checked)
+                {
+                    tamanhoVizinhanca = 7;
+                }
+
+                Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+                for (int x = 0; x < imagemCinza.Width; x++)
+                {
+                    for (int y = 0; y < imagemCinza.Height; y++)
+                    {
+                        int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+                        for (int i = 0; i < tamanhoVizinhanca; i++)
+                        {
+                            for (int j = 0; j < tamanhoVizinhanca; j++)
+                            {
+                                int xIndex = x + i - tamanhoVizinhanca / 2;
+                                int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                                if (xIndex < 0)
+                                {
+                                    xIndex = 0;
+                                }
+                                if (xIndex >= imagemCinza.Width)
+                                {
+                                    xIndex = imagemCinza.Width - 1;
+                                }
+                                if (yIndex < 0)
+                                {
+                                    yIndex = 0;
+                                }
+                                if (yIndex >= imagemCinza.Height)
+                                {
+                                    yIndex = imagemCinza.Height - 1;
+                                }
+
+                                vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            }
+                        }
+
+                        int media = GetMedia(vizinhanca);
+
+                        imagemFiltrada.SetPixel(x, y, Color.FromArgb(media, media, media));
+                    }
+                }
+
+                imgResultado.Image = imagemFiltrada;
+            }
+        }
+
+        // FUNÇÃO PARA CALCULAR A MÉDIA DE UMA VIZINHANÇA
+        private int GetMedia(int[,] matriz)
+        {
+            int soma = 0;
+
+            for (int i = 0; i < matriz.GetLength(0); i++)
+            {
+                for (int j = 0; j < matriz.GetLength(1); j++)
+                {
+                    soma += matriz[i, j];
+                }
+            }
+
+            int media = soma / (matriz.GetLength(0) * matriz.GetLength(1));
+            return media;
+        }
 
 
     }
