@@ -87,6 +87,7 @@
             this.rb7 = new System.Windows.Forms.RadioButton();
             this.rb5 = new System.Windows.Forms.RadioButton();
             this.rb3 = new System.Windows.Forms.RadioButton();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgResultado)).BeginInit();
@@ -107,6 +108,7 @@
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.blendingInputTB)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // imgA
@@ -163,7 +165,7 @@
             // 
             // negativoBT
             // 
-            this.negativoBT.Location = new System.Drawing.Point(692, 268);
+            this.negativoBT.Location = new System.Drawing.Point(692, 260);
             this.negativoBT.Margin = new System.Windows.Forms.Padding(2);
             this.negativoBT.Name = "negativoBT";
             this.negativoBT.Size = new System.Drawing.Size(101, 35);
@@ -174,7 +176,7 @@
             // 
             // cinzaBT
             // 
-            this.cinzaBT.Location = new System.Drawing.Point(692, 307);
+            this.cinzaBT.Location = new System.Drawing.Point(692, 299);
             this.cinzaBT.Margin = new System.Windows.Forms.Padding(2);
             this.cinzaBT.Name = "cinzaBT";
             this.cinzaBT.Size = new System.Drawing.Size(101, 35);
@@ -280,7 +282,7 @@
             // 
             // somaBT
             // 
-            this.somaBT.Location = new System.Drawing.Point(692, 106);
+            this.somaBT.Location = new System.Drawing.Point(692, 97);
             this.somaBT.Margin = new System.Windows.Forms.Padding(2);
             this.somaBT.Name = "somaBT";
             this.somaBT.Size = new System.Drawing.Size(101, 35);
@@ -291,7 +293,7 @@
             // 
             // subtracaoBT
             // 
-            this.subtracaoBT.Location = new System.Drawing.Point(692, 179);
+            this.subtracaoBT.Location = new System.Drawing.Point(692, 169);
             this.subtracaoBT.Margin = new System.Windows.Forms.Padding(2);
             this.subtracaoBT.Name = "subtracaoBT";
             this.subtracaoBT.Size = new System.Drawing.Size(101, 35);
@@ -302,7 +304,7 @@
             // 
             // FlipBT
             // 
-            this.FlipBT.Location = new System.Drawing.Point(881, 268);
+            this.FlipBT.Location = new System.Drawing.Point(905, 260);
             this.FlipBT.Margin = new System.Windows.Forms.Padding(2);
             this.FlipBT.Name = "FlipBT";
             this.FlipBT.Size = new System.Drawing.Size(101, 35);
@@ -313,7 +315,7 @@
             // 
             // FlipUDBT
             // 
-            this.FlipUDBT.Location = new System.Drawing.Point(881, 307);
+            this.FlipUDBT.Location = new System.Drawing.Point(905, 307);
             this.FlipUDBT.Margin = new System.Windows.Forms.Padding(2);
             this.FlipUDBT.Name = "FlipUDBT";
             this.FlipUDBT.Size = new System.Drawing.Size(101, 35);
@@ -324,7 +326,7 @@
             // 
             // concatenarBT
             // 
-            this.concatenarBT.Location = new System.Drawing.Point(881, 228);
+            this.concatenarBT.Location = new System.Drawing.Point(905, 368);
             this.concatenarBT.Margin = new System.Windows.Forms.Padding(2);
             this.concatenarBT.Name = "concatenarBT";
             this.concatenarBT.Size = new System.Drawing.Size(101, 35);
@@ -370,7 +372,7 @@
             // 
             // limparBT
             // 
-            this.limparBT.Location = new System.Drawing.Point(692, 368);
+            this.limparBT.Location = new System.Drawing.Point(797, 368);
             this.limparBT.Margin = new System.Windows.Forms.Padding(2);
             this.limparBT.Name = "limparBT";
             this.limparBT.Size = new System.Drawing.Size(101, 35);
@@ -459,7 +461,7 @@
             // 
             // adInputTB
             // 
-            this.adInputTB.Location = new System.Drawing.Point(692, 143);
+            this.adInputTB.Location = new System.Drawing.Point(692, 134);
             this.adInputTB.Maximum = new decimal(new int[] {
             255,
             0,
@@ -473,7 +475,7 @@
             // 
             // subInputTB
             // 
-            this.subInputTB.Location = new System.Drawing.Point(692, 217);
+            this.subInputTB.Location = new System.Drawing.Point(692, 207);
             this.subInputTB.Maximum = new decimal(new int[] {
             255,
             0,
@@ -486,7 +488,7 @@
             // 
             // RGBbinBT
             // 
-            this.RGBbinBT.Location = new System.Drawing.Point(881, 106);
+            this.RGBbinBT.Location = new System.Drawing.Point(905, 97);
             this.RGBbinBT.Margin = new System.Windows.Forms.Padding(2);
             this.RGBbinBT.Name = "RGBbinBT";
             this.RGBbinBT.Size = new System.Drawing.Size(101, 35);
@@ -497,7 +499,7 @@
             // 
             // RGBbinTB
             // 
-            this.RGBbinTB.Location = new System.Drawing.Point(881, 143);
+            this.RGBbinTB.Location = new System.Drawing.Point(905, 134);
             this.RGBbinTB.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -509,7 +511,7 @@
             // 
             // equalizarBT
             // 
-            this.equalizarBT.Location = new System.Drawing.Point(881, 368);
+            this.equalizarBT.Location = new System.Drawing.Point(692, 368);
             this.equalizarBT.Margin = new System.Windows.Forms.Padding(2);
             this.equalizarBT.Name = "equalizarBT";
             this.equalizarBT.Size = new System.Drawing.Size(101, 35);
@@ -623,7 +625,7 @@
             // 
             // blendingBT
             // 
-            this.blendingBT.Location = new System.Drawing.Point(412, 427);
+            this.blendingBT.Location = new System.Drawing.Point(905, 169);
             this.blendingBT.Margin = new System.Windows.Forms.Padding(2);
             this.blendingBT.Name = "blendingBT";
             this.blendingBT.Size = new System.Drawing.Size(101, 35);
@@ -635,17 +637,17 @@
             // blendingInputTB
             // 
             this.blendingInputTB.DecimalPlaces = 2;
-            this.blendingInputTB.Location = new System.Drawing.Point(412, 477);
+            this.blendingInputTB.Location = new System.Drawing.Point(905, 209);
             this.blendingInputTB.Name = "blendingInputTB";
             this.blendingInputTB.Size = new System.Drawing.Size(101, 20);
             this.blendingInputTB.TabIndex = 43;
             // 
             // minBT
             // 
-            this.minBT.Location = new System.Drawing.Point(239, 704);
+            this.minBT.Location = new System.Drawing.Point(8, 58);
             this.minBT.Margin = new System.Windows.Forms.Padding(2);
             this.minBT.Name = "minBT";
-            this.minBT.Size = new System.Drawing.Size(139, 35);
+            this.minBT.Size = new System.Drawing.Size(167, 35);
             this.minBT.TabIndex = 44;
             this.minBT.Text = "MÍNIMO";
             this.minBT.UseVisualStyleBackColor = true;
@@ -653,28 +655,30 @@
             // 
             // maxBT
             // 
-            this.maxBT.Location = new System.Drawing.Point(239, 743);
+            this.maxBT.Location = new System.Drawing.Point(8, 106);
             this.maxBT.Margin = new System.Windows.Forms.Padding(2);
             this.maxBT.Name = "maxBT";
-            this.maxBT.Size = new System.Drawing.Size(139, 35);
+            this.maxBT.Size = new System.Drawing.Size(167, 35);
             this.maxBT.TabIndex = 45;
             this.maxBT.Text = "MÁXIMO";
             this.maxBT.UseVisualStyleBackColor = true;
+            this.maxBT.Click += new System.EventHandler(this.maxBT_Click);
             // 
             // medBT
             // 
-            this.medBT.Location = new System.Drawing.Point(239, 782);
+            this.medBT.Location = new System.Drawing.Point(8, 154);
             this.medBT.Margin = new System.Windows.Forms.Padding(2);
             this.medBT.Name = "medBT";
-            this.medBT.Size = new System.Drawing.Size(139, 35);
+            this.medBT.Size = new System.Drawing.Size(167, 35);
             this.medBT.TabIndex = 46;
             this.medBT.Text = "MÉDIA";
             this.medBT.UseVisualStyleBackColor = true;
+            this.medBT.Click += new System.EventHandler(this.medBT_Click);
             // 
             // rb7
             // 
             this.rb7.AutoSize = true;
-            this.rb7.Location = new System.Drawing.Point(350, 671);
+            this.rb7.Location = new System.Drawing.Point(125, 28);
             this.rb7.Name = "rb7";
             this.rb7.Size = new System.Drawing.Size(50, 17);
             this.rb7.TabIndex = 49;
@@ -685,7 +689,7 @@
             // rb5
             // 
             this.rb5.AutoSize = true;
-            this.rb5.Location = new System.Drawing.Point(284, 671);
+            this.rb5.Location = new System.Drawing.Point(64, 28);
             this.rb5.Name = "rb5";
             this.rb5.Size = new System.Drawing.Size(50, 17);
             this.rb5.TabIndex = 48;
@@ -696,7 +700,7 @@
             // rb3
             // 
             this.rb3.AutoSize = true;
-            this.rb3.Location = new System.Drawing.Point(216, 671);
+            this.rb3.Location = new System.Drawing.Point(8, 28);
             this.rb3.Name = "rb3";
             this.rb3.Size = new System.Drawing.Size(50, 17);
             this.rb3.TabIndex = 47;
@@ -704,18 +708,28 @@
             this.rb3.Text = "3 X 3";
             this.rb3.UseVisualStyleBackColor = true;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.rb7);
+            this.groupBox3.Controls.Add(this.rb5);
+            this.groupBox3.Controls.Add(this.rb3);
+            this.groupBox3.Controls.Add(this.medBT);
+            this.groupBox3.Controls.Add(this.maxBT);
+            this.groupBox3.Controls.Add(this.minBT);
+            this.groupBox3.Location = new System.Drawing.Point(414, 430);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(188, 208);
+            this.groupBox3.TabIndex = 50;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Vizinhança";
+            // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1371, 839);
-            this.Controls.Add(this.rb7);
-            this.Controls.Add(this.rb5);
-            this.Controls.Add(this.rb3);
-            this.Controls.Add(this.medBT);
-            this.Controls.Add(this.maxBT);
-            this.Controls.Add(this.minBT);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.blendingInputTB);
             this.Controls.Add(this.blendingBT);
             this.Controls.Add(this.groupBox2);
@@ -765,8 +779,9 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.blendingInputTB)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -824,6 +839,7 @@
         private System.Windows.Forms.RadioButton rb7;
         private System.Windows.Forms.RadioButton rb5;
         private System.Windows.Forms.RadioButton rb3;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
 
