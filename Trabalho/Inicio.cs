@@ -16,6 +16,25 @@ namespace Trabalho
 
             this.WindowState = FormWindowState.Maximized;
             LimparGraficos();
+
+
+        }
+
+
+        private void Inicio_Load(object sender, EventArgs e)
+        {
+            //NumericUpDown nulas quando inicializadas 
+            adInputTB.ResetText();
+            subInputTB.ResetText();
+            RGBbinTB.ResetText();
+            multiplicacaoTB.ResetText();
+            divisaoTB.ResetText();
+            blendingNTBNumericUpDown.ResetText();
+            widthInicialTB.ResetText();
+            heightInicialTB.ResetText();
+            widthFinalTB.ResetText();
+            heightFinalTB.ResetText();
+            odermBT.ResetText();
         }
 
 
@@ -61,6 +80,79 @@ namespace Trabalho
                 }
             }
         }
+
+
+        // Permite apenas números até 255 na multiplicacaoTB
+        private void multiplicacaoTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permite apenas números e a tecla Backspace (código ASCII 8)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignora o caractere digitado
+            }
+            else if (!char.IsControl(e.KeyChar))
+            {
+                // Se o usuário digitar um número e o valor exceder 255, define o valor como 255
+                int newValue = Convert.ToInt32(multiplicacaoTB.Text + e.KeyChar);
+                if (newValue > 255)
+                {
+                    multiplicacaoTB.Text = "255";
+                    e.Handled = true; // Indica que o evento foi manipulado
+                }
+            }
+        }
+
+
+        // Permite apenas números até 255 na divisaoTB
+        private void divisaoTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permite apenas números e a tecla Backspace (código ASCII 8)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignora o caractere digitado
+            }
+            else if (!char.IsControl(e.KeyChar))
+            {
+                // Se o usuário digitar um número e o valor exceder 255, define o valor como 255
+                int newValue = Convert.ToInt32(divisaoTB.Text + e.KeyChar);
+                if (newValue > 255)
+                {
+                    divisaoTB.Text = "255";
+                    e.Handled = true; // Indica que o evento foi manipulado
+                }
+            }
+        }
+
+
+        // Permite apenas números até 255 na RGBbinTB
+        private void RGBbinTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Permite apenas números e a tecla Backspace (código ASCII 8)
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Ignora o caractere digitado
+            }
+            else if (!char.IsControl(e.KeyChar))
+            {
+                // Se o usuário digitar um número e o valor exceder 255, define o valor como 255
+                int newValue = Convert.ToInt32(RGBbinTB.Text + e.KeyChar);
+                if (newValue > 255)
+                {
+                    RGBbinTB.Text = "255";
+                    e.Handled = true; // Indica que o evento foi manipulado
+                }
+            }
+
+        }
+
+
+        // Não permite o que o mouse seja tranformado em cursor de texto ao passar por cima do Blending NTB
+        private void blendingNTBNumericUpDown_Enter(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+            blendingNTBNumericUpDown.Cursor = Cursors.Default;
+        }
+
 
 
 
@@ -977,11 +1069,17 @@ namespace Trabalho
             imgB.Image = null;
             imgResultado.Image = null;
 
-            widthInicialTB.Text = "0";
-            widthFinalTB.Text = "0";
-            heightInicialTB.Text = "0";
-            heightFinalTB.Text = "0";
-            blendingInputTB.Text = "0";
+            adInputTB.ResetText();
+            subInputTB.ResetText();
+            RGBbinTB.ResetText();
+            multiplicacaoTB.ResetText();
+            divisaoTB.ResetText();
+            blendingNTBNumericUpDown.ResetText();
+            widthInicialTB.ResetText();
+            heightInicialTB.ResetText();
+            widthFinalTB.ResetText();
+            heightFinalTB.ResetText();
+            odermBT.ResetText();
 
             rbA.Checked = false;
             rbB.Checked = false;
@@ -1056,12 +1154,6 @@ namespace Trabalho
                 return;
             }
 
-            // Verifica se o valor digitado é maior que 255
-            if (mediaRGB > 255)
-            {
-                MessageBox.Show("O valor deve ser menor ou igual a 255.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
             // Obtendo a largura e altura da imagem selecionada
             int width = imagemSelecionada.Width;
@@ -1269,12 +1361,19 @@ namespace Trabalho
             chart1.Series["Antes"].Points.DataBindY(histogramaOriginal);
             chart1.ChartAreas[0].AxisY.Maximum = histogramaOriginal.Max() + 10;
 
+            // Remove a legenda do primeiro gráfico
+            chart1.Legends.Clear();
+
             // Adiciona o histograma da imagem equalizada ao segundo gráfico
             chart2.Series.Add("Depois");
             chart2.Series["Depois"].ChartType = SeriesChartType.Column;
             chart2.Series["Depois"].Points.DataBindY(histogramaEqualizado);
             chart2.ChartAreas[0].AxisY.Maximum = histogramaEqualizado.Max() + 10;
+
+            // Remove a legenda do segundo gráfico
+            chart2.Legends.Clear();
         }
+
 
 
 
@@ -1469,10 +1568,10 @@ namespace Trabalho
             }
 
             // Tenta converter o valor de blending
-            if (!float.TryParse(blendingInputTB.Text.Replace(".", ","), out float valorBlending) || valorBlending < 0.01f || valorBlending > 1.00f)
+            if (!float.TryParse(blendingNTBNumericUpDown.Text.Replace(".", ","), out float valorBlending) || valorBlending < 0.01f || valorBlending > 1.00f)
             {
                 // Limpa a NumericTextBox
-                blendingInputTB.Text = "";
+                blendingNTBNumericUpDown.Text = "";
 
                 // Exibe um aviso sobre o valor inválido
                 MessageBox.Show("Insira um valor válido (0,01 a 1,00).", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1487,13 +1586,13 @@ namespace Trabalho
 
                 if (image1 == null || image2 == null)
                 {
-                    MessageBox.Show("Por favor, selecione duas imagens");
+                    MessageBox.Show("Abra duas Imagens.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 if (image1.Width != image2.Width || image1.Height != image2.Height || image1.PixelFormat != image2.PixelFormat)
                 {
-                    MessageBox.Show("As imagens precisam ter o mesmo tamanho e formato.");
+                    MessageBox.Show("As imagens precisam ter o mesmo tamanho e formato.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -1525,7 +1624,7 @@ namespace Trabalho
 
                 if (image1 == null)
                 {
-                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.");
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -1554,7 +1653,7 @@ namespace Trabalho
 
                 if (image1 == null)
                 {
-                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.");
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -2152,7 +2251,7 @@ namespace Trabalho
 
                 imgResultado.Image = imagemFiltrada;
             }
-            
+
             // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
             if (rbB.Checked)
             {
@@ -2266,8 +2365,708 @@ namespace Trabalho
         }
 
 
+
+
+        // BOTÃO MEDIANA --------------------------------------------------------------------------------------------------------------------------------------------
+        private void medianaBT_Click(object sender, EventArgs e)
+        {
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
+            if (rbA.Checked)
+            {
+                Image image1 = imgA.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Converte a imagem original para escala de cinza
+                Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                        int r = color1.R;
+                        int g = color1.G;
+                        int b = color1.B;
+                        int gray = (r + g + b) / 3;
+
+                        Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                        imagemCinza.SetPixel(x, y, novaCor);
+
+                    }
+                }
+
+                // Seleciona o tamanho da vizinhança
+                int tamanhoVizinhanca = 0;
+                if (!rb3.Checked && !rb5.Checked && !rb7.Checked)
+                {
+                    MessageBox.Show("Selecione o tamanho da vizinhança para filtrar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (rb3.Checked)
+                {
+                    tamanhoVizinhanca = 3;
+                }
+                if (rb5.Checked)
+                {
+                    tamanhoVizinhanca = 5;
+                }
+                if (rb7.Checked)
+                {
+                    tamanhoVizinhanca = 7;
+                }
+
+                // Filtra a imagem
+                Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+                for (int x = 0; x < imagemCinza.Width; x++)
+                {
+                    for (int y = 0; y < imagemCinza.Height; y++)
+                    {
+                        int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+                        for (int i = 0; i < tamanhoVizinhanca; i++)
+                        {
+                            for (int j = 0; j < tamanhoVizinhanca; j++)
+                            {
+
+                                // Trata os casos em que xIndex e yIndex estão fora dos limites da imagem
+                                int xIndex = x + i - tamanhoVizinhanca / 2;
+                                int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                                if (xIndex < 0)
+                                {
+                                    xIndex = 0;
+                                }
+                                if (xIndex >= imagemCinza.Width)
+                                {
+                                    xIndex = imagemCinza.Width - 1;
+                                }
+                                if (yIndex < 0)
+                                {
+                                    yIndex = 0;
+                                }
+                                if (yIndex >= imagemCinza.Height)
+                                {
+                                    yIndex = imagemCinza.Height - 1;
+                                }
+
+                                vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            }
+                        }
+
+                        int media = GetMediana(vizinhanca);
+
+                        imagemFiltrada.SetPixel(x, y, Color.FromArgb(media, media, media));
+                    }
+                }
+
+                imgResultado.Image = imagemFiltrada;
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
+            if (rbB.Checked)
+            {
+                Image image1 = imgB.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                        int r = color1.R;
+                        int g = color1.G;
+                        int b = color1.B;
+                        int gray = (r + g + b) / 3;
+
+                        Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                        imagemCinza.SetPixel(x, y, novaCor);
+
+                    }
+                }
+
+                int tamanhoVizinhanca = 0;
+                if (!rb3.Checked && !rb5.Checked && !rb7.Checked)
+                {
+                    MessageBox.Show("Selecione o tamanho da vizinhança para filtrar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (rb3.Checked)
+                {
+                    tamanhoVizinhanca = 3;
+                }
+                if (rb5.Checked)
+                {
+                    tamanhoVizinhanca = 5;
+                }
+                if (rb7.Checked)
+                {
+                    tamanhoVizinhanca = 7;
+                }
+
+                Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+                // Converte a imagem original para escala de cinza
+                for (int x = 0; x < imagemCinza.Width; x++)
+                {
+                    for (int y = 0; y < imagemCinza.Height; y++)
+                    {
+                        int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+                        for (int i = 0; i < tamanhoVizinhanca; i++)
+                        {
+                            for (int j = 0; j < tamanhoVizinhanca; j++)
+                            {
+                                int xIndex = x + i - tamanhoVizinhanca / 2;
+                                int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                                if (xIndex < 0)
+                                {
+                                    xIndex = 0;
+                                }
+                                if (xIndex >= imagemCinza.Width)
+                                {
+                                    xIndex = imagemCinza.Width - 1;
+                                }
+                                if (yIndex < 0)
+                                {
+                                    yIndex = 0;
+                                }
+                                if (yIndex >= imagemCinza.Height)
+                                {
+                                    yIndex = imagemCinza.Height - 1;
+                                }
+
+                                vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            }
+                        }
+
+                        int media = GetMediana(vizinhanca);
+
+                        imagemFiltrada.SetPixel(x, y, Color.FromArgb(media, media, media));
+                    }
+                }
+
+                imgResultado.Image = imagemFiltrada;
+            }
+        }
+
+        // FUNÇÃO PARA CALCULAR A MEDIANA DE UMA VIZINHANÇA
+        private int GetMediana(int[,] matriz)
+        {
+            int tamanho = matriz.GetLength(0) * matriz.GetLength(1);
+            int[] elementos = new int[tamanho];
+
+            int index = 0;
+            for (int i = 0; i < matriz.GetLength(0); i++)
+            {
+                for (int j = 0; j < matriz.GetLength(1); j++)
+                {
+                    elementos[index] = matriz[i, j];
+                    index++;
+                }
+            }
+
+            Array.Sort(elementos);
+
+            int mediana;
+            if (tamanho % 2 == 0)
+            {
+                int meio = tamanho / 2;
+                mediana = (elementos[meio - 1] + elementos[meio]) / 2;
+            }
+            else
+            {
+                int meio = tamanho / 2;
+                mediana = elementos[meio];
+            }
+
+            return mediana;
+        }
+
+
+
+
+        // BOTÃO MEDIANA --------------------------------------------------------------------------------------------------------------------------------------------
+        private void ordemBT_Click(object sender, EventArgs e)
+        {
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
+            if (rbA.Checked)
+            {
+                Image image1 = imgA.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Converte a imagem original para escala de cinza
+                Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                        int r = color1.R;
+                        int g = color1.G;
+                        int b = color1.B;
+                        int gray = (r + g + b) / 3;
+
+                        Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                        imagemCinza.SetPixel(x, y, novaCor);
+
+                    }
+                }
+
+
+                // Seleciona o tamanho da vizinhança
+                int tamanhoVizinhanca = 0;
+                if (!rb3.Checked && !rb5.Checked && !rb7.Checked)
+                {
+                    MessageBox.Show("Selecione o tamanho da vizinhança para filtrar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (rb3.Checked)
+                {
+                    tamanhoVizinhanca = 3;
+                    odermBT.Maximum = 8;
+                }
+                if (rb5.Checked)
+                {
+                    tamanhoVizinhanca = 5;
+                    odermBT.Maximum = 17;
+                }
+                if (rb7.Checked)
+                {
+                    tamanhoVizinhanca = 7;
+                    odermBT.Maximum = 35;
+                }
+
+                // Filtra a imagem
+                Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+                for (int x = 0; x < imagemCinza.Width; x++)
+                {
+                    for (int y = 0; y < imagemCinza.Height; y++)
+                    {
+                        int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+                        for (int i = 0; i < tamanhoVizinhanca; i++)
+                        {
+                            for (int j = 0; j < tamanhoVizinhanca; j++)
+                            {
+                                // Trata os casos em que xIndex e yIndex estão fora dos limites da imagem
+                                int xIndex = x + i - tamanhoVizinhanca / 2;
+                                int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                                if (xIndex < 0)
+                                {
+                                    xIndex = 0;
+                                }
+                                if (xIndex >= imagemCinza.Width)
+                                {
+                                    xIndex = imagemCinza.Width - 1;
+                                }
+                                if (yIndex < 0)
+                                {
+                                    yIndex = 0;
+                                }
+                                if (yIndex >= imagemCinza.Height)
+                                {
+                                    yIndex = imagemCinza.Height - 1;
+                                }
+
+                                vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            }
+                        }
+
+                        int ordem = GetOrdem(vizinhanca);
+
+                        imagemFiltrada.SetPixel(x, y, Color.FromArgb(ordem, ordem, ordem));
+                    }
+                }
+
+                imgResultado.Image = imagemFiltrada;
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
+            if (rbB.Checked)
+            {
+                Image image1 = imgB.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+
+                }
+
+                Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                        int r = color1.R;
+                        int g = color1.G;
+                        int b = color1.B;
+                        int gray = (r + g + b) / 3;
+
+                        Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                        imagemCinza.SetPixel(x, y, novaCor);
+
+                    }
+                }
+
+                int tamanhoVizinhanca = 0;
+                if (!rb3.Checked && !rb5.Checked && !rb7.Checked)
+                {
+                    MessageBox.Show("Selecione o tamanho da vizinhança para filtrar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (rb3.Checked)
+                {
+                    tamanhoVizinhanca = 3;
+                    odermBT.Maximum = 8;
+                }
+                if (rb5.Checked)
+                {
+                    tamanhoVizinhanca = 5;
+                    odermBT.Maximum = 17;
+                }
+                if (rb7.Checked)
+                {
+                    tamanhoVizinhanca = 7;
+                    odermBT.Maximum = 35;
+                }
+
+                Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+                for (int x = 0; x < imagemCinza.Width; x++)
+                {
+                    for (int y = 0; y < imagemCinza.Height; y++)
+                    {
+                        int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+                        for (int i = 0; i < tamanhoVizinhanca; i++)
+                        {
+                            for (int j = 0; j < tamanhoVizinhanca; j++)
+                            {
+                                int xIndex = x + i - tamanhoVizinhanca / 2;
+                                int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                                if (xIndex < 0)
+                                {
+                                    xIndex = 0;
+                                }
+                                if (xIndex >= imagemCinza.Width)
+                                {
+                                    xIndex = imagemCinza.Width - 1;
+                                }
+                                if (yIndex < 0)
+                                {
+                                    yIndex = 0;
+                                }
+                                if (yIndex >= imagemCinza.Height)
+                                {
+                                    yIndex = imagemCinza.Height - 1;
+                                }
+
+                                vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            }
+                        }
+
+                        int ordem = GetOrdem(vizinhanca);
+
+                        imagemFiltrada.SetPixel(x, y, Color.FromArgb(ordem, ordem, ordem));
+                    }
+                }
+
+                imgResultado.Image = imagemFiltrada;
+            }
+        }
+
+        // FUNÇÃO PARA CALCULAR A ORDEM DE UMA VIZINHANÇA
+        private int GetOrdem(int[,] matriz)
+        {
+            int tamanho = matriz.GetLength(0) * matriz.GetLength(1);
+            int[] elementos = new int[tamanho];
+
+            int index = 0;
+            for (int i = 0; i < matriz.GetLength(0); i++)
+            {
+                for (int j = 0; j < matriz.GetLength(1); j++)
+                {
+                    elementos[index] = matriz[i, j];
+                    index++;
+                }
+            }
+
+            Array.Sort(elementos);
+
+            int ordem;
+            ordem = elementos[(int)odermBT.Value];
+            return ordem;
+        }
+
+
+
+
+        // BOTÃO MULTIPLICAÇÃO --------------------------------------------------------------------------------------------------------------------------------------------
+        private void buttonmultiplicacaoBT_Click(object sender, EventArgs e)
+        {
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
+            if (rbA.Checked)
+            {
+                // Carrega a imagem A
+                Image image1 = imgA.Image;
+
+                // Pede para abrir uma imagem caso já não esteja aberta
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Obtem o valor do campo numérico para determinar quantas vezes a imagem será multiplicada
+                decimal multiplicacao = multiplicacaoTB.Value;
+
+                // Verifica se há um valor na caixa de texto
+                if (multiplicacao == 0)
+                {
+                    MessageBox.Show("Digite um valor na caixa de texto.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+                // Itera os pixels da imagem
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        //Multiplica o RGB de cada pixel conforme o valor digitado e trunca os valores
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                        int r = (int)Math.Max(0, Math.Min(255, Math.Round(color1.R * multiplicacao)));
+                        int g = (int)Math.Max(0, Math.Min(255, Math.Round(color1.G * multiplicacao)));
+                        int b = (int)Math.Max(0, Math.Min(255, Math.Round(color1.B * multiplicacao)));
+
+                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
+                }
+
+                imgResultado.Image = imagemResultado;
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
+            if (rbB.Checked)
+            {
+                // Carrega a imagem B
+                Image image1 = imgB.Image;
+
+                // Pede para abrir uma imagem caso já não esteja aberta
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Obtem o valor do campo numérico para determinar quantas vezes a imagem será multiplicada
+                decimal multiplicacao = multiplicacaoTB.Value;
+
+                // Verifica se há um valor na caixa de texto
+                if (multiplicacao == 0)
+                {
+                    MessageBox.Show("Digite um valor na caixa de texto.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+                // Itera os pixels da imagem
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        //Multiplica o RGB de cada pixel conforme o valor digitado e trunca os valores
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                        int r = (int)Math.Max(0, Math.Min(255, Math.Round(color1.R * multiplicacao)));
+                        int g = (int)Math.Max(0, Math.Min(255, Math.Round(color1.G * multiplicacao)));
+                        int b = (int)Math.Max(0, Math.Min(255, Math.Round(color1.B * multiplicacao)));
+
+                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
+                }
+
+                imgResultado.Image = imagemResultado;
+            }
+        }
+
+
+
+
+        // BOTÃO DIVISÃO --------------------------------------------------------------------------------------------------------------------------------------------
+        private void divisaoBT_Click(object sender, EventArgs e)
+        {
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
+            if (rbA.Checked)
+            {
+                // Carrega a imagem
+                Image image1 = imgA.Image;
+
+                // Pede para abrir uma imagem caso já não esteja aberta
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Obtem o valor do campo numérico para determinar quantas vezes a imagem será multiplicada
+                decimal divisao = divisaoTB.Value;
+
+                // Verifica se há um valor na caixa de texto
+                if (divisao == 0)
+                {
+                    MessageBox.Show("Digite um valor na caixa de texto.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+                // Itera os pixels da imagem
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        //Divide o RGB de cada pixel conforme o valor digitado e trunca os valores
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                        int r = (int)Math.Max(0, Math.Min(255, Math.Round(color1.R / divisao + color1.R / divisao)));
+                        int g = (int)Math.Max(0, Math.Min(255, Math.Round(color1.G / divisao + color1.G / divisao)));
+                        int b = (int)Math.Max(0, Math.Min(255, Math.Round(color1.B / divisao + color1.B / divisao)));
+
+                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
+                }
+
+                imgResultado.Image = imagemResultado;
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
+            if (rbB.Checked)
+            {
+                // Carrega a imagem
+                Image image1 = imgB.Image;
+
+                // Pede para abrir uma imagem caso já não esteja aberta
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Obtem o valor do campo numérico para determinar quantas vezes a imagem será multiplicada
+                decimal divisao = divisaoTB.Value;
+
+                // Verifica se há um valor na caixa de texto
+                if (divisao == 0)
+                {
+                    MessageBox.Show("Digite um valor na caixa de texto.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Bitmap imagemResultado = new Bitmap(image1.Width, image1.Height);
+
+                // Itera os pixels da imagem
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        //Divide o RGB de cada pixel conforme o valor digitado e trunca os valores
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                        int r = (int)Math.Max(0, Math.Min(255, Math.Round(color1.R / divisao + color1.R / divisao)));
+                        int g = (int)Math.Max(0, Math.Min(255, Math.Round(color1.G / divisao + color1.G / divisao)));
+                        int b = (int)Math.Max(0, Math.Min(255, Math.Round(color1.B / divisao + color1.B / divisao)));
+
+                        imagemResultado.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
+                }
+                imgResultado.Image = imagemResultado;
+            }
+        }
+
+
+
     }
 }
+
 
 
 
