@@ -34,7 +34,8 @@ namespace Trabalho
             heightInicialTB.ResetText();
             widthFinalTB.ResetText();
             heightFinalTB.ResetText();
-            odermBT.ResetText();
+            ordemTB.ResetText();
+            gaussianaNTB.ResetText();
         }
 
 
@@ -43,14 +44,12 @@ namespace Trabalho
         // Permite apenas números até 255 na adInputTB
         private void adInputTB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permite apenas números e a tecla Backspace
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
             else if (!char.IsControl(e.KeyChar))
             {
-
                 int newValue = Convert.ToInt32(adInputTB.Text + e.KeyChar);
                 if (newValue > 255)
                 {
@@ -64,19 +63,17 @@ namespace Trabalho
         // Permite apenas números até 255 na subInputTB
         private void subInputTB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permite apenas números e a tecla Backspace (código ASCII 8)
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                e.Handled = true; // Ignora o caractere digitado
+                e.Handled = true;
             }
             else if (!char.IsControl(e.KeyChar))
             {
-                // Se o usuário digitar um número e o valor exceder 255, define o valor como 255
                 int newValue = Convert.ToInt32(subInputTB.Text + e.KeyChar);
                 if (newValue > 255)
                 {
                     subInputTB.Text = "255";
-                    e.Handled = true; // Indica que o evento foi manipulado
+                    e.Handled = true;
                 }
             }
         }
@@ -85,19 +82,19 @@ namespace Trabalho
         // Permite apenas números até 255 na multiplicacaoTB
         private void multiplicacaoTB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permite apenas números e a tecla Backspace (código ASCII 8)
+
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                e.Handled = true; // Ignora o caractere digitado
+                e.Handled = true;
             }
             else if (!char.IsControl(e.KeyChar))
             {
-                // Se o usuário digitar um número e o valor exceder 255, define o valor como 255
+
                 int newValue = Convert.ToInt32(multiplicacaoTB.Text + e.KeyChar);
                 if (newValue > 255)
                 {
                     multiplicacaoTB.Text = "255";
-                    e.Handled = true; // Indica que o evento foi manipulado
+                    e.Handled = true;
                 }
             }
         }
@@ -106,19 +103,19 @@ namespace Trabalho
         // Permite apenas números até 255 na divisaoTB
         private void divisaoTB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permite apenas números e a tecla Backspace (código ASCII 8)
+
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                e.Handled = true; // Ignora o caractere digitado
+                e.Handled = true;
             }
             else if (!char.IsControl(e.KeyChar))
             {
-                // Se o usuário digitar um número e o valor exceder 255, define o valor como 255
+
                 int newValue = Convert.ToInt32(divisaoTB.Text + e.KeyChar);
                 if (newValue > 255)
                 {
                     divisaoTB.Text = "255";
-                    e.Handled = true; // Indica que o evento foi manipulado
+                    e.Handled = true;
                 }
             }
         }
@@ -127,32 +124,71 @@ namespace Trabalho
         // Permite apenas números até 255 na RGBbinTB
         private void RGBbinTB_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Permite apenas números e a tecla Backspace (código ASCII 8)
+
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                e.Handled = true; // Ignora o caractere digitado
+                e.Handled = true;
             }
             else if (!char.IsControl(e.KeyChar))
             {
-                // Se o usuário digitar um número e o valor exceder 255, define o valor como 255
+                
                 int newValue = Convert.ToInt32(RGBbinTB.Text + e.KeyChar);
                 if (newValue > 255)
                 {
                     RGBbinTB.Text = "255";
-                    e.Handled = true; // Indica que o evento foi manipulado
+                    e.Handled = true;
                 }
             }
 
         }
 
 
-        // Não permite o que o mouse seja tranformado em cursor de texto ao passar por cima do Blending NTB
+        // Permite apenas números até 10 na gaussianaNTB
+        private void gaussianaNTB_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+            else if (!char.IsControl(e.KeyChar))
+            {
+
+                int newValue = Convert.ToInt32(gaussianaNTB.Text + e.KeyChar);
+                if (newValue > 10)
+                {
+                    gaussianaNTB.Text = "10";
+                    e.Handled = true;
+                }
+            }
+        }
+
+
+        // Não permite o que o mouse seja tranformado em cursor de texto ao passar por cima dos NumericUpDown
         private void blendingNTBNumericUpDown_Enter(object sender, EventArgs e)
         {
             this.ActiveControl = null;
             blendingNTBNumericUpDown.Cursor = Cursors.Default;
         }
 
+        private void divisaoTB_Enter(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+            divisaoTB.Cursor = Cursors.Default;
+        }
+
+        private void multiplicacaoTB_Enter(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+            multiplicacaoTB.Cursor = Cursors.Default;
+
+        }
+
+        private void gaussianaNTB_Enter(object sender, EventArgs e)
+        {
+            this.ActiveControl = null;
+            gaussianaNTB.Cursor = Cursors.Default;
+        }
 
 
 
@@ -261,7 +297,6 @@ namespace Trabalho
             // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
             if (rbDuas.Checked)
             {
-                // Carrega as imagens
                 Image image1 = imgA.Image;
                 Image image2 = imgB.Image;
 
@@ -271,6 +306,14 @@ namespace Trabalho
                     MessageBox.Show("Abra duas Imagens.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                // Exibe um aviso caso a adInputTB estiver nula
+                if (string.IsNullOrEmpty(adInputTB.Text))
+                {
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
 
                 // Redimensiona as imagens para o mesmo tamanho, se necessário
                 if (image1.Width != image2.Width || image1.Height != image2.Height)
@@ -293,6 +336,13 @@ namespace Trabalho
                     return;
                 }
 
+                // Exibe um aviso caso a adInputTB estiver nula
+                if (string.IsNullOrEmpty(adInputTB.Text))
+                {
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 AtualizarResultadoImagem(image1);
             }
 
@@ -304,6 +354,13 @@ namespace Trabalho
                 if (image1 == null)
                 {
                     MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Exibe um aviso caso a adInputTB estiver nula
+                if (string.IsNullOrEmpty(adInputTB.Text))
+                {
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -412,6 +469,13 @@ namespace Trabalho
                     return;
                 }
 
+                // Exibe um aviso caso a subInputTB estiver nula
+                if (string.IsNullOrEmpty(subInputTB.Text))
+                {
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // Redimensiona as imagens para o mesmo tamanho, se necessário
                 if (image1.Width != image2.Width || image1.Height != image2.Height)
                 {
@@ -433,9 +497,10 @@ namespace Trabalho
                     return;
                 }
 
+                // Exibe um aviso caso a subInputTB estiver nula
                 if (string.IsNullOrEmpty(subInputTB.Text))
                 {
-                    MessageBox.Show("Adicione um valor no campo de subtração.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -453,9 +518,10 @@ namespace Trabalho
                     return;
                 }
 
+                // Exibe um aviso caso a subInputTB estiver nula
                 if (string.IsNullOrEmpty(subInputTB.Text))
                 {
-                    MessageBox.Show("Adicione um valor no campo de subtração.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -1079,7 +1145,7 @@ namespace Trabalho
             heightInicialTB.ResetText();
             widthFinalTB.ResetText();
             heightFinalTB.ResetText();
-            odermBT.ResetText();
+            ordemTB.ResetText();
 
             rbA.Checked = false;
             rbB.Checked = false;
@@ -1126,6 +1192,12 @@ namespace Trabalho
                     MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
+
+                if (string.IsNullOrEmpty(RGBbinTB.Text))
+                {
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
             }
 
             // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
@@ -1138,13 +1210,12 @@ namespace Trabalho
                     MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-            }
 
-            // Verifica se o usuário digitou um valor na caixa de texto
-            if (string.IsNullOrEmpty(RGBbinTB.Text))
-            {
-                MessageBox.Show("Digite um valor na caixa de texto.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                if (string.IsNullOrEmpty(RGBbinTB.Text))
+                {
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
             }
 
             // Converte o valor digitado para um número inteiro
@@ -1573,9 +1644,13 @@ namespace Trabalho
                 // Limpa a NumericTextBox
                 blendingNTBNumericUpDown.Text = "";
 
-                // Exibe um aviso sobre o valor inválido
-                MessageBox.Show("Insira um valor válido (0,01 a 1,00).", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+
+                // Exibe um aviso caso o blendingNTBNumericUpDown estiver nulo
+                if (string.IsNullOrEmpty(blendingNTBNumericUpDown.Text))
+                {
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
             }
 
             // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
@@ -2639,6 +2714,13 @@ namespace Trabalho
                     return;
                 }
 
+                // Exibe um aviso caso a ordemTB estiver nula
+                if (string.IsNullOrEmpty(ordemTB.Text))
+                {
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 // Converte a imagem original para escala de cinza
                 Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
 
@@ -2669,17 +2751,17 @@ namespace Trabalho
                 if (rb3.Checked)
                 {
                     tamanhoVizinhanca = 3;
-                    odermBT.Maximum = 8;
+                    ordemTB.Maximum = 8;
                 }
                 if (rb5.Checked)
                 {
                     tamanhoVizinhanca = 5;
-                    odermBT.Maximum = 17;
+                    ordemTB.Maximum = 17;
                 }
                 if (rb7.Checked)
                 {
                     tamanhoVizinhanca = 7;
-                    odermBT.Maximum = 35;
+                    ordemTB.Maximum = 35;
                 }
 
                 // Filtra a imagem
@@ -2740,6 +2822,13 @@ namespace Trabalho
 
                 }
 
+                // Exibe um aviso caso a ordemTB estiver nula
+                if (string.IsNullOrEmpty(ordemTB.Text))
+                {
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
                 Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
 
                 for (int x = 0; x < image1.Width; x++)
@@ -2767,17 +2856,17 @@ namespace Trabalho
                 if (rb3.Checked)
                 {
                     tamanhoVizinhanca = 3;
-                    odermBT.Maximum = 8;
+                    ordemTB.Maximum = 8;
                 }
                 if (rb5.Checked)
                 {
                     tamanhoVizinhanca = 5;
-                    odermBT.Maximum = 17;
+                    ordemTB.Maximum = 17;
                 }
                 if (rb7.Checked)
                 {
                     tamanhoVizinhanca = 7;
-                    odermBT.Maximum = 35;
+                    ordemTB.Maximum = 35;
                 }
 
                 Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
@@ -2844,7 +2933,7 @@ namespace Trabalho
             Array.Sort(elementos);
 
             int ordem;
-            ordem = elementos[(int)odermBT.Value];
+            ordem = elementos[(int)ordemTB.Value];
             return ordem;
         }
 
@@ -2872,23 +2961,20 @@ namespace Trabalho
             // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
             if (rbA.Checked)
             {
-                // Carrega a imagem A
                 Image image1 = imgA.Image;
 
-                // Pede para abrir uma imagem caso já não esteja aberta
                 if (image1 == null)
                 {
                     MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Obtem o valor do campo numérico para determinar quantas vezes a imagem será multiplicada
                 decimal multiplicacao = multiplicacaoTB.Value;
 
-                // Verifica se há um valor na caixa de texto
-                if (multiplicacao == 0)
+                // Exibe um aviso caso a multiplicacaoTB estiver nula
+                if (string.IsNullOrEmpty(multiplicacaoTB.Text))
                 {
-                    MessageBox.Show("Digite um valor na caixa de texto.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -2915,10 +3001,8 @@ namespace Trabalho
             // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
             if (rbB.Checked)
             {
-                // Carrega a imagem B
                 Image image1 = imgB.Image;
 
-                // Pede para abrir uma imagem caso já não esteja aberta
                 if (image1 == null)
                 {
                     MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -2928,10 +3012,10 @@ namespace Trabalho
                 // Obtem o valor do campo numérico para determinar quantas vezes a imagem será multiplicada
                 decimal multiplicacao = multiplicacaoTB.Value;
 
-                // Verifica se há um valor na caixa de texto
-                if (multiplicacao == 0)
+                // Exibe um aviso caso a multiplicacaoTB estiver nula
+                if (string.IsNullOrEmpty(multiplicacaoTB.Text))
                 {
-                    MessageBox.Show("Digite um valor na caixa de texto.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -2979,23 +3063,21 @@ namespace Trabalho
             // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
             if (rbA.Checked)
             {
-                // Carrega a imagem
                 Image image1 = imgA.Image;
 
-                // Pede para abrir uma imagem caso já não esteja aberta
                 if (image1 == null)
                 {
                     MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                // Obtem o valor do campo numérico para determinar quantas vezes a imagem será multiplicada
+                // Obtem o valor do campo numérico para determinar quantas vezes a imagem será dividida
                 decimal divisao = divisaoTB.Value;
 
-                // Verifica se há um valor na caixa de texto
-                if (divisao == 0)
+                // Exibe um aviso caso a divisaoTB estiver nula
+                if (string.IsNullOrEmpty(divisaoTB.Text))
                 {
-                    MessageBox.Show("Digite um valor na caixa de texto.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -3022,7 +3104,6 @@ namespace Trabalho
             // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
             if (rbB.Checked)
             {
-                // Carrega a imagem
                 Image image1 = imgB.Image;
 
                 // Pede para abrir uma imagem caso já não esteja aberta
@@ -3035,10 +3116,10 @@ namespace Trabalho
                 // Obtem o valor do campo numérico para determinar quantas vezes a imagem será multiplicada
                 decimal divisao = divisaoTB.Value;
 
-                // Verifica se há um valor na caixa de texto
-                if (divisao == 0)
+                // Exibe um aviso caso a divisaoTB estiver nula
+                if (string.IsNullOrEmpty(divisaoTB.Text))
                 {
-                    MessageBox.Show("Digite um valor na caixa de texto.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
@@ -3060,6 +3141,317 @@ namespace Trabalho
                 }
                 imgResultado.Image = imagemResultado;
             }
+        }
+
+
+
+
+        // FILTRAGEM GAUSSIANA --------------------------------------------------------------------------------------------------------------------------------------------
+        private void gaussianoBT_Click(object sender, EventArgs e)
+        {
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
+            if (rbA.Checked)
+            {
+                Image image1 = imgA.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Exibe um aviso caso a gaussianaNTB estiver nula
+                if (string.IsNullOrEmpty(gaussianaNTB.Text))
+                {
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Exibe um aviso caso o valor da gaussianaNTB for igual 0
+                if (string.IsNullOrWhiteSpace(gaussianaNTB.Text) || !double.TryParse(gaussianaNTB.Text, out double sigma) || sigma == 0)
+                {
+                    MessageBox.Show("Insira um valor válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                mostrarKernel(sigma);
+
+                Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+                // Converte a imagem original para escala de cinza
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+
+                        int r = color1.R;
+                        int g = color1.G;
+                        int b = color1.B;
+
+                        int gray = (r + g + b) / 3;
+                        Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                        imagemCinza.SetPixel(x, y, novaCor);
+                    }
+                }
+
+                // Tamanho da vizinhança = 5
+                int tamanhoVizinhanca = 5;
+
+                Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+                // Itera sobre cada pixel da imagem em tons de cinza
+                for (int x = 0; x < imagemCinza.Width; x++)
+                {
+                    for (int y = 0; y < imagemCinza.Height; y++)
+                    {
+                        // Define uma matriz para armazenar a vizinhança atual
+                        int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+                        for (int i = 0; i < tamanhoVizinhanca; i++)
+                        {
+                            for (int j = 0; j < tamanhoVizinhanca; j++)
+                            {
+                                // Trata os casos em que xIndex e yIndex estão fora dos limites da imagem
+                                int xIndex = x + i - tamanhoVizinhanca / 2;
+                                int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                                if (xIndex < 0)
+                                {
+                                    xIndex = 0;
+                                }
+                                if (xIndex >= imagemCinza.Width)
+                                {
+                                    xIndex = imagemCinza.Width - 1;
+                                }
+                                if (yIndex < 0)
+                                {
+                                    yIndex = 0;
+                                }
+                                if (yIndex >= imagemCinza.Height)
+                                {
+                                    yIndex = imagemCinza.Height - 1;
+                                }
+
+                                vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            }
+                        }
+
+                        // Aplica o filtro Gaussiano
+                        double gaussian = GetGaussian(vizinhanca, sigma);
+
+                        int pixelNovo = (int)Math.Round(gaussian);
+                        if (pixelNovo < 0) pixelNovo = 0;
+                        else if (pixelNovo > 255) pixelNovo = 255;
+ 
+                        Color imagemNova = Color.FromArgb(pixelNovo, pixelNovo, pixelNovo);
+                        imagemFiltrada.SetPixel(x, y, imagemNova);
+                    }
+                }
+
+                imgResultado.Image = imagemFiltrada;
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
+            if (rbB.Checked)
+            {
+                // Carrega a imagem
+                Image image1 = imgB.Image;
+
+                // Pede para abrir uma imagem caso já não esteja aberta
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Exibe um aviso caso a ordemTB estiver nula
+                if (string.IsNullOrEmpty(gaussianaNTB.Text))
+                {
+                    MessageBox.Show("Insira um valor para realizar a operação.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Exibe um aviso caso o valor da gaussianaNTB for igual 0
+                if (string.IsNullOrWhiteSpace(gaussianaNTB.Text) || !double.TryParse(gaussianaNTB.Text, out double sigma) || sigma == 0)
+                {
+                    MessageBox.Show("Insira um valor válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                mostrarKernel(sigma);
+
+                Bitmap imagemCinza = new Bitmap(image1.Width, image1.Height);
+
+                // Converte a imagem original para escala de cinza
+                for (int x = 0; x < image1.Width; x++)
+                {
+                    for (int y = 0; y < image1.Height; y++)
+                    {
+                        Color color1 = ((Bitmap)image1).GetPixel(x, y);
+                        int r = color1.R;
+                        int g = color1.G;
+                        int b = color1.B;
+                        int gray = (r + g + b) / 3;
+
+                        Color novaCor = Color.FromArgb(color1.A, gray, gray, gray);
+                        imagemCinza.SetPixel(x, y, novaCor);
+                    }
+                }
+
+                // Tamanho da vizinhança = 5
+                int tamanhoVizinhanca = 5;
+
+                Bitmap imagemFiltrada = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+                // Itera sobre cada pixel da imagem em tons de cinza
+                for (int x = 0; x < imagemCinza.Width; x++)
+                {
+                    for (int y = 0; y < imagemCinza.Height; y++)
+                    {
+                        // Define uma matriz para armazenar a vizinhança atual
+                        int[,] vizinhanca = new int[tamanhoVizinhanca, tamanhoVizinhanca];
+                        for (int i = 0; i < tamanhoVizinhanca; i++)
+                        {
+                            for (int j = 0; j < tamanhoVizinhanca; j++)
+                            {
+                                int xIndex = x + i - tamanhoVizinhanca / 2;
+                                int yIndex = y + j - tamanhoVizinhanca / 2;
+
+                                if (xIndex < 0)
+                                {
+                                    xIndex = 0;
+                                }
+                                if (xIndex >= imagemCinza.Width)
+                                {
+                                    xIndex = imagemCinza.Width - 1;
+                                }
+                                if (yIndex < 0)
+                                {
+                                    yIndex = 0;
+                                }
+                                if (yIndex >= imagemCinza.Height)
+                                {
+                                    yIndex = imagemCinza.Height - 1;
+                                }
+
+                                vizinhanca[i, j] = imagemCinza.GetPixel(xIndex, yIndex).R;
+                            }
+                        }
+
+                        // Aplica o filtro Gaussiano
+                        double gaussian = GetGaussian(vizinhanca, sigma);
+
+                        int pixelNovo = (int)Math.Round(gaussian);
+                        if (pixelNovo < 0) pixelNovo = 0;
+                        else if (pixelNovo > 255) pixelNovo = 255;
+
+                        Color imagemNova = Color.FromArgb(pixelNovo, pixelNovo, pixelNovo);
+                        imagemFiltrada.SetPixel(x, y, imagemNova);
+                    }
+                }
+
+                imgResultado.Image = imagemFiltrada;
+            }
+        }
+
+        // FUNÇÃO PARA CALCULAR O FILTRO GAUSSIANO
+        private double GetGaussian(int[,] vizi, double sigma)
+        {
+            double soma = 0;
+
+            int size = vizi.GetLength(0);
+
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    int valorPixel = vizi[i, j];
+                    double exponente = -(i * i + j * j) / (2 * sigma * sigma);
+                    double peso = Math.Exp(exponente) / (2 * Math.PI * sigma * sigma);
+                    soma += valorPixel * peso;
+                }
+            }
+
+            return soma;
+        }
+
+        // Gera os valores do Kernel
+        private double[,] gerarKernel(int size, double sigma)
+        {
+            double[,] kernel = new double[size, size];
+            double sum = 0;
+            int mid = size / 2;
+            double sigma2 = sigma * sigma;
+
+            for (int x = 0; x < size; x++)
+            {
+                for (int y = 0; y < size; y++)
+                {
+                    double dx = x - mid;
+                    double dy = y - mid;
+                    double exponent = -(dx * dx + dy * dy) / (2 * sigma2);
+                    kernel[x, y] = Math.Exp(exponent) / (2 * Math.PI * sigma2);
+                    sum += kernel[x, y];
+                }
+            }
+
+            // Normaliza o Kernel
+            for (int x = 0; x < size; x++)
+            {
+                for (int y = 0; y < size; y++)
+                {
+                    kernel[x, y] /= sum;
+                }
+            }
+
+            return kernel;
+        }
+
+        // Converte o Kernel em bit map
+        private Bitmap converterKernel(double[,] kernel)
+        {
+            int size = kernel.GetLength(0);
+            Bitmap bitmap = new Bitmap(size, size);
+
+            double max = kernel.Cast<double>().Max();
+            double min = kernel.Cast<double>().Min();
+            double range = max - min;
+
+            for (int x = 0; x < size; x++)
+            {
+                for (int y = 0; y < size; y++)
+                {
+                    int value = (int)((kernel[x, y] - min) / range * 255);
+                    Color color = Color.FromArgb(value, value, value);
+                    bitmap.SetPixel(x, y, color);
+                }
+            }
+
+            return bitmap;
+        }
+
+        // Função para mostrar o Kernel
+        private void mostrarKernel(double sigma)
+        {
+            int size = 5;
+            double[,] kernel = gerarKernel(size, sigma);
+            Bitmap bitmap = converterKernel(kernel);
+
+            kernelPictureBox.Image = bitmap;
         }
 
 
