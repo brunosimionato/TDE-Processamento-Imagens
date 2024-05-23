@@ -84,20 +84,25 @@
             this.rb5 = new System.Windows.Forms.RadioButton();
             this.rb3 = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.odermBT = new System.Windows.Forms.NumericUpDown();
+            this.ordemTB = new System.Windows.Forms.NumericUpDown();
             this.ordemBT = new System.Windows.Forms.Button();
             this.medianaBT = new System.Windows.Forms.Button();
-            this.buttonmultiplicacaoBT = new System.Windows.Forms.Button();
+            this.multiplicacaoBT = new System.Windows.Forms.Button();
             this.multiplicacaoTB = new System.Windows.Forms.NumericUpDown();
             this.divisaoBT = new System.Windows.Forms.Button();
             this.divisaoTB = new System.Windows.Forms.NumericUpDown();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.blendingNTBNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.blendingNTBNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.gaussianoBT = new System.Windows.Forms.Button();
+            this.kernelPictureBox = new System.Windows.Forms.PictureBox();
+            this.gaussianaNTB = new System.Windows.Forms.NumericUpDown();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.imgA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgResultado)).BeginInit();
@@ -115,20 +120,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.RGBbinTB)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.odermBT)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ordemTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.multiplicacaoTB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.divisaoTB)).BeginInit();
             this.groupBox4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.blendingNTBNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.groupBox5.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.blendingNTBNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kernelPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gaussianaNTB)).BeginInit();
+            this.groupBox7.SuspendLayout();
             this.SuspendLayout();
             // 
             // imgA
             // 
+            this.imgA.BackColor = System.Drawing.SystemColors.Window;
             this.imgA.Location = new System.Drawing.Point(13, 22);
             this.imgA.Margin = new System.Windows.Forms.Padding(2);
             this.imgA.Name = "imgA";
@@ -139,6 +148,7 @@
             // 
             // imgB
             // 
+            this.imgB.BackColor = System.Drawing.SystemColors.Window;
             this.imgB.Location = new System.Drawing.Point(13, 22);
             this.imgB.Margin = new System.Windows.Forms.Padding(2);
             this.imgB.Name = "imgB";
@@ -160,6 +170,7 @@
             // 
             // imgResultado
             // 
+            this.imgResultado.BackColor = System.Drawing.SystemColors.Window;
             this.imgResultado.Location = new System.Drawing.Point(14, 24);
             this.imgResultado.Margin = new System.Windows.Forms.Padding(2);
             this.imgResultado.Name = "imgResultado";
@@ -298,7 +309,7 @@
             // 
             // somaBT
             // 
-            this.somaBT.Location = new System.Drawing.Point(12, 28);
+            this.somaBT.Location = new System.Drawing.Point(11, 26);
             this.somaBT.Margin = new System.Windows.Forms.Padding(2);
             this.somaBT.Name = "somaBT";
             this.somaBT.Size = new System.Drawing.Size(97, 35);
@@ -562,10 +573,10 @@
             // 
             // xorBT
             // 
-            this.xorBT.Location = new System.Drawing.Point(12, 166);
+            this.xorBT.Location = new System.Drawing.Point(15, 166);
             this.xorBT.Margin = new System.Windows.Forms.Padding(2);
             this.xorBT.Name = "xorBT";
-            this.xorBT.Size = new System.Drawing.Size(109, 35);
+            this.xorBT.Size = new System.Drawing.Size(106, 35);
             this.xorBT.TabIndex = 40;
             this.xorBT.Text = "XOR";
             this.xorBT.UseVisualStyleBackColor = true;
@@ -674,7 +685,7 @@
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.odermBT);
+            this.groupBox3.Controls.Add(this.ordemTB);
             this.groupBox3.Controls.Add(this.ordemBT);
             this.groupBox3.Controls.Add(this.medianaBT);
             this.groupBox3.Controls.Add(this.rb7);
@@ -690,12 +701,12 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Vizinhança";
             // 
-            // odermBT
+            // ordemTB
             // 
-            this.odermBT.Location = new System.Drawing.Point(125, 146);
-            this.odermBT.Name = "odermBT";
-            this.odermBT.Size = new System.Drawing.Size(106, 20);
-            this.odermBT.TabIndex = 51;
+            this.ordemTB.Location = new System.Drawing.Point(125, 146);
+            this.ordemTB.Name = "ordemTB";
+            this.ordemTB.Size = new System.Drawing.Size(106, 20);
+            this.ordemTB.TabIndex = 51;
             // 
             // ordemBT
             // 
@@ -719,28 +730,47 @@
             this.medianaBT.UseVisualStyleBackColor = true;
             this.medianaBT.Click += new System.EventHandler(this.medianaBT_Click);
             // 
-            // buttonmultiplicacaoBT
+            // multiplicacaoBT
             // 
-            this.buttonmultiplicacaoBT.Location = new System.Drawing.Point(7, 105);
-            this.buttonmultiplicacaoBT.Margin = new System.Windows.Forms.Padding(2);
-            this.buttonmultiplicacaoBT.Name = "buttonmultiplicacaoBT";
-            this.buttonmultiplicacaoBT.Size = new System.Drawing.Size(97, 35);
-            this.buttonmultiplicacaoBT.TabIndex = 51;
-            this.buttonmultiplicacaoBT.Text = "Multiplicação";
-            this.buttonmultiplicacaoBT.UseVisualStyleBackColor = true;
-            this.buttonmultiplicacaoBT.Click += new System.EventHandler(this.buttonmultiplicacaoBT_Click);
+            this.multiplicacaoBT.Location = new System.Drawing.Point(7, 105);
+            this.multiplicacaoBT.Margin = new System.Windows.Forms.Padding(2);
+            this.multiplicacaoBT.Name = "multiplicacaoBT";
+            this.multiplicacaoBT.Size = new System.Drawing.Size(97, 35);
+            this.multiplicacaoBT.TabIndex = 51;
+            this.multiplicacaoBT.Text = "Multiplicação";
+            this.multiplicacaoBT.UseVisualStyleBackColor = true;
+            this.multiplicacaoBT.Click += new System.EventHandler(this.buttonmultiplicacaoBT_Click);
             // 
             // multiplicacaoTB
             // 
+            this.multiplicacaoTB.BackColor = System.Drawing.SystemColors.Window;
+            this.multiplicacaoTB.DecimalPlaces = 2;
+            this.multiplicacaoTB.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.multiplicacaoTB.Location = new System.Drawing.Point(11, 145);
             this.multiplicacaoTB.Maximum = new decimal(new int[] {
-            255,
+            2,
+            0,
+            0,
+            0});
+            this.multiplicacaoTB.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
             this.multiplicacaoTB.Name = "multiplicacaoTB";
+            this.multiplicacaoTB.ReadOnly = true;
             this.multiplicacaoTB.Size = new System.Drawing.Size(97, 20);
             this.multiplicacaoTB.TabIndex = 52;
+            this.multiplicacaoTB.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.multiplicacaoTB.Enter += new System.EventHandler(this.multiplicacaoTB_Enter);
             this.multiplicacaoTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.multiplicacaoTB_KeyPress);
             // 
             // divisaoBT
@@ -756,15 +786,34 @@
             // 
             // divisaoTB
             // 
+            this.divisaoTB.BackColor = System.Drawing.SystemColors.Window;
+            this.divisaoTB.DecimalPlaces = 2;
+            this.divisaoTB.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.divisaoTB.Location = new System.Drawing.Point(119, 145);
             this.divisaoTB.Maximum = new decimal(new int[] {
-            255,
+            2,
+            0,
+            0,
+            0});
+            this.divisaoTB.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
             this.divisaoTB.Name = "divisaoTB";
+            this.divisaoTB.ReadOnly = true;
             this.divisaoTB.Size = new System.Drawing.Size(97, 20);
             this.divisaoTB.TabIndex = 54;
+            this.divisaoTB.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.divisaoTB.Enter += new System.EventHandler(this.divisaoTB_Enter);
             this.divisaoTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.divisaoTB_KeyPress);
             // 
             // groupBox4
@@ -773,7 +822,7 @@
             this.groupBox4.Controls.Add(this.divisaoTB);
             this.groupBox4.Controls.Add(this.divisaoBT);
             this.groupBox4.Controls.Add(this.multiplicacaoTB);
-            this.groupBox4.Controls.Add(this.buttonmultiplicacaoBT);
+            this.groupBox4.Controls.Add(this.multiplicacaoBT);
             this.groupBox4.Controls.Add(this.blendingBT);
             this.groupBox4.Controls.Add(this.RGBbinTB);
             this.groupBox4.Controls.Add(this.RGBbinBT);
@@ -787,6 +836,27 @@
             this.groupBox4.TabIndex = 55;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Operações Aritméticas";
+            // 
+            // blendingNTBNumericUpDown
+            // 
+            this.blendingNTBNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
+            this.blendingNTBNumericUpDown.DecimalPlaces = 2;
+            this.blendingNTBNumericUpDown.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.blendingNTBNumericUpDown.Location = new System.Drawing.Point(227, 145);
+            this.blendingNTBNumericUpDown.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.blendingNTBNumericUpDown.Name = "blendingNTBNumericUpDown";
+            this.blendingNTBNumericUpDown.ReadOnly = true;
+            this.blendingNTBNumericUpDown.Size = new System.Drawing.Size(96, 20);
+            this.blendingNTBNumericUpDown.TabIndex = 57;
+            this.blendingNTBNumericUpDown.Enter += new System.EventHandler(this.blendingNTBNumericUpDown_Enter);
             // 
             // chart1
             // 
@@ -861,33 +931,89 @@
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Histograma Antes";
             // 
-            // blendingNTBNumericUpDown
+            // gaussianoBT
             // 
-            this.blendingNTBNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
-            this.blendingNTBNumericUpDown.DecimalPlaces = 2;
-            this.blendingNTBNumericUpDown.Increment = new decimal(new int[] {
+            this.gaussianoBT.Location = new System.Drawing.Point(13, 93);
+            this.gaussianoBT.Margin = new System.Windows.Forms.Padding(2);
+            this.gaussianoBT.Name = "gaussianoBT";
+            this.gaussianoBT.Size = new System.Drawing.Size(109, 35);
+            this.gaussianoBT.TabIndex = 42;
+            this.gaussianoBT.Text = "Guassiano";
+            this.gaussianoBT.UseVisualStyleBackColor = true;
+            this.gaussianoBT.Click += new System.EventHandler(this.gaussianoBT_Click);
+            // 
+            // kernelPictureBox
+            // 
+            this.kernelPictureBox.BackColor = System.Drawing.SystemColors.Window;
+            this.kernelPictureBox.Location = new System.Drawing.Point(139, 18);
+            this.kernelPictureBox.Margin = new System.Windows.Forms.Padding(2);
+            this.kernelPictureBox.Name = "kernelPictureBox";
+            this.kernelPictureBox.Size = new System.Drawing.Size(106, 110);
+            this.kernelPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.kernelPictureBox.TabIndex = 5;
+            this.kernelPictureBox.TabStop = false;
+            // 
+            // gaussianaNTB
+            // 
+            this.gaussianaNTB.BackColor = System.Drawing.SystemColors.Window;
+            this.gaussianaNTB.DecimalPlaces = 2;
+            this.gaussianaNTB.Increment = new decimal(new int[] {
             1,
             0,
             0,
             131072});
-            this.blendingNTBNumericUpDown.Location = new System.Drawing.Point(227, 145);
-            this.blendingNTBNumericUpDown.Maximum = new decimal(new int[] {
+            this.gaussianaNTB.Location = new System.Drawing.Point(13, 64);
+            this.gaussianaNTB.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.gaussianaNTB.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.blendingNTBNumericUpDown.Name = "blendingNTBNumericUpDown";
-            this.blendingNTBNumericUpDown.ReadOnly = true;
-            this.blendingNTBNumericUpDown.Size = new System.Drawing.Size(96, 20);
-            this.blendingNTBNumericUpDown.TabIndex = 57;
-            this.blendingNTBNumericUpDown.Enter += new System.EventHandler(this.blendingNTBNumericUpDown_Enter);
+            this.gaussianaNTB.Name = "gaussianaNTB";
+            this.gaussianaNTB.ReadOnly = true;
+            this.gaussianaNTB.Size = new System.Drawing.Size(109, 20);
+            this.gaussianaNTB.TabIndex = 52;
+            this.gaussianaNTB.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.gaussianaNTB.Enter += new System.EventHandler(this.gaussianaNTB_Enter);
+            this.gaussianaNTB.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.gaussianaNTB_KeyPress);
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.label5);
+            this.groupBox7.Controls.Add(this.kernelPictureBox);
+            this.groupBox7.Controls.Add(this.gaussianaNTB);
+            this.groupBox7.Controls.Add(this.gaussianoBT);
+            this.groupBox7.Location = new System.Drawing.Point(21, 670);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(257, 142);
+            this.groupBox7.TabIndex = 57;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Filtragem Gaussiana";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(10, 48);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(115, 13);
+            this.label5.TabIndex = 53;
+            this.label5.Text = "Desvio Padrão (Sigma)";
             // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1482, 839);
+            this.ClientSize = new System.Drawing.Size(1478, 868);
+            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox5);
@@ -926,16 +1052,20 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.odermBT)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ordemTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.multiplicacaoTB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.divisaoTB)).EndInit();
             this.groupBox4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.blendingNTBNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.groupBox5.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.blendingNTBNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.kernelPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gaussianaNTB)).EndInit();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -992,9 +1122,9 @@
         private System.Windows.Forms.RadioButton rb3;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button medianaBT;
-        private System.Windows.Forms.NumericUpDown odermBT;
+        private System.Windows.Forms.NumericUpDown ordemTB;
         private System.Windows.Forms.Button ordemBT;
-        private System.Windows.Forms.Button buttonmultiplicacaoBT;
+        private System.Windows.Forms.Button multiplicacaoBT;
         private System.Windows.Forms.NumericUpDown multiplicacaoTB;
         private System.Windows.Forms.Button divisaoBT;
         private System.Windows.Forms.NumericUpDown divisaoTB;
@@ -1005,6 +1135,11 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.NumericUpDown blendingNTBNumericUpDown;
+        private System.Windows.Forms.Button gaussianoBT;
+        private System.Windows.Forms.PictureBox kernelPictureBox;
+        private System.Windows.Forms.NumericUpDown gaussianaNTB;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label label5;
     }
 }
 
