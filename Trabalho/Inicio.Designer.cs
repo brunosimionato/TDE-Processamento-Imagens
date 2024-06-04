@@ -84,9 +84,10 @@
             this.rb5 = new System.Windows.Forms.RadioButton();
             this.rb3 = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.medianaBT = new System.Windows.Forms.Button();
             this.ordemTB = new System.Windows.Forms.NumericUpDown();
             this.ordemBT = new System.Windows.Forms.Button();
-            this.medianaBT = new System.Windows.Forms.Button();
             this.multiplicacaoBT = new System.Windows.Forms.Button();
             this.multiplicacaoTB = new System.Windows.Forms.NumericUpDown();
             this.divisaoBT = new System.Windows.Forms.Button();
@@ -103,6 +104,16 @@
             this.gaussianaNTB = new System.Windows.Forms.NumericUpDown();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.prewittBT = new System.Windows.Forms.Button();
+            this.sobelBT = new System.Windows.Forms.Button();
+            this.laplacianoBT = new System.Windows.Forms.Button();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.ersosaoBT = new System.Windows.Forms.Button();
+            this.fechamentoBT = new System.Windows.Forms.Button();
+            this.dilatacaoBT = new System.Windows.Forms.Button();
+            this.aberturaBT = new System.Windows.Forms.Button();
+            this.contornoBT = new System.Windows.Forms.Button();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgResultado)).BeginInit();
@@ -133,6 +144,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.kernelPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gaussianaNTB)).BeginInit();
             this.groupBox7.SuspendLayout();
+            this.groupBox9.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.SuspendLayout();
             // 
             // imgA
@@ -216,7 +229,7 @@
             // 
             this.gpA.Controls.Add(this.btAbrirA);
             this.gpA.Controls.Add(this.imgA);
-            this.gpA.Location = new System.Drawing.Point(21, 28);
+            this.gpA.Location = new System.Drawing.Point(279, 89);
             this.gpA.Margin = new System.Windows.Forms.Padding(2);
             this.gpA.Name = "gpA";
             this.gpA.Padding = new System.Windows.Forms.Padding(2);
@@ -229,7 +242,7 @@
             // 
             this.gpB.Controls.Add(this.btAbrirB);
             this.gpB.Controls.Add(this.imgB);
-            this.gpB.Location = new System.Drawing.Point(373, 28);
+            this.gpB.Location = new System.Drawing.Point(631, 89);
             this.gpB.Margin = new System.Windows.Forms.Padding(2);
             this.gpB.Name = "gpB";
             this.gpB.Padding = new System.Windows.Forms.Padding(2);
@@ -242,7 +255,7 @@
             // 
             this.gpResultado.Controls.Add(this.btSalavar);
             this.gpResultado.Controls.Add(this.imgResultado);
-            this.gpResultado.Location = new System.Drawing.Point(1076, 28);
+            this.gpResultado.Location = new System.Drawing.Point(1334, 89);
             this.gpResultado.Margin = new System.Windows.Forms.Padding(2);
             this.gpResultado.Name = "gpResultado";
             this.gpResultado.Padding = new System.Windows.Forms.Padding(2);
@@ -267,7 +280,7 @@
             this.groupBox8.Controls.Add(this.rbDuas);
             this.groupBox8.Controls.Add(this.rbB);
             this.groupBox8.Controls.Add(this.rbA);
-            this.groupBox8.Location = new System.Drawing.Point(723, 28);
+            this.groupBox8.Location = new System.Drawing.Point(981, 89);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(338, 52);
             this.groupBox8.TabIndex = 15;
@@ -399,10 +412,10 @@
             // 
             // limparBT
             // 
-            this.limparBT.Location = new System.Drawing.Point(610, 734);
+            this.limparBT.Location = new System.Drawing.Point(851, 856);
             this.limparBT.Margin = new System.Windows.Forms.Padding(2);
             this.limparBT.Name = "limparBT";
-            this.limparBT.Size = new System.Drawing.Size(101, 35);
+            this.limparBT.Size = new System.Drawing.Size(104, 35);
             this.limparBT.TabIndex = 23;
             this.limparBT.Text = "Limpar";
             this.limparBT.UseVisualStyleBackColor = true;
@@ -443,7 +456,7 @@
             this.gbCortar.Controls.Add(this.heightInicialTB);
             this.gbCortar.Controls.Add(this.widthInicialTB);
             this.gbCortar.Controls.Add(this.widthFinalTB);
-            this.gbCortar.Location = new System.Drawing.Point(21, 433);
+            this.gbCortar.Location = new System.Drawing.Point(631, 494);
             this.gbCortar.Name = "gbCortar";
             this.gbCortar.Size = new System.Drawing.Size(189, 216);
             this.gbCortar.TabIndex = 26;
@@ -588,7 +601,7 @@
             this.groupBox2.Controls.Add(this.xorBT);
             this.groupBox2.Controls.Add(this.andBT);
             this.groupBox2.Controls.Add(this.orBT);
-            this.groupBox2.Location = new System.Drawing.Point(224, 433);
+            this.groupBox2.Location = new System.Drawing.Point(279, 494);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(135, 216);
             this.groupBox2.TabIndex = 41;
@@ -619,10 +632,10 @@
             // 
             // minBT
             // 
-            this.minBT.Location = new System.Drawing.Point(8, 58);
+            this.minBT.Location = new System.Drawing.Point(8, 67);
             this.minBT.Margin = new System.Windows.Forms.Padding(2);
             this.minBT.Name = "minBT";
-            this.minBT.Size = new System.Drawing.Size(106, 35);
+            this.minBT.Size = new System.Drawing.Size(97, 35);
             this.minBT.TabIndex = 44;
             this.minBT.Text = "MÍNIMO";
             this.minBT.UseVisualStyleBackColor = true;
@@ -630,10 +643,10 @@
             // 
             // maxBT
             // 
-            this.maxBT.Location = new System.Drawing.Point(8, 106);
+            this.maxBT.Location = new System.Drawing.Point(8, 113);
             this.maxBT.Margin = new System.Windows.Forms.Padding(2);
             this.maxBT.Name = "maxBT";
-            this.maxBT.Size = new System.Drawing.Size(106, 35);
+            this.maxBT.Size = new System.Drawing.Size(97, 35);
             this.maxBT.TabIndex = 45;
             this.maxBT.Text = "MÁXIMO";
             this.maxBT.UseVisualStyleBackColor = true;
@@ -641,10 +654,10 @@
             // 
             // medBT
             // 
-            this.medBT.Location = new System.Drawing.Point(8, 157);
+            this.medBT.Location = new System.Drawing.Point(118, 113);
             this.medBT.Margin = new System.Windows.Forms.Padding(2);
             this.medBT.Name = "medBT";
-            this.medBT.Size = new System.Drawing.Size(106, 35);
+            this.medBT.Size = new System.Drawing.Size(97, 35);
             this.medBT.TabIndex = 46;
             this.medBT.Text = "MÉDIA";
             this.medBT.UseVisualStyleBackColor = true;
@@ -685,50 +698,60 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.medianaBT);
             this.groupBox3.Controls.Add(this.ordemTB);
             this.groupBox3.Controls.Add(this.ordemBT);
-            this.groupBox3.Controls.Add(this.medianaBT);
             this.groupBox3.Controls.Add(this.rb7);
             this.groupBox3.Controls.Add(this.rb5);
             this.groupBox3.Controls.Add(this.rb3);
             this.groupBox3.Controls.Add(this.medBT);
             this.groupBox3.Controls.Add(this.maxBT);
             this.groupBox3.Controls.Add(this.minBT);
-            this.groupBox3.Location = new System.Drawing.Point(373, 433);
+            this.groupBox3.Location = new System.Drawing.Point(279, 726);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(338, 216);
+            this.groupBox3.Size = new System.Drawing.Size(338, 167);
             this.groupBox3.TabIndex = 50;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Vizinhança";
             // 
-            // ordemTB
+            // label6
             // 
-            this.ordemTB.Location = new System.Drawing.Point(125, 146);
-            this.ordemTB.Name = "ordemTB";
-            this.ordemTB.Size = new System.Drawing.Size(106, 20);
-            this.ordemTB.TabIndex = 51;
-            // 
-            // ordemBT
-            // 
-            this.ordemBT.Location = new System.Drawing.Point(125, 106);
-            this.ordemBT.Margin = new System.Windows.Forms.Padding(2);
-            this.ordemBT.Name = "ordemBT";
-            this.ordemBT.Size = new System.Drawing.Size(106, 35);
-            this.ordemBT.TabIndex = 51;
-            this.ordemBT.Text = "ORDEM";
-            this.ordemBT.UseVisualStyleBackColor = true;
-            this.ordemBT.Click += new System.EventHandler(this.ordemBT_Click);
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(229, 110);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(65, 13);
+            this.label6.TabIndex = 30;
+            this.label6.Text = "Valor Ordem";
             // 
             // medianaBT
             // 
-            this.medianaBT.Location = new System.Drawing.Point(125, 58);
+            this.medianaBT.Location = new System.Drawing.Point(118, 67);
             this.medianaBT.Margin = new System.Windows.Forms.Padding(2);
             this.medianaBT.Name = "medianaBT";
-            this.medianaBT.Size = new System.Drawing.Size(106, 35);
+            this.medianaBT.Size = new System.Drawing.Size(97, 35);
             this.medianaBT.TabIndex = 50;
             this.medianaBT.Text = "MEDIANA";
             this.medianaBT.UseVisualStyleBackColor = true;
             this.medianaBT.Click += new System.EventHandler(this.medianaBT_Click);
+            // 
+            // ordemTB
+            // 
+            this.ordemTB.Location = new System.Drawing.Point(232, 126);
+            this.ordemTB.Name = "ordemTB";
+            this.ordemTB.Size = new System.Drawing.Size(97, 20);
+            this.ordemTB.TabIndex = 51;
+            // 
+            // ordemBT
+            // 
+            this.ordemBT.Location = new System.Drawing.Point(232, 67);
+            this.ordemBT.Margin = new System.Windows.Forms.Padding(2);
+            this.ordemBT.Name = "ordemBT";
+            this.ordemBT.Size = new System.Drawing.Size(97, 35);
+            this.ordemBT.TabIndex = 51;
+            this.ordemBT.Text = "Ordem";
+            this.ordemBT.UseVisualStyleBackColor = true;
+            this.ordemBT.Click += new System.EventHandler(this.ordemBT_Click);
             // 
             // multiplicacaoBT
             // 
@@ -830,7 +853,7 @@
             this.groupBox4.Controls.Add(this.adInputTB);
             this.groupBox4.Controls.Add(this.subtracaoBT);
             this.groupBox4.Controls.Add(this.somaBT);
-            this.groupBox4.Location = new System.Drawing.Point(723, 96);
+            this.groupBox4.Location = new System.Drawing.Point(981, 157);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(338, 187);
             this.groupBox4.TabIndex = 55;
@@ -864,7 +887,7 @@
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(14, 20);
+            this.chart1.Location = new System.Drawing.Point(14, 23);
             this.chart1.Name = "chart1";
             this.chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
             series1.ChartArea = "ChartArea1";
@@ -872,7 +895,7 @@
             series1.Name = "Antes";
             series1.YValuesPerPoint = 4;
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(311, 303);
+            this.chart1.Size = new System.Drawing.Size(311, 360);
             this.chart1.TabIndex = 35;
             this.chart1.Text = "chart1";
             // 
@@ -889,18 +912,18 @@
             series2.Legend = "Legend1";
             series2.Name = "Depois";
             this.chart2.Series.Add(series2);
-            this.chart2.Size = new System.Drawing.Size(311, 303);
+            this.chart2.Size = new System.Drawing.Size(311, 363);
             this.chart2.TabIndex = 36;
             this.chart2.Text = "chart2";
             // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.chart2);
-            this.groupBox5.Location = new System.Drawing.Point(1076, 433);
+            this.groupBox5.Location = new System.Drawing.Point(1334, 494);
             this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox5.Size = new System.Drawing.Size(338, 336);
+            this.groupBox5.Size = new System.Drawing.Size(338, 398);
             this.groupBox5.TabIndex = 11;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Histograma Depois";
@@ -913,7 +936,7 @@
             this.groupBox1.Controls.Add(this.FlipUDBT);
             this.groupBox1.Controls.Add(this.FlipBT);
             this.groupBox1.Controls.Add(this.cinzaBT);
-            this.groupBox1.Location = new System.Drawing.Point(723, 301);
+            this.groupBox1.Location = new System.Drawing.Point(981, 362);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(338, 117);
             this.groupBox1.TabIndex = 56;
@@ -922,21 +945,21 @@
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.chart1);
-            this.groupBox6.Location = new System.Drawing.Point(723, 433);
+            this.groupBox6.Location = new System.Drawing.Point(981, 494);
             this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox6.Size = new System.Drawing.Size(338, 336);
+            this.groupBox6.Size = new System.Drawing.Size(338, 398);
             this.groupBox6.TabIndex = 37;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Histograma Antes";
             // 
             // gaussianoBT
             // 
-            this.gaussianoBT.Location = new System.Drawing.Point(13, 93);
+            this.gaussianoBT.Location = new System.Drawing.Point(10, 71);
             this.gaussianoBT.Margin = new System.Windows.Forms.Padding(2);
             this.gaussianoBT.Name = "gaussianoBT";
-            this.gaussianoBT.Size = new System.Drawing.Size(109, 35);
+            this.gaussianoBT.Size = new System.Drawing.Size(165, 35);
             this.gaussianoBT.TabIndex = 42;
             this.gaussianoBT.Text = "Guassiano";
             this.gaussianoBT.UseVisualStyleBackColor = true;
@@ -945,10 +968,10 @@
             // kernelPictureBox
             // 
             this.kernelPictureBox.BackColor = System.Drawing.SystemColors.Window;
-            this.kernelPictureBox.Location = new System.Drawing.Point(139, 18);
+            this.kernelPictureBox.Location = new System.Drawing.Point(10, 110);
             this.kernelPictureBox.Margin = new System.Windows.Forms.Padding(2);
             this.kernelPictureBox.Name = "kernelPictureBox";
-            this.kernelPictureBox.Size = new System.Drawing.Size(106, 110);
+            this.kernelPictureBox.Size = new System.Drawing.Size(165, 91);
             this.kernelPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.kernelPictureBox.TabIndex = 5;
             this.kernelPictureBox.TabStop = false;
@@ -962,7 +985,7 @@
             0,
             0,
             131072});
-            this.gaussianaNTB.Location = new System.Drawing.Point(13, 64);
+            this.gaussianaNTB.Location = new System.Drawing.Point(10, 41);
             this.gaussianaNTB.Maximum = new decimal(new int[] {
             10,
             0,
@@ -975,7 +998,7 @@
             0});
             this.gaussianaNTB.Name = "gaussianaNTB";
             this.gaussianaNTB.ReadOnly = true;
-            this.gaussianaNTB.Size = new System.Drawing.Size(109, 20);
+            this.gaussianaNTB.Size = new System.Drawing.Size(165, 20);
             this.gaussianaNTB.TabIndex = 52;
             this.gaussianaNTB.Value = new decimal(new int[] {
             1,
@@ -991,9 +1014,9 @@
             this.groupBox7.Controls.Add(this.kernelPictureBox);
             this.groupBox7.Controls.Add(this.gaussianaNTB);
             this.groupBox7.Controls.Add(this.gaussianoBT);
-            this.groupBox7.Location = new System.Drawing.Point(21, 670);
+            this.groupBox7.Location = new System.Drawing.Point(428, 494);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(257, 142);
+            this.groupBox7.Size = new System.Drawing.Size(189, 216);
             this.groupBox7.TabIndex = 57;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Filtragem Gaussiana";
@@ -1001,27 +1024,144 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 48);
+            this.label5.Location = new System.Drawing.Point(11, 25);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(115, 13);
+            this.label5.Size = new System.Drawing.Size(77, 13);
             this.label5.TabIndex = 53;
-            this.label5.Text = "Desvio Padrão (Sigma)";
+            this.label5.Text = "Desvio Padrão";
+            // 
+            // prewittBT
+            // 
+            this.prewittBT.Location = new System.Drawing.Point(15, 22);
+            this.prewittBT.Margin = new System.Windows.Forms.Padding(2);
+            this.prewittBT.Name = "prewittBT";
+            this.prewittBT.Size = new System.Drawing.Size(159, 35);
+            this.prewittBT.TabIndex = 58;
+            this.prewittBT.Text = "Prewitt";
+            this.prewittBT.UseVisualStyleBackColor = true;
+            this.prewittBT.Click += new System.EventHandler(this.prewittBT_Click);
+            // 
+            // sobelBT
+            // 
+            this.sobelBT.Location = new System.Drawing.Point(15, 67);
+            this.sobelBT.Margin = new System.Windows.Forms.Padding(2);
+            this.sobelBT.Name = "sobelBT";
+            this.sobelBT.Size = new System.Drawing.Size(159, 35);
+            this.sobelBT.TabIndex = 59;
+            this.sobelBT.Text = "Sobel";
+            this.sobelBT.UseVisualStyleBackColor = true;
+            this.sobelBT.Click += new System.EventHandler(this.sobelBT_Click);
+            // 
+            // laplacianoBT
+            // 
+            this.laplacianoBT.Location = new System.Drawing.Point(15, 113);
+            this.laplacianoBT.Margin = new System.Windows.Forms.Padding(2);
+            this.laplacianoBT.Name = "laplacianoBT";
+            this.laplacianoBT.Size = new System.Drawing.Size(159, 35);
+            this.laplacianoBT.TabIndex = 60;
+            this.laplacianoBT.Text = "Laplaciano";
+            this.laplacianoBT.UseVisualStyleBackColor = true;
+            this.laplacianoBT.Click += new System.EventHandler(this.laplacianoBT_Click);
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.laplacianoBT);
+            this.groupBox9.Controls.Add(this.sobelBT);
+            this.groupBox9.Controls.Add(this.prewittBT);
+            this.groupBox9.Location = new System.Drawing.Point(631, 724);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(189, 167);
+            this.groupBox9.TabIndex = 61;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Detecção de Borda";
+            // 
+            // ersosaoBT
+            // 
+            this.ersosaoBT.Location = new System.Drawing.Point(13, 23);
+            this.ersosaoBT.Margin = new System.Windows.Forms.Padding(2);
+            this.ersosaoBT.Name = "ersosaoBT";
+            this.ersosaoBT.Size = new System.Drawing.Size(106, 35);
+            this.ersosaoBT.TabIndex = 61;
+            this.ersosaoBT.Text = "Erosão";
+            this.ersosaoBT.UseVisualStyleBackColor = true;
+            this.ersosaoBT.Click += new System.EventHandler(this.ersosaoBT_Click);
+            // 
+            // fechamentoBT
+            // 
+            this.fechamentoBT.Location = new System.Drawing.Point(13, 166);
+            this.fechamentoBT.Margin = new System.Windows.Forms.Padding(2);
+            this.fechamentoBT.Name = "fechamentoBT";
+            this.fechamentoBT.Size = new System.Drawing.Size(106, 35);
+            this.fechamentoBT.TabIndex = 62;
+            this.fechamentoBT.Text = "Fechamento";
+            this.fechamentoBT.UseVisualStyleBackColor = true;
+            this.fechamentoBT.Click += new System.EventHandler(this.fechamentoBT_Click);
+            // 
+            // dilatacaoBT
+            // 
+            this.dilatacaoBT.Location = new System.Drawing.Point(13, 71);
+            this.dilatacaoBT.Margin = new System.Windows.Forms.Padding(2);
+            this.dilatacaoBT.Name = "dilatacaoBT";
+            this.dilatacaoBT.Size = new System.Drawing.Size(106, 35);
+            this.dilatacaoBT.TabIndex = 62;
+            this.dilatacaoBT.Text = "Dilatação";
+            this.dilatacaoBT.UseVisualStyleBackColor = true;
+            this.dilatacaoBT.Click += new System.EventHandler(this.dilatacaoBT_Click);
+            // 
+            // aberturaBT
+            // 
+            this.aberturaBT.AllowDrop = true;
+            this.aberturaBT.Location = new System.Drawing.Point(13, 118);
+            this.aberturaBT.Margin = new System.Windows.Forms.Padding(2);
+            this.aberturaBT.Name = "aberturaBT";
+            this.aberturaBT.Size = new System.Drawing.Size(106, 35);
+            this.aberturaBT.TabIndex = 63;
+            this.aberturaBT.Text = "Abertura";
+            this.aberturaBT.UseVisualStyleBackColor = true;
+            this.aberturaBT.Click += new System.EventHandler(this.aberturaBT_Click);
+            // 
+            // contornoBT
+            // 
+            this.contornoBT.Location = new System.Drawing.Point(13, 214);
+            this.contornoBT.Margin = new System.Windows.Forms.Padding(2);
+            this.contornoBT.Name = "contornoBT";
+            this.contornoBT.Size = new System.Drawing.Size(106, 35);
+            this.contornoBT.TabIndex = 64;
+            this.contornoBT.Text = "Contorno";
+            this.contornoBT.UseVisualStyleBackColor = true;
+            this.contornoBT.Click += new System.EventHandler(this.contornoBT_Click);
+            // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.contornoBT);
+            this.groupBox10.Controls.Add(this.aberturaBT);
+            this.groupBox10.Controls.Add(this.dilatacaoBT);
+            this.groupBox10.Controls.Add(this.fechamentoBT);
+            this.groupBox10.Controls.Add(this.ersosaoBT);
+            this.groupBox10.Location = new System.Drawing.Point(838, 494);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Size = new System.Drawing.Size(130, 266);
+            this.groupBox10.TabIndex = 65;
+            this.groupBox10.TabStop = false;
+            this.groupBox10.Text = "Morfologia";
             // 
             // Inicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1478, 868);
+            this.ClientSize = new System.Drawing.Size(1605, 1020);
+            this.Controls.Add(this.limparBT);
+            this.Controls.Add(this.groupBox10);
+            this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.gbCortar);
-            this.Controls.Add(this.limparBT);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.gpResultado);
             this.Controls.Add(this.gpB);
@@ -1066,6 +1206,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gaussianaNTB)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox10.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1140,6 +1282,17 @@
         private System.Windows.Forms.NumericUpDown gaussianaNTB;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button prewittBT;
+        private System.Windows.Forms.Button sobelBT;
+        private System.Windows.Forms.Button laplacianoBT;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Button ersosaoBT;
+        private System.Windows.Forms.Button fechamentoBT;
+        private System.Windows.Forms.Button dilatacaoBT;
+        private System.Windows.Forms.Button aberturaBT;
+        private System.Windows.Forms.Button contornoBT;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Label label6;
     }
 }
 
