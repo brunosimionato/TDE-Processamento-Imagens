@@ -131,7 +131,7 @@ namespace Trabalho
             }
             else if (!char.IsControl(e.KeyChar))
             {
-                
+
                 int newValue = Convert.ToInt32(RGBbinTB.Text + e.KeyChar);
                 if (newValue > 255)
                 {
@@ -3256,7 +3256,7 @@ namespace Trabalho
                         int pixelNovo = (int)Math.Round(gaussian);
                         if (pixelNovo < 0) pixelNovo = 0;
                         else if (pixelNovo > 255) pixelNovo = 255;
- 
+
                         Color imagemNova = Color.FromArgb(pixelNovo, pixelNovo, pixelNovo);
                         imagemFiltrada.SetPixel(x, y, imagemNova);
                     }
@@ -3456,10 +3456,907 @@ namespace Trabalho
 
 
 
+
+        // PREWITT --------------------------------------------------------------------------------------------------------------------------------------------
+        private void prewittBT_Click(object sender, EventArgs e)
+        {
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Image image1 = null;
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA
+            if (rbA.Checked)
+            {
+                image1 = imgA.Image;
+
+                // Pede para abrir uma imagem caso já não esteja aberta
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA
+            if (rbB.Checked)
+            {
+                image1 = imgB.Image;
+
+                // Pede para abrir uma imagem caso já não esteja aberta
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            Bitmap imagemOriginal = new Bitmap(image1);
+            Bitmap imagemResultado = new Bitmap(imagemOriginal.Width, imagemOriginal.Height);
+
+            // Usa as máscaras de X e Y do Prewitt
+            int[,] prewittX = GetPrewittXMask();
+            int[,] prewittY = GetPrewittYMask();
+
+            // Aplica a convolução
+            for (int x = 1; x < imagemOriginal.Width - 1; x++)
+            {
+                for (int y = 1; y < imagemOriginal.Height - 1; y++)
+                {
+                    int gradientX = 0;
+                    int gradientY = 0;
+
+                    // Aplica as máscaras
+                    for (int i = -1; i <= 1; i++)
+                    {
+                        for (int j = -1; j <= 1; j++)
+                        {
+                            int pixelValue = imagemOriginal.GetPixel(x + i, y + j).R;
+                            gradientX += pixelValue * prewittX[i + 1, j + 1];
+                            gradientY += pixelValue * prewittY[i + 1, j + 1];
+                        }
+                    }
+
+                    // Calcula gradiente
+                    int gradient = (int)Math.Sqrt(gradientX * gradientX + gradientY * gradientY);
+
+                    // Garante que o valor esteja entre 0 e 255
+                    gradient = Math.Max(0, Math.Min(255, gradient));
+
+                    // Define novo pixel
+                    Color novaCor = Color.FromArgb(gradient, gradient, gradient);
+                    imagemResultado.SetPixel(x, y, novaCor);
+                }
+            }
+
+            imgResultado.Image = imagemResultado;
+        }
+
+        // MÁSCARA PREWITT X
+        private int[,] GetPrewittXMask()
+        {
+            return new int[,]
+            {
+                { -1, 0, 1 },
+                { -1, 0, 1 },
+                { -1, 0, 1 }
+            };
+        }
+
+        //MÁSCARA PREWITT Y
+        private int[,] GetPrewittYMask()
+        {
+            return new int[,]
+            {
+                { -1, -1, -1 },
+                { 0, 0, 0 },
+                { 1, 1, 1 }
+            };
+        }
+
+
+
+
+        // SOBEL --------------------------------------------------------------------------------------------------------------------------------------------
+        private void sobelBT_Click(object sender, EventArgs e)
+        {
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Image image1 = null;
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA E NENHUMA IMAGEM ABERTA
+            if (rbA.Checked)
+            {
+                image1 = imgA.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA E NENHUMA IMAGEM ABERTA
+            if (rbB.Checked)
+            {
+                image1 = imgB.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            Bitmap imagemOriginal = new Bitmap(image1);
+            Bitmap imagemResultado = new Bitmap(imagemOriginal.Width, imagemOriginal.Height);
+
+            // Obtém as máscaras de Sobel
+            int[,] sobelX = GetSobelXMask();
+            int[,] sobelY = GetSobelYMask();
+
+            // Aplica a operação de convolução Sobel
+            for (int x = 1; x < imagemOriginal.Width - 1; x++)
+            {
+                for (int y = 1; y < imagemOriginal.Height - 1; y++)
+                {
+                    int gradientX = 0;
+                    int gradientY = 0;
+
+                    // Aplica as máscaras
+                    for (int i = -1; i <= 1; i++)
+                    {
+                        for (int j = -1; j <= 1; j++)
+                        {
+                            int pixelValue = imagemOriginal.GetPixel(x + i, y + j).R;
+                            gradientX += pixelValue * sobelX[i + 1, j + 1];
+                            gradientY += pixelValue * sobelY[i + 1, j + 1];
+                        }
+                    }
+
+                    // Calcula gradiente
+                    int gradient = (int)Math.Sqrt(gradientX * gradientX + gradientY * gradientY);
+
+                    // Garante que o valor esteja entre 0 e 255
+                    gradient = Math.Max(0, Math.Min(255, gradient));
+
+                    // Define novo pixel
+                    Color novaCor = Color.FromArgb(gradient, gradient, gradient);
+                    imagemResultado.SetPixel(x, y, novaCor);
+                }
+            }
+
+            imgResultado.Image = imagemResultado;
+
+        }
+
+        // MÁSCARA SOBEL X
+        private int[,] GetSobelXMask()
+        {
+            return new int[,]
+            {
+                { -1, 0, 1 },
+                { -2, 0, 2 },
+                { -1, 0, 1 }
+            };
+        }
+
+        //MÁSCARA SOBEL Y
+        private int[,] GetSobelYMask()
+        {
+            return new int[,]
+            {
+                { -1, -2, -1 },
+                { 0, 0, 0 },
+                { 1, 2, 1 }
+            };
+        }
+
+        // Método para converter uma imagem para escala de cinza
+        private Bitmap ToGrayscale(Bitmap original)
+        {
+            Bitmap grayscale = new Bitmap(original.Width, original.Height);
+
+            for (int x = 0; x < original.Width; x++)
+            {
+                for (int y = 0; y < original.Height; y++)
+                {
+                    Color pixelColor = original.GetPixel(x, y);
+                    int grayValue = (int)(pixelColor.R * 0.299 + pixelColor.G * 0.587 + pixelColor.B * 0.114);
+                    grayscale.SetPixel(x, y, Color.FromArgb(grayValue, grayValue, grayValue));
+                }
+            }
+
+            return grayscale;
+        }
+
+
+
+
+        // LAPLACIANO --------------------------------------------------------------------------------------------------------------------------------------------
+        private void laplacianoBT_Click(object sender, EventArgs e)
+        {
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Image image1 = null;
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA E NENHUMA IMAGEM ABERTA
+            if (rbA.Checked)
+            {
+                image1 = imgA.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA E NENHUMA IMAGEM ABERTA
+            if (rbB.Checked)
+            {
+                image1 = imgB.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            Bitmap imagemOriginal = new Bitmap(image1);
+
+            // Converte imagem para escala de cinza
+            Bitmap imagemCinza = ToGrayscale(imagemOriginal);
+
+            Bitmap imagemResultado = new Bitmap(imagemCinza.Width, imagemCinza.Height);
+
+            // Obtém a máscara Laplaciana
+            int[,] laplaciano = GetLaplacianaMask();
+
+            // Aplica a operação de convolução Laplaciana
+            for (int x = 1; x < imagemCinza.Width - 1; x++)
+            {
+                for (int y = 1; y < imagemCinza.Height - 1; y++)
+                {
+                    int laplacianValue = 0;
+
+                    // Aplica a máscara
+                    for (int i = -1; i <= 1; i++)
+                    {
+                        for (int j = -1; j <= 1; j++)
+                        {
+                            int pixelValue = imagemCinza.GetPixel(x + i, y + j).R;
+                            laplacianValue += pixelValue * laplaciano[i + 1, j + 1];
+                        }
+                    }
+
+                    // Garante que o valor esteja entre 0 e 255
+                    laplacianValue = Math.Max(0, Math.Min(255, laplacianValue));
+
+                    // Define novo pixel
+                    Color novaCor = Color.FromArgb(laplacianValue, laplacianValue, laplacianValue);
+                    imagemResultado.SetPixel(x, y, novaCor);
+                }
+            }
+
+            imgResultado.Image = imagemResultado;
+        }
+
+        // MÁSCARA LAPLACEANA COM CENTRO NEGATIVO
+        private int[,] GetLaplacianaMask()
+        {
+            return new int[,]
+            {
+                { 0, -1, 0 },
+                { -1, 4, -1 },
+                { 0, -1, 0 }
+            };
+        }
+
+
+
+
+        // EROSÃO --------------------------------------------------------------------------------------------------------------------------------------------
+        private void ersosaoBT_Click(object sender, EventArgs e)
+        {
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Image image1 = null;
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA E NENHUMA IMAGEM ABERTA
+            if (rbA.Checked)
+            {
+                image1 = imgA.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA E NENHUMA IMAGEM ABERTA
+            if (rbB.Checked)
+            {
+                image1 = imgB.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // Converte a imagem para bitmap
+            Bitmap imagemOriginal = new Bitmap(image1);
+            Bitmap imagemResultado = new Bitmap(imagemOriginal.Width, imagemOriginal.Height);
+
+            // ELEMENTO ESTRUTURANTE 3X3
+            int[,] elementoEstruturante = new int[3, 3]
+            {
+                { 1, 1, 1 },
+                { 1, 1, 1 },
+                { 1, 1, 1 }
+            };
+
+            // Aplica a operação de erosão
+            for (int x = 1; x < imagemOriginal.Width - 1; x++)
+            {
+                for (int y = 1; y < imagemOriginal.Height - 1; y++)
+                {
+                    bool erodePixel = true;
+
+                    for (int i = -1; i <= 1; i++)
+                    {
+                        for (int j = -1; j <= 1; j++)
+                        {
+                            Color pixelColor = imagemOriginal.GetPixel(x + i, y + j);
+                            if (elementoEstruturante[i + 1, j + 1] == 1 && (pixelColor.R != 0 || pixelColor.G != 0 || pixelColor.B != 0))
+                            {
+                                erodePixel = false;
+                                break;
+                            }
+                        }
+                        if (!erodePixel) break;
+                    }
+
+                    imagemResultado.SetPixel(x, y, erodePixel ? Color.Black : Color.White);
+                }
+            }
+
+            imgResultado.Image = imagemResultado;
+        }
+
+
+
+
+        // DILATAÇÃO --------------------------------------------------------------------------------------------------------------------------------------------
+        private void dilatacaoBT_Click(object sender, EventArgs e)
+        {
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Image image1 = null;
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA E NENHUMA IMAGEM ABERTA
+            if (rbA.Checked)
+            {
+                image1 = imgA.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA E NENHUMA IMAGEM ABERTA
+            if (rbB.Checked)
+            {
+                image1 = imgB.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // Converte a imagem para bitmap
+            Bitmap imagemOriginal = new Bitmap(image1);
+            Bitmap imagemResultado = new Bitmap(imagemOriginal.Width, imagemOriginal.Height);
+
+            // ELEMENTO ESTRUTURANTE 3X3
+            int[,] elementoEstruturante = new int[3, 3]
+            {
+                { 1, 1, 1 },
+                { 1, 1, 1 },
+                { 1, 1, 1 }
+            };
+
+            // Aplica operação de dilatação
+            for (int x = 1; x < imagemOriginal.Width - 1; x++)
+            {
+                for (int y = 1; y < imagemOriginal.Height - 1; y++)
+                {
+                    Color pixelColor = imagemOriginal.GetPixel(x, y);
+                    if (pixelColor.R == 0 && pixelColor.G == 0 && pixelColor.B == 0) // Pixel central é preto
+                    {
+                        for (int i = -1; i <= 1; i++)
+                        {
+                            for (int j = -1; j <= 1; j++)
+                            {
+                                if (elementoEstruturante[i + 1, j + 1] == 1)
+                                {
+                                    int newX = x + i;
+                                    int newY = y + j;
+
+                                    // Verifica se está dentro dos limites da imagem
+                                    if (newX >= 0 && newX < imagemOriginal.Width && newY >= 0 && newY < imagemOriginal.Height)
+                                    {
+                                        imagemResultado.SetPixel(newX, newY, Color.Black);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Preenche os pixels restantes com branco
+            for (int x = 0; x < imagemOriginal.Width; x++)
+            {
+                for (int y = 0; y < imagemOriginal.Height; y++)
+                {
+                    if (imagemResultado.GetPixel(x, y).ToArgb() == Color.Empty.ToArgb())
+                    {
+                        imagemResultado.SetPixel(x, y, Color.White);
+                    }
+                }
+            }
+
+            imgResultado.Image = imagemResultado;
+        }
+
+
+        // ABERTURA ------------------------------------------------------------------------------------------------------------------------------------------
+        private void aberturaBT_Click(object sender, EventArgs e)
+        {
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Image image1 = null;
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA E NENHUMA IMAGEM ABERTA
+            if (rbA.Checked)
+            {
+                image1 = imgA.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA E NENHUMA IMAGEM ABERTA
+            if (rbB.Checked)
+            {
+                image1 = imgB.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            Bitmap imagemOriginal = new Bitmap(image1);
+
+            Bitmap imagemErodida = Erosao(imagemOriginal);
+
+            Bitmap imagemAbertura = Dilatacao(imagemErodida);
+
+            imgResultado.Image = imagemAbertura;
+        }
+
+        // ELEMENTO ESTRUTURANTE EROSÃO 3X3
+        private Bitmap Erosao(Bitmap imagemOriginal)
+        {
+            Bitmap imagemResultado = new Bitmap(imagemOriginal.Width, imagemOriginal.Height);
+            int[,] elementoEstruturante = new int[3, 3]
+            {
+                { 1, 1, 1 },
+                { 1, 1, 1 },
+                { 1, 1, 1 }
+            };
+
+            for (int x = 1; x < imagemOriginal.Width - 1; x++)
+            {
+                for (int y = 1; y < imagemOriginal.Height - 1; y++)
+                {
+                    bool erodePixel = true;
+
+                    for (int i = -1; i <= 1; i++)
+                    {
+                        for (int j = -1; j <= 1; j++)
+                        {
+                            Color pixelColor = imagemOriginal.GetPixel(x + i, y + j);
+                            if (elementoEstruturante[i + 1, j + 1] == 1 && (pixelColor.R != 0 || pixelColor.G != 0 || pixelColor.B != 0))
+                            {
+                                erodePixel = false;
+                                break;
+                            }
+                        }
+                        if (!erodePixel) break;
+                    }
+
+                    imagemResultado.SetPixel(x, y, erodePixel ? Color.Black : Color.White);
+                }
+            }
+
+            return imagemResultado;
+        }
+
+        // ELEMENTO ESTRUTURANTE DILATAÇÃO 3X3
+        private Bitmap Dilatacao(Bitmap imagemOriginal)
+        {
+            Bitmap imagemResultado = new Bitmap(imagemOriginal.Width, imagemOriginal.Height);
+            int[,] elementoEstruturante = new int[3, 3]
+            {
+                { 1, 1, 1 },
+                { 1, 1, 1 },
+                { 1, 1, 1 }
+            };
+
+            for (int x = 1; x < imagemOriginal.Width - 1; x++)
+            {
+                for (int y = 1; y < imagemOriginal.Height - 1; y++)
+                {
+                    Color pixelColor = imagemOriginal.GetPixel(x, y);
+                    if (pixelColor.R == 0 && pixelColor.G == 0 && pixelColor.B == 0) // Pixel central é preto
+                    {
+                        for (int i = -1; i <= 1; i++)
+                        {
+                            for (int j = -1; j <= 1; j++)
+                            {
+                                if (elementoEstruturante[i + 1, j + 1] == 1)
+                                {
+                                    int newX = x + i;
+                                    int newY = y + j;
+
+                                    // Verifica se está dentro dos limites da imagem
+                                    if (newX >= 0 && newX < imagemOriginal.Width && newY >= 0 && newY < imagemOriginal.Height)
+                                    {
+                                        imagemResultado.SetPixel(newX, newY, Color.Black);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Preenche os pixels restantes com branco
+            for (int x = 0; x < imagemOriginal.Width; x++)
+            {
+                for (int y = 0; y < imagemOriginal.Height; y++)
+                {
+                    if (imagemResultado.GetPixel(x, y).ToArgb() == Color.Empty.ToArgb())
+                    {
+                        imagemResultado.SetPixel(x, y, Color.White);
+                    }
+                }
+            }
+
+            return imagemResultado;
+        }
+
+
+
+
+        // FECHAMENTO ------------------------------------------------------------------------------------------------------------------------------------------
+        private void fechamentoBT_Click(object sender, EventArgs e)
+        {
+            // CASO A OPÇÃO "AMBAS AS IMAGENS" ESTIVER SELECIONADA
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Image image1 = null;
+
+            // CASO A OPÇÃO "IMAGEM A" ESTIVER SELECIONADA E NENHUMA IMAGEM ABERTA
+            if (rbA.Checked)
+            {
+                image1 = imgA.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // CASO A OPÇÃO "IMAGEM B" ESTIVER SELECIONADA E NENHUMA IMAGEM ABERTAada
+            if (rbB.Checked)
+            {
+                image1 = imgB.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // Converte a imagem para bitmap
+            Bitmap imagemOriginal = new Bitmap(image1);
+
+            // Executa dilatação
+            Bitmap imagemDilatada = ExecutarDilatacao(imagemOriginal);
+
+            // Executa dilataÇÃO
+            Bitmap imagemFechamento = ExecutarErosao(imagemDilatada);
+
+            imgResultado.Image = imagemFechamento;
+        }
+
+        // ELEMENTO ESTRUTURANTE EROSÃO 3X3
+        private Bitmap ExecutarErosao(Bitmap imagemOriginal)
+        {
+            Bitmap imagemResultado = new Bitmap(imagemOriginal.Width, imagemOriginal.Height);
+            int[,] elementoEstruturante = new int[3, 3]
+            {
+                { 1, 1, 1 },
+                { 1, 1, 1 },
+                { 1, 1, 1 }
+            };
+
+            for (int x = 1; x < imagemOriginal.Width - 1; x++)
+            {
+                for (int y = 1; y < imagemOriginal.Height - 1; y++)
+                {
+                    bool erodePixel = true;
+
+                    for (int i = -1; i <= 1; i++)
+                    {
+                        for (int j = -1; j <= 1; j++)
+                        {
+                            Color pixelColor = imagemOriginal.GetPixel(x + i, y + j);
+                            if (elementoEstruturante[i + 1, j + 1] == 1 && (pixelColor.R != 0 || pixelColor.G != 0 || pixelColor.B != 0))
+                            {
+                                erodePixel = false;
+                                break;
+                            }
+                        }
+                        if (!erodePixel) break;
+                    }
+
+                    imagemResultado.SetPixel(x, y, erodePixel ? Color.Black : Color.White);
+                }
+            }
+
+            return imagemResultado;
+        }
+
+        // ELEMENTO ESTRUTURANTE DILATAÇÃO 3X3
+        private Bitmap ExecutarDilatacao(Bitmap imagemOriginal)
+        {
+            Bitmap imagemResultado = new Bitmap(imagemOriginal.Width, imagemOriginal.Height);
+            int[,] elementoEstruturante = new int[3, 3]
+            {
+                { 1, 1, 1 },
+                { 1, 1, 1 },
+                { 1, 1, 1 }
+            };
+
+            for (int x = 1; x < imagemOriginal.Width - 1; x++)
+            {
+                for (int y = 1; y < imagemOriginal.Height - 1; y++)
+                {
+                    Color pixelColor = imagemOriginal.GetPixel(x, y);
+                    if (pixelColor.R == 0 && pixelColor.G == 0 && pixelColor.B == 0) // Pixel central é preto
+                    {
+                        for (int i = -1; i <= 1; i++)
+                        {
+                            for (int j = -1; j <= 1; j++)
+                            {
+                                if (elementoEstruturante[i + 1, j + 1] == 1)
+                                {
+                                    int newX = x + i;
+                                    int newY = y + j;
+
+                                    // Verifica se está dentro dos limites da imagem
+                                    if (newX >= 0 && newX < imagemOriginal.Width && newY >= 0 && newY < imagemOriginal.Height)
+                                    {
+                                        imagemResultado.SetPixel(newX, newY, Color.Black);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Preenche os pixels restantes com branco
+            for (int x = 0; x < imagemOriginal.Width; x++)
+            {
+                for (int y = 0; y < imagemOriginal.Height; y++)
+                {
+                    if (imagemResultado.GetPixel(x, y).ToArgb() == Color.Empty.ToArgb())
+                    {
+                        imagemResultado.SetPixel(x, y, Color.White);
+                    }
+                }
+            }
+
+            return imagemResultado;
+        }
+
+
+
+
+        // CONTORNO ------------------------------------------------------------------------------------------------------------------------------------------
+        private void contornoBT_Click(object sender, EventArgs e)
+        {
+            // Verifica se a opção "Ambas as imagens" está selecionada
+            if (rbDuas.Checked)
+            {
+                MessageBox.Show("A operação é feita apenas com uma imagem de cada vez.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Verifica se nenhuma imagem está selecionada
+            if (!rbA.Checked && !rbB.Checked)
+            {
+                MessageBox.Show("Selecione 'Imagem A' ou 'Imagem B' no campo 'Escolha de Imagens'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Image image1 = null;
+
+            // Verifica se a opção "Imagem A" está selecionada e se há uma imagem carregada
+            if (rbA.Checked)
+            {
+                image1 = imgA.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem A'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // Verifica se a opção "Imagem B" está selecionada e se há uma imagem carregada
+            if (rbB.Checked)
+            {
+                image1 = imgB.Image;
+
+                if (image1 == null)
+                {
+                    MessageBox.Show("Abra uma imagem no campo 'Imagem B'.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+            }
+
+            // Converte a imagem para bitmap
+            Bitmap imagemOriginal = new Bitmap(image1);
+
+            // Executa erosão
+            Bitmap imagemErodida = ExecutarErosao(imagemOriginal);
+
+            // Executa subtração
+            Bitmap imagemContorno = SubtrairImagens(imagemOriginal, imagemErodida);
+
+            imgResultado.Image = imagemContorno;
+        }
+
+        // FUNÇÃO SUBTRAÇÃO IMAGENS
+        private Bitmap SubtrairImagens(Bitmap imagemOriginal, Bitmap imagemErodida)
+        {
+            Bitmap imagemResultado = new Bitmap(imagemOriginal.Width, imagemOriginal.Height);
+
+            for (int x = 0; x < imagemOriginal.Width; x++)
+            {
+                for (int y = 0; y < imagemOriginal.Height; y++)
+                {
+                    Color corOriginal = imagemOriginal.GetPixel(x, y);
+                    Color corErodida = imagemErodida.GetPixel(x, y);
+
+                    // Subtrai as componentes de cor para obter o contorno
+                    int R = Math.Abs(corOriginal.R - corErodida.R);
+                    int G = Math.Abs(corOriginal.G - corErodida.G);
+                    int B = Math.Abs(corOriginal.B - corErodida.B);
+
+                    // Define a cor resultante na imagem de contorno
+                    imagemResultado.SetPixel(x, y, Color.FromArgb(R, G, B));
+                }
+            }
+
+            return imagemResultado;
+        }
+
     }
 }
-
-
-
 
 
